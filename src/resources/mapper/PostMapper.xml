@@ -57,6 +57,10 @@
 
     <delete id="deletePost" parameterType="String">
         DELETE FROM `tb_bbs`
+        WHERE LEFT(`id`, 3) = LEFT(#{postId}, 3)
+    </delete>
+    <delete id="deleteReply" parameterType="String">
+        DELETE FROM `tb_bbs`
         WHERE `id` = #{postId}
     </delete>
 

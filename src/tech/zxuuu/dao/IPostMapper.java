@@ -23,4 +23,6 @@ public interface IPostMapper {
 
     public Boolean deletePost(String postId);
 
+    public Boolean deleteReply(String postId);
+
 }

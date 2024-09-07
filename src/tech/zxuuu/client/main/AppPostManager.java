@@ -2,6 +2,7 @@ package tech.zxuuu.client.main;
 
 import tech.zxuuu.client.bbs.BBSGUI;
 import tech.zxuuu.client.bbs.InsertNewPostGUI;
+import tech.zxuuu.client.bbs.ManagePostInfoPane;
 import tech.zxuuu.client.bbs.PostInfoPane;
 import tech.zxuuu.entity.PostInfo;
 import tech.zxuuu.net.Request;
@@ -28,7 +29,7 @@ public class AppPostManager extends JFrame {
             JPanel postPanel = new JPanel();
             postPanel.setLayout(new BorderLayout());
 
-            postPanel.add(new PostInfoPane(post.getId(), post.getContent(), post.getDate(), post.getUser_id()), BorderLayout.CENTER);
+            postPanel.add(new ManagePostInfoPane(post.getId(), post.getContent(), post.getDate(), post.getUser_id()), BorderLayout.CENTER);
 
             JButton btnDelete = new JButton("删除");
             btnDelete.addActionListener(new ActionListener() {
