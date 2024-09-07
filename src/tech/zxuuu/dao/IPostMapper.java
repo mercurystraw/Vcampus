@@ -25,4 +25,6 @@ public interface IPostMapper {
 
     public Boolean deleteReply(String postId);
 
+//    public List<PostInfo> getMyPostList(String userid);
+
 }

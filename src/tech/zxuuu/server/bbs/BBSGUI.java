@@ -43,4 +43,21 @@ public class BBSGUI {
         return post;
     }
 
+//    public static List<PostInfo> getMyPostList(String userid){
+//        List<PostInfo> list = new ArrayList<>();
+//        try{
+//            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+//            IPostMapper postMapper = sqlSession.getMapper(IPostMapper.class);
+//            list = postMapper.getMyPostList(userid);
+//            sqlSession.commit();
+//            sqlSession.close();
+//            for (PostInfo post : list) {
+//                System.out.println("我发布的帖子 PostInfo: " + post);
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return list;
+//    }
+
 }

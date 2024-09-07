@@ -64,4 +64,14 @@
         WHERE `id` = #{postId}
     </delete>
 
+<!--    <select id="getMyPostList" parameterType="String" resultType="PostInfo">-->
+<!--        SELECT-->
+<!--            `id` as "id",-->
+<!--            `content` as "content",-->
+<!--            `date` as "date",-->
+<!--            `userid` as "userid"-->
+<!--        FROM `tb_bbs`-->
+<!--        WHERE `userid` = #{userId}-->
+<!--    </select>-->
+
 </mapper>
