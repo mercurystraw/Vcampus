@@ -1,0 +1,46 @@
+package tech.zxuuu.server.bbs;
+
+import org.apache.ibatis.session.SqlSession;
+import tech.zxuuu.dao.IPostMapper;
+import tech.zxuuu.entity.PostInfo;
+import tech.zxuuu.server.main.App;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class BBSGUI {
+    public static List<PostInfo> getParentPostList(){
+        List<PostInfo> list =new ArrayList<>();
+        SqlSession sqlSession = null;
+        try{
+            sqlSession = App.sqlSessionFactory.openSession();
+            IPostMapper postMapper = sqlSession.getMapper(IPostMapper.class);
+            list = postMapper.getParentPostList();
+            sqlSession.commit();
+            sqlSession.close();
+            for (PostInfo post : list) {
+                System.out.println("PostInfo: " + post);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            System.err.println("Error occurred while fetching parent post list: " + e.getMessage());
+        }
+        return list;
+    }
+
+    public static PostInfo getPostById(String postId){
+        PostInfo post = null;
+        try{
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IPostMapper postMapper = sqlSession.getMapper(IPostMapper.class);
+            post = postMapper.getPostById(postId);
+            sqlSession.commit();
+            sqlSession.close();
+            System.out.println("PostInfo: " + post);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return post;
+    }
+
+}
