@@ -6,7 +6,7 @@ import java.awt.*;
 public class PostDetailsPane extends JPanel {
 
     private JLabel lblPostId;
-    private JLabel lblContent;
+    private JTextPane txtContent; // 使用 JTextPane 显示帖子内容
     private JLabel lblDate;
     private JLabel lblUserId;
     private JTextArea txtReplies;
@@ -19,12 +19,16 @@ public class PostDetailsPane extends JPanel {
         postInfoPanel.setLayout(new GridLayout(4, 1));
 
         this.lblPostId = new JLabel("帖子ID: " + id);
-        this.lblContent = new JLabel("内容: " + content);
+        this.txtContent = new JTextPane(); // 使用 JTextPane 显示内容
+        this.txtContent.setEditable(false); // 设置为不可编辑
+        this.txtContent.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 16)); // 设置支持 Emoji 的字体
+        this.txtContent.setText(content); // 设置帖子内容
+
         this.lblDate = new JLabel("日期: " + date);
         this.lblUserId = new JLabel("用户ID: " + userid);
 
         postInfoPanel.add(lblPostId);
-        postInfoPanel.add(lblContent);
+        postInfoPanel.add(txtContent); // 添加帖子内容到面板
         postInfoPanel.add(lblDate);
         postInfoPanel.add(lblUserId);
 
@@ -41,6 +45,4 @@ public class PostDetailsPane extends JPanel {
 
         setVisible(true);
     }
-
-
 }

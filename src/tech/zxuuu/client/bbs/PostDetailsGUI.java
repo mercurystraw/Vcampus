@@ -45,10 +45,7 @@ public class PostDetailsGUI extends JFrame {
         pnlPostDetail.setBounds(70, 95, 800, 200);
         pnlPostDetail.setLayout(new BorderLayout());
 
-        // 帖子标题
-        JLabel lblPostTitle = new JLabel("帖子标题");
-        lblPostTitle.setFont(new Font("微软雅黑", Font.BOLD, 20));
-        pnlPostDetail.add(lblPostTitle, BorderLayout.NORTH);
+
 
         // 添加主帖的详细信息面板
         JPanel pnlPostInfo = new JPanel();
@@ -193,7 +190,7 @@ public class PostDetailsGUI extends JFrame {
 
                 replyPanel.add(userAndDatePanel);
 
-                // 添加间隔
+                // 添加间隔a
                 JPanel spacer = new JPanel();
                 spacer.setPreferredSize(new Dimension(1, 10)); // 设置间隔高度
                 pnlReplyList.add(replyPanel);

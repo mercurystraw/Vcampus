@@ -14,7 +14,7 @@ public class ManagePostInfoPane extends JPanel {
     private String userid; // 用户ID
 
     private JLabel lblPostId;
-    private JLabel lblContent;
+    private JTextPane txtContent; // 使用 JTextPane 显示帖子内容
     private JLabel lblDate;
     private JLabel lblUserId;
 
@@ -61,19 +61,22 @@ public class ManagePostInfoPane extends JPanel {
         lblPostId.setBounds(10, 10, 150, 30);
         add(lblPostId);
 
-        this.lblContent = new JLabel("帖子内容");
-        lblContent.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        lblContent.setBounds(10, 40, 500, 20);
-        add(lblContent);
+        // 使用 JTextPane 来显示帖子内容
+        this.txtContent = new JTextPane();
+        txtContent.setEditable(false); // 设置为不可编辑
+        txtContent.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 16)); // 设置支持 Emoji 的字体
+        txtContent.setBounds(10, 40, 500, 40); // 设置合适的大小
+        txtContent.setOpaque(false); // 使背景透明
+        add(txtContent);
 
         this.lblDate = new JLabel("发布日期");
         lblDate.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        lblDate.setBounds(10, 70, 200, 20);
+        lblDate.setBounds(10, 90, 200, 20);
         add(lblDate);
 
         this.lblUserId = new JLabel("用户ID");
         lblUserId.setFont(new Font("微软雅黑", Font.PLAIN, 16));
-        lblUserId.setBounds(10, 100, 150, 30);
+        lblUserId.setBounds(10, 110, 150, 30);
         add(lblUserId);
 
         JButton btnViewDetails = new JButton("查看详情");
@@ -82,9 +85,8 @@ public class ManagePostInfoPane extends JPanel {
         btnViewDetails.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // 管理员管理回复的界面
+                // 在这里添加查看详情的逻辑
                 ManageReplyGUI manageReplyGUI = new ManageReplyGUI(id);
-                System.out.println("管理回复界面开启！！");
                 manageReplyGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 manageReplyGUI.setVisible(true);
             }
@@ -92,7 +94,6 @@ public class ManagePostInfoPane extends JPanel {
         btnViewDetails.setBounds(600, 100, 150, 70);
         add(btnViewDetails);
 
-        setLayout(null);
         setVisible(true);
     }
 
@@ -104,7 +105,7 @@ public class ManagePostInfoPane extends JPanel {
         this.userid = userid;
 
         this.lblPostId.setText("帖子ID: " + this.id);
-        this.lblContent.setText("内容: " + this.content);
+        this.txtContent.setText(this.content); // 使用 JTextPane 设置帖子内容
         this.lblDate.setText("日期: " + this.date);
         this.lblUserId.setText("用户ID: " + this.userid);
 
@@ -114,4 +115,3 @@ public class ManagePostInfoPane extends JPanel {
         this.revalidate();
     }
 }
-

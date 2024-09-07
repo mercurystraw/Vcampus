@@ -53,10 +53,6 @@ public class ManageReplyGUI extends JFrame {
         pnlPostDetail.setBounds(70, 95, 800, 200);
         pnlPostDetail.setLayout(new BorderLayout());
 
-        // 帖子标题
-        JLabel lblPostTitle = new JLabel("帖子标题");
-        lblPostTitle.setFont(new Font("微软雅黑", Font.BOLD, 20));
-        pnlPostDetail.add(lblPostTitle, BorderLayout.NORTH);
 
         // 添加主帖的详细信息面板
         JPanel pnlPostInfo = new JPanel();
