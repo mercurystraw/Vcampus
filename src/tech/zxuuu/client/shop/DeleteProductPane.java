@@ -17,6 +17,8 @@ import tech.zxuuu.entity.Product;
 import tech.zxuuu.net.Request;
 import tech.zxuuu.util.ResponseUtils;
 import tech.zxuuu.util.SwingUtils;
+import tech.zxuuu.client.rounded.RoundedTextField;
+import tech.zxuuu.client.rounded.RoundedButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -27,7 +29,7 @@ import javax.swing.JComboBox;
 
 /**
  * 商品删除面板
- * 
+ *
  * @author 杨鹏杰
  * @modify z0gSh1u
  */
@@ -44,29 +46,22 @@ public class DeleteProductPane extends JPanel {
 	public DeleteProductPane() {
 		this.setLayout(null);
 		{
-			JLabel lbl_ShopManage = new JLabel("商店管理中心·删除商品");
-			lbl_ShopManage.setFont(new Font("微软雅黑", Font.PLAIN, 25));
-			lbl_ShopManage.setHorizontalAlignment(SwingConstants.CENTER);
-			lbl_ShopManage.setBounds(86, 24, 566, 75);
-			this.add(lbl_ShopManage);
-		}
-		{
 			JLabel lbl_ProductName = new JLabel("商品名称");
-			lbl_ProductName.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+			lbl_ProductName.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 			lbl_ProductName.setHorizontalAlignment(SwingConstants.CENTER);
-			lbl_ProductName.setBounds(-18, 196, 115, 33);
+			lbl_ProductName.setBounds(100, 50, 115, 33);
 			this.add(lbl_ProductName);
 		}
 		{
 			JLabel lbl_Type = new JLabel("类型");
-			lbl_Type.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+			lbl_Type.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 			lbl_Type.setHorizontalAlignment(SwingConstants.CENTER);
-			lbl_Type.setBounds(-18, 254, 115, 33);
+			lbl_Type.setBounds(450, 50, 115, 33);
 			this.add(lbl_Type);
 		}
 		{
-			txtName = new JTextField();
-			txtName.setBounds(100, 194, 193, 41);
+			txtName = new RoundedTextField(10);
+			txtName.setBounds(250, 50, 160, 33);
 			this.add(txtName);
 			txtName.setColumns(10);
 		}
@@ -104,16 +99,17 @@ public class DeleteProductPane extends JPanel {
 		tblSearchList.setModel(model);
 		JScrollPane jsp = new JScrollPane(tblSearchList);
 
-		jsp.setBounds(307, 150, 394, 274);
+		jsp.setBounds(100, 260, 700, 220);
 		this.add(jsp);
 
-		JLabel lbl_ProductList = new JLabel("商品列表·双击删除商品");
-		lbl_ProductList.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+		JLabel lbl_ProductList = new JLabel("商品列表(双击删除商品)");
+		lbl_ProductList.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		lbl_ProductList.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_ProductList.setBounds(304, 101, 397, 41);
+		lbl_ProductList.setBounds(250, 200, 397, 41);
 		this.add(lbl_ProductList);
 
-		JButton btn_Search = new JButton("搜索");
+		JButton btn_Search = new RoundedButton("搜 索",10);
+		btn_Search.setFont(new Font("微软雅黑", Font.PLAIN, 22));
 		btn_Search.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -147,20 +143,14 @@ public class DeleteProductPane extends JPanel {
 			}
 
 		});
-		btn_Search.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-		btn_Search.setBounds(86, 320, 167, 55);
+		btn_Search.setBounds(375, 125, 167, 40);
 		this.add(btn_Search);
 
-		JLabel lbl_SearchProduct = new JLabel("搜索商品");
-		lbl_SearchProduct.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_SearchProduct.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-		lbl_SearchProduct.setBounds(14, 100, 256, 43);
-		add(lbl_SearchProduct);
 
 		cbType = new JComboBox();
 		cbType.setFont(new Font("宋体", Font.PLAIN, 16));
 		cbType.setModel(new DefaultComboBoxModel(new String[] { "食物", "饮料", "水果", "文具", "用品" }));
-		cbType.setBounds(100, 260, 193, 30);
+		cbType.setBounds(600, 50, 193, 33);
 		add(cbType);
 	}
 }

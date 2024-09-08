@@ -14,6 +14,7 @@ import tech.zxuuu.client.main.App;
 import tech.zxuuu.client.main.AppStudent;
 import tech.zxuuu.util.ResponseUtils;
 import tech.zxuuu.util.SwingUtils;
+import tech.zxuuu.client.rounded.*;
 
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
@@ -31,7 +32,7 @@ import javax.swing.SwingUtilities;
 
 /**
  * 购物车面板
- * 
+ *
  * @author z0gSh1u
  * @author 杨鹏杰
  */
@@ -96,11 +97,11 @@ public class CartPane extends JPanel {
 		txtSumDisp = new JTextArea();
 		txtSumDisp.setEditable(false);
 		txtSumDisp.setFont(new Font("微软雅黑", Font.PLAIN, 17));
-		txtSumDisp.setBounds(90, 431, 91, 41);
+		txtSumDisp.setBounds(90, 441, 91, 41);
 
 		add(txtSumDisp);
 
-		JLabel lblSum = new JLabel("总金额");
+		JLabel lblSum = new JLabel("共计：");
 		lblSum.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		lblSum.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSum.setBounds(14, 431, 91, 41);
@@ -120,7 +121,7 @@ public class CartPane extends JPanel {
 		});
 		scrollPane.setViewportView(table);
 
-		JButton btnCheckout = new JButton("校园卡结算");
+		JButton btnCheckout = new RoundedButton("校园卡结算",10);
 		btnCheckout.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -148,19 +149,12 @@ public class CartPane extends JPanel {
 					ShopFirstPage.cart.clear();
 					requireReRender();
 					ShopFirstPage.lblCartCount.setText("0");
-
 					SwingUtilities.invokeLater(new Runnable() {
+
 						@Override
 						public void run() {
-							double currentBalance = Double.parseDouble(AppStudent.lblBalance.getText());
-							double newBalance = currentBalance - sum;
-							AppStudent.lblBalance.setText(String.format("%.2f", newBalance));
-							AppStudent.lblBalance.repaint(); // 手动触发重新绘制
-							AppStudent.lblBalance.revalidate(); // 手动触发重新验证
-							AppStudent.lblBalance.getParent().repaint(); // 手动触发父容器的重新绘制
-							AppStudent.lblBalance.getParent().revalidate(); // 手动触发父容器的重新验证
-							AppStudent.lblBalance.setVisible(true); // 确保组件是可见的
-							SwingUtilities.updateComponentTreeUI(AppStudent.lblBalance.getRootPane()); // 强制刷新整个窗口
+							AppStudent.lblBalance
+									.setText(String.format("%.2f", Double.parseDouble(AppStudent.lblBalance.getText()) - sum));
 						}
 					});
 				} else if (ret.equals(1)) {
@@ -170,8 +164,8 @@ public class CartPane extends JPanel {
 				}
 			}
 		});
-		btnCheckout.setIcon(new ImageIcon(CartPane.class.getResource("/resources/assets/icon/checkout.png")));
 		btnCheckout.setBounds(213, 431, 143, 41);
+		btnCheckout.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		add(btnCheckout);
 
 		table.setModel(model);

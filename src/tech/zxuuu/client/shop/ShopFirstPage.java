@@ -10,6 +10,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import tech.zxuuu.client.main.App;
+import tech.zxuuu.client.rounded.LibButton;
+import tech.zxuuu.client.rounded.RoundedButton;
+import tech.zxuuu.client.rounded.RoundedTextField;
 import tech.zxuuu.entity.Product;
 import tech.zxuuu.net.Request;
 import tech.zxuuu.util.ResponseUtils;
@@ -56,13 +59,14 @@ public class ShopFirstPage extends JFrame {
 
 	JPanel pnl_list;
 	JScrollPane jsp_List;
-	JLabel lblDefaultHint;
+
 
 	public void handleTypeButtonClick(JButton btn) {
 		pnl_list.removeAll();
+		System.out.println("这是类型按钮的文字："+btn.getText());
 		List<Product> list = ResponseUtils
 				.getResponseByHash(new Request(App.connectionToServer, null,
-						"tech.zxuuu.server.shop.ProductServer.listProductByType", new Object[] { btn.getText() }).send())
+						"tech.zxuuu.server.shop.ProductServer.listProductByType", new Object[] { btn.getText()}).send())
 				.getListReturn(Product.class);
 		if (list == null) {
 			SwingUtils.showMessage(null, "抱歉，没有搜到这个商品，管理员正在努力备货中...", "提示");
@@ -80,7 +84,7 @@ public class ShopFirstPage extends JFrame {
 			@Override
 			public void run() {
 				jsp_List.getVerticalScrollBar().setValue(0);
-				lblDefaultHint.setVisible(false);
+
 				jsp_List.setVisible(true);
 			}
 		});
@@ -94,13 +98,13 @@ public class ShopFirstPage extends JFrame {
 		cart = new ArrayList<Product>();
 
 		setResizable(false);
-		setTitle("商店 - VCampus");
+		setTitle("校园商店");
 		setIconImage(
-				Toolkit.getDefaultToolkit().getImage(ShopFirstPage.class.getResource("/resources/assets/icon/fav.png")));
+				Toolkit.getDefaultToolkit().getImage(ShopFirstPage.class.getResource("/resources/assets/icon/seu_icon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 756, 796);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
@@ -111,19 +115,15 @@ public class ShopFirstPage extends JFrame {
 
 		cartPanel = new CartPane();
 		cartPanel.setBackground(Color.WHITE);
-		cartPanel.setBounds(108, 173, 371, 490);
+		cartPanel.setBounds(190, 173, 371, 490);
 		cartPanel.setVisible(false);
 
 		JLabel label = new JLabel("");
 		label.setBounds(14, 13, 64, 64);
-		label.setIcon(new ImageIcon(ShopFirstPage.class.getResource("/resources/assets/icon/shop.png")));
+		label.setIcon(new ImageIcon(ShopFirstPage.class.getResource("/resources/assets/icon/seu_icon.png")));
 		panel.add(label);
 		panel.add(cartPanel);
-		
-		lblDefaultHint = new JLabel("选择一项分类来开始...");
-		lblDefaultHint.setBounds(284, 272, 159, 18);
-		cartPanel.add(lblDefaultHint);
-		lblDefaultHint.setVisible(true);
+
 
 		pnl_list = new JPanel();
 		pnl_list.setLayout(new GridLayout(0, 1));
@@ -132,7 +132,7 @@ public class ShopFirstPage extends JFrame {
 		jsp_List.setBounds(190, 173, 510, 531);
 
 		panel.add(jsp_List);
-		
+
 		jsp_List.setVisible(false);
 
 		jsp_List.setViewportView(pnl_list);
@@ -140,13 +140,13 @@ public class ShopFirstPage extends JFrame {
 		panel.revalidate(); // 告诉其他部件,我的宽高变了 this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		txt_Search = new JTextField();
+		txt_Search = new RoundedTextField(10);
 		txt_Search.setBounds(79, 101, 494, 42);
-		txt_Search.setText("请输入商品名称或关键字");
+		txt_Search.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		txt_Search.setColumns(10);
 		panel.add(txt_Search);
 
-		JButton btn_Search = new JButton("搜索");
+		JButton btn_Search = new RoundedButton("搜 索",10);
 		btn_Search.setBounds(587, 101, 113, 42);
 
 		btn_Search.addActionListener(new ActionListener() {
@@ -163,7 +163,7 @@ public class ShopFirstPage extends JFrame {
 				} else {
 					pnl_list.setPreferredSize(new Dimension(jsp_List.getWidth() - 50, 280 * list.size()));
 					for (int i = 0; i < list.size(); i++) {
-						JPanel paneli = new Blocks(list.get(i).getPicture(), list.get(i).getInformation(), list.get(i).getName(),list.get(i).getType(),
+						JPanel paneli = new Blocks(list.get(i).getPicture(), list.get(i).getInformation(),list.get(i).getName(), list.get(i).getType(),
 								list.get(i).getPrice());
 						paneli.setName(list.get(i).getName());
 						pnl_list.add(paneli);
@@ -173,69 +173,60 @@ public class ShopFirstPage extends JFrame {
 			}
 		});
 
-		btn_Search.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+		btn_Search.setFont(new Font("微软雅黑", Font.PLAIN, 22));
 		panel.add(btn_Search);
 
-		btn_Search.setFont(new Font("幼圆", Font.BOLD, 15));
-		panel.add(btn_Search);
 
-		JLabel lblVcampus = new JLabel("商店 - VCampus");
-		lblVcampus.setBounds(102, 32, 239, 34);
+		JLabel lblVcampus = new JLabel("校园商店");
 		lblVcampus.setFont(new Font("微软雅黑", Font.PLAIN, 25));
+		lblVcampus.setForeground(Color.WHITE); // 设置字体颜色为白色
+		lblVcampus.setBounds(102, 27, 239, 34);
 		panel.add(lblVcampus);
+
 
 		String[] tableHeader = { "商品名称", "类型", "价格", "数量" };
 		model = new DefaultTableModel(null, tableHeader);
 
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(14, 157, 167, 407);
-		panel_1.setBorder(
-				new TitledBorder(null, "\u5546\u54C1\u5206\u7C7B", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.add(panel_1);
-		panel_1.setLayout(null);
 
-		JButton btn_Food = new JButton("食物");
-		btn_Food.setBounds(24, 39, 117, 57);
-		panel_1.add(btn_Food);
-		btn_Food.setFont(new Font("宋体", Font.PLAIN, 16));
-		btn_Food.setIcon(new ImageIcon(ShopFirstPage.class.getResource("/resources/assets/icon/餐饮.png")));
+		JButton btn_Food = new LibButton("食物",0);
+		btn_Food.setBounds(0, 170, 160, 80);
+		panel.add(btn_Food);
+		btn_Food.setFont(new Font("微软雅黑", Font.PLAIN, 28));
 
-		JButton btn_Drink = new JButton("饮料");
-		btn_Drink.setBounds(24, 109, 117, 57);
-		panel_1.add(btn_Drink);
-		btn_Drink.setIcon(new ImageIcon(ShopFirstPage.class.getResource("/resources/assets/icon/饮品 (1).png")));
+		JButton btn_Drink = new LibButton("饮料",0);
+		btn_Drink.setBounds(0, 170+80, 160, 80);
+		panel.add(btn_Drink);
 		btn_Drink.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				handleTypeButtonClick(btn_Drink);
 			}
 		});
-		btn_Drink.setFont(new Font("宋体", Font.PLAIN, 16));
+		btn_Drink.setFont(new Font("微软雅黑", Font.PLAIN, 28));
 
-		JButton btn_Fruit = new JButton("水果");
-		btn_Fruit.setBounds(24, 178, 117, 57);
-		panel_1.add(btn_Fruit);
-		btn_Fruit.setFont(new Font("宋体", Font.PLAIN, 16));
-		btn_Fruit.setIcon(new ImageIcon(ShopFirstPage.class.getResource("/resources/assets/icon/水果 (1).png")));
+		JButton btn_Fruit = new LibButton("水果",0);
+		btn_Fruit.setBounds(0, 170+80*2, 160, 80);
+		panel.add(btn_Fruit);
+		btn_Fruit.setFont(new Font("微软雅黑", Font.PLAIN, 28));
 
-		JButton btn_Tool = new JButton("文具");
-		btn_Tool.setBounds(24, 248, 117, 57);
-		panel_1.add(btn_Tool);
-		btn_Tool.setFont(new Font("宋体", Font.PLAIN, 16));
-		btn_Tool.setIcon(new ImageIcon(ShopFirstPage.class.getResource("/resources/assets/icon/家具.png")));
 
-		JButton btn_Thing = new JButton("用品");
-		btn_Thing.setBounds(24, 318, 117, 57);
-		panel_1.add(btn_Thing);
-		btn_Thing.setIcon(new ImageIcon(ShopFirstPage.class.getResource("/resources/assets/icon/日用品.png")));
+		JButton btn_Tool = new LibButton("文具",0);
+		btn_Tool.setBounds(0, 170+80*3, 160, 80);
+		panel.add(btn_Tool);
+		btn_Tool.setFont(new Font("微软雅黑", Font.PLAIN, 28));
+
+
+		JButton btn_Thing = new LibButton("日用品",0);
+		btn_Thing.setBounds(0, 170+80*4, 160, 80);
+		panel.add(btn_Thing);
 		btn_Thing.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				handleTypeButtonClick(btn_Thing);
 			}
 		});
-		btn_Thing.setFont(new Font("宋体", Font.PLAIN, 16));
-
+		btn_Thing.setFont(new Font("微软雅黑", Font.PLAIN, 28));
+/*
 		lblCartCount = new JLabel("0");
 		lblCartCount.setHorizontalAlignment(SwingConstants.LEFT);
 		lblCartCount.setBackground(Color.WHITE);
@@ -243,13 +234,13 @@ public class ShopFirstPage extends JFrame {
 		lblCartCount.setForeground(Color.RED);
 		lblCartCount.setBounds(10, 562, 55, 40);
 		panel.add(lblCartCount);
-
+*/
 		JButton btnCart = new JButton("");
 		btnCart.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SwingUtilities.invokeLater(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						// TODO 自动生成的方法存根
@@ -258,13 +249,13 @@ public class ShopFirstPage extends JFrame {
 						cartPanel.setVisible(true);
 					}
 				});
-				
+
 			}
 		});
 		btnCart.setIcon(new ImageIcon(ShopFirstPage.class.getResource("/resources/assets/icon/cart.png")));
-		btnCart.setBounds(15, 578, 161, 137);
+		btnCart.setBounds(15, 600, 161, 137);
 		panel.add(btnCart);
-		
+
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(ShopFirstPage.class.getResource("/resources/assets/icon/search01.png")));
 		lblNewLabel.setBounds(42, 105, 32, 32);
@@ -288,6 +279,62 @@ public class ShopFirstPage extends JFrame {
 				handleTypeButtonClick(btn_Food);
 			}
 		});
+		JLabel greenStrip = new JLabel("");
+		greenStrip.setOpaque(true);
+		greenStrip.setBackground(new Color(0, 100, 0)); // Green color
+		greenStrip.setBounds(0, 0, 866, 80); // Adjust the height as needed
+		panel.add(greenStrip, Integer.valueOf(-1)); // Add to the bottom layer
 
+
+		btn_Food.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				btn_Food.setBackground(new Color(0, 120, 0));
+				btn_Drink.setBackground(new Color(0, 100, 0));
+				btn_Fruit.setBackground(new Color(0, 100, 0));
+				btn_Thing.setBackground(new Color(0, 100, 0));
+				btn_Tool.setBackground(new Color(0, 100, 0));
+			}
+
+		});
+		btn_Drink.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				btn_Drink.setBackground(new Color(0, 120, 0));
+				btn_Food.setBackground(new Color(0, 100, 0));
+				btn_Fruit.setBackground(new Color(0, 100, 0));
+				btn_Thing.setBackground(new Color(0, 100, 0));
+				btn_Tool.setBackground(new Color(0, 100, 0));
+			}
+
+		});
+		btn_Fruit.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				btn_Fruit.setBackground(new Color(0, 120, 0));
+				btn_Food.setBackground(new Color(0, 100, 0));
+				btn_Drink.setBackground(new Color(0, 100, 0));
+				btn_Thing.setBackground(new Color(0, 100, 0));
+				btn_Tool.setBackground(new Color(0, 100, 0));
+			}
+
+		});
+		btn_Tool.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				btn_Tool.setBackground(new Color(0, 120, 0));
+				btn_Food.setBackground(new Color(0, 100, 0));
+				btn_Fruit.setBackground(new Color(0, 100, 0));
+				btn_Thing.setBackground(new Color(0, 100, 0));
+				btn_Drink.setBackground(new Color(0, 100, 0));
+			}
+
+		});
+		btn_Thing.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				btn_Thing.setBackground(new Color(0, 120, 0));
+				btn_Food.setBackground(new Color(0, 100, 0));
+				btn_Fruit.setBackground(new Color(0, 100, 0));
+				btn_Drink.setBackground(new Color(0, 100, 0));
+				btn_Tool.setBackground(new Color(0, 100, 0));
+			}
+
+		});
 	}
 }
