@@ -7,8 +7,10 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import tech.zxuuu.dao.INoticeMapper;
+import tech.zxuuu.dao.IPostMapper;
 import tech.zxuuu.dao.IStudentMapper;
 import tech.zxuuu.entity.NoticeInfo;
+import tech.zxuuu.entity.PostInfo;
 import tech.zxuuu.util.OtherUtils;
 
 /**
@@ -65,6 +67,21 @@ public class UtilsApi {
 			sqlSession = App.sqlSessionFactory.openSession();
 			INoticeMapper noticeMapper = sqlSession.getMapper(INoticeMapper.class);
 			result = noticeMapper.getTop4Notice();
+			sqlSession.commit();
+			sqlSession.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public static List<PostInfo> getTop3Post(){
+		List<PostInfo> result = null;
+		SqlSession sqlSession = null;
+		try {
+			sqlSession = App.sqlSessionFactory.openSession();
+			IPostMapper postMapper = sqlSession.getMapper(IPostMapper.class);
+			result = postMapper.getTop3Post();
 			sqlSession.commit();
 			sqlSession.close();
 		} catch (Exception e) {

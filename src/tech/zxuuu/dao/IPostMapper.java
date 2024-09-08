@@ -26,7 +26,9 @@ public interface IPostMapper {
 
     public Boolean deleteReply(String postId);
 
-    Boolean updateThumbup(@Param("postId") String postId, @Param("thumbup") Integer thumbup);
+    public Boolean updateThumbup(@Param("postId") String postId, @Param("thumbup") Integer thumbup);
+
+    public List<PostInfo> getTop3Post();
 
 
 //    public List<PostInfo> getMyPostList(String userid);

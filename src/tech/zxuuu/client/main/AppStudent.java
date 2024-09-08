@@ -19,6 +19,7 @@ import tech.zxuuu.client.teaching.studentSide.TeachingStudentMain;
 import tech.zxuuu.entity.Book;
 import tech.zxuuu.entity.ClassInfo;
 import tech.zxuuu.entity.NoticeInfo;
+import tech.zxuuu.entity.PostInfo;
 import tech.zxuuu.net.Request;
 import tech.zxuuu.util.OtherUtils;
 import tech.zxuuu.util.ResponseUtils;
@@ -404,38 +405,70 @@ public class AppStudent extends JFrame {
 		lblNewLabel_4.setBounds(418, 0, 730, 130);
 		contentPane.add(lblNewLabel_4);
 
+
 		List<NoticeInfo> noticeInfos = ResponseUtils
 				.getResponseByHash(
 						new Request(App.connectionToServer, null, "tech.zxuuu.server.main.UtilsApi.getTop4Notice", null).send())
 				.getListReturn(NoticeInfo.class);
 
-		if (noticeInfos.size() > 0) {
+		if(noticeInfos.size() > 0) {
 			NoticeBlock noticeBlock1 = new NoticeBlock(noticeInfos.get(0).getTitle(),
 					quickFormatDate(noticeInfos.get(0).getDate()), noticeInfos.get(0).getUrl());
 			noticeBlock1.setBounds(57, 170, 660, 50);
 			contentPane.add(noticeBlock1);
 		}
 
-		if (noticeInfos.size() > 1) {
+		if(noticeInfos.size() > 1) {
 			NoticeBlock noticeBlock2 = new NoticeBlock(noticeInfos.get(1).getTitle(),
 					quickFormatDate(noticeInfos.get(1).getDate()), noticeInfos.get(1).getUrl());
 			noticeBlock2.setBounds(57, 233, 660, 50);
 			contentPane.add(noticeBlock2);
 		}
 
-		if (noticeInfos.size() > 2) {
+		if(noticeInfos.size() > 2) {
 			NoticeBlock noticeBlock3 = new NoticeBlock(noticeInfos.get(2).getTitle(),
 					quickFormatDate(noticeInfos.get(2).getDate()), noticeInfos.get(2).getUrl());
 			noticeBlock3.setBounds(57, 296, 660, 50);
 			contentPane.add(noticeBlock3);
 		}
 
-		if (noticeInfos.size() > 3) {
+		if(noticeInfos.size() > 3) {
 			NoticeBlock noticeBlock4 = new NoticeBlock(noticeInfos.get(3).getTitle(),
 					quickFormatDate(noticeInfos.get(3).getDate()), noticeInfos.get(3).getUrl());
 			noticeBlock4.setBounds(57, 359, 660, 50);
 			contentPane.add(noticeBlock4);
 		}
+
+		//考虑加一个icon“热门帖子”
+
+		List<PostInfo> postInfos = ResponseUtils.getResponseByHash(
+						new Request(App.connectionToServer, null, "tech.zxuuu.server.main.UtilsApi.getTop3Post", null).send())
+				.getListReturn(PostInfo.class);
+
+		if (postInfos.size() > 0) {
+			PostBlock postBlock1 = new PostBlock(postInfos.get(0).getId(), postInfos.get(0).getContent(),
+					quickFormatDate(postInfos.get(0).getDate()), postInfos.get(0).getUser_id(), postInfos.get(0).getThumbup());
+			postBlock1.setBounds(57, 422, 660, 80); // 调整位置
+			contentPane.add(postBlock1);
+		}
+
+		if (postInfos.size() > 1) {
+			PostBlock postBlock2 = new PostBlock(postInfos.get(1).getId(), postInfos.get(1).getContent(),
+					quickFormatDate(postInfos.get(1).getDate()), postInfos.get(1).getUser_id(), postInfos.get(1).getThumbup());
+			postBlock2.setBounds(57, 512, 660, 80); // 调整位置
+			contentPane.add(postBlock2);
+		}
+
+		if (postInfos.size() > 2) {
+			PostBlock postBlock3 = new PostBlock(postInfos.get(2).getId(), postInfos.get(2).getContent(),
+					quickFormatDate(postInfos.get(2).getDate()), postInfos.get(2).getUser_id(), postInfos.get(2).getThumbup());
+			postBlock3.setBounds(57, 602, 660, 80); // 调整位置
+			contentPane.add(postBlock3);
+		}
+
+
+
+
 
 
 	}
