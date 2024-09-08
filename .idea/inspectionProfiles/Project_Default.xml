@@ -15,9 +15,11 @@
     <inspection_tool class="AlibabaMethodReturnWrapperType" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="AlibabaMethodTooLong" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="AlibabaPackageNaming" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AlibabaPojoMustOverrideToString" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="AlibabaSneakyThrowsWithoutExceptionType" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="AlibabaSwitchExpression" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="AlibabaTestClassShouldEndWithTestNaming" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AlibabaThreadShouldSetName" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="AlibabaTransactionMustHaveRollback" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="AlibabaUseRightCaseForDateFormat" enabled="true" level="WARNING" enabled_by_default="true" />
   </profile>

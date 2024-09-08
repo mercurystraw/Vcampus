@@ -5,30 +5,26 @@ public class PostInfo {
     private String content;
     private String date;
     private String userid;
+    private int thumbup;
 
-    @Override
-    public String toString() {
-        return "PostInfo{" +
-                "id='" + id + '\'' +
-                ", content='" + content + '\'' +
-                ", date='" + date + '\'' +
-                ", userid='" + userid + '\'' +
-                '}';
+    public PostInfo(String id, String date, String content, String userid, int thumbup) {
+        this.id = id;
+        this.date = date;
+        this.content = content;
+        this.userid = userid;
+        this.thumbup = thumbup;
     }
 
+    public int getThumbup() {
+        return thumbup;
+    }
+
+    public void setThumbup(int thumbup) {
+        this.thumbup = thumbup;
+    }
 
     public PostInfo() {
     }
-
-    public PostInfo(String id, String content, String date, String userid) {
-        this.id = id;
-        this.content = content;
-        this.date = date;
-        this.userid = userid;
-    }
-
-
-
     public String getUser_id() {
         return userid;
     }

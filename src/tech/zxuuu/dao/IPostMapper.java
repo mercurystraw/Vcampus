@@ -1,5 +1,6 @@
 package tech.zxuuu.dao;
 
+import org.apache.ibatis.annotations.Param;
 import tech.zxuuu.entity.PostInfo;
 
 import java.util.List;
@@ -24,6 +25,9 @@ public interface IPostMapper {
     public Boolean deletePost(String postId);
 
     public Boolean deleteReply(String postId);
+
+    Boolean updateThumbup(@Param("postId") String postId, @Param("thumbup") Integer thumbup);
+
 
 //    public List<PostInfo> getMyPostList(String userid);
 

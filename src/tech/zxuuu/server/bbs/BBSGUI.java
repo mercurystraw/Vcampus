@@ -43,6 +43,21 @@ public class BBSGUI {
         return post;
     }
 
+    public static Boolean updateThumbup(String postId, Integer thumbup){
+        Boolean result = null;
+        try{
+            SqlSession sqlSession = App.sqlSessionFactory.openSession();
+            IPostMapper postMapper = sqlSession.getMapper(IPostMapper.class);
+            result = postMapper.updateThumbup(postId, thumbup);
+            sqlSession.commit();
+            sqlSession.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 //    public static List<PostInfo> getMyPostList(String userid){
 //        List<PostInfo> list = new ArrayList<>();
 //        try{

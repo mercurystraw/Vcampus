@@ -1,5 +1,6 @@
 package tech.zxuuu.client.bbs;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import tech.zxuuu.entity.PostInfo;
 import tech.zxuuu.net.Request;
 import tech.zxuuu.util.ResponseUtils;
@@ -11,8 +12,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import java.util.Set;
 
 public class PostDetailsGUI extends JFrame {
 
@@ -20,9 +22,12 @@ public class PostDetailsGUI extends JFrame {
     private JPanel pnlReplyList;
     private JScrollPane spnReplyList;
     private String postId; // 当前帖子的ID
+    private Set<String> likedReplies ;//直接传入用户点赞过的所有帖子id 源头再BBSGUI 是static的
 
-    public PostDetailsGUI(String postId) {
+    public PostDetailsGUI(String postId, Set<String> likedReplies) {
         this.postId = postId;
+        this.likedReplies = likedReplies;
+
         setResizable(true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -44,8 +49,6 @@ public class PostDetailsGUI extends JFrame {
         JPanel pnlPostDetail = new JPanel();
         pnlPostDetail.setBounds(70, 95, 800, 200);
         pnlPostDetail.setLayout(new BorderLayout());
-
-
 
         // 添加主帖的详细信息面板
         JPanel pnlPostInfo = new JPanel();
@@ -72,7 +75,6 @@ public class PostDetailsGUI extends JFrame {
         contentPane.add(pnlPostDetail);
 
         // 回复列表面板
-
         pnlReplyList = new JPanel();
         pnlReplyList.setLayout(new BoxLayout(pnlReplyList, BoxLayout.Y_AXIS)); // 使用 BoxLayout
         spnReplyList = new JScrollPane(pnlReplyList);
@@ -101,7 +103,6 @@ public class PostDetailsGUI extends JFrame {
             }
         });
         contentPane.add(btnReply);
-
 
         // 刷新按钮
         JButton btnRefresh = new JButton("刷新");
@@ -146,6 +147,21 @@ public class PostDetailsGUI extends JFrame {
 
         System.out.println("主贴ID" + mainPost.getId() + " " + mainPost.getUser_id());
     }
+    private void updateThumbInDatabase(String replyId, int thumb){
+        System.out.println("回复帖子ID："+replyId+"更新后点赞数："+thumb);
+        Boolean result = ResponseUtils.getResponseByHash(
+                new Request(App.connectionToServer, null,
+                        "tech.zxuuu.server.bbs.BBSGUI.updateThumbup", new Object[]{replyId, thumb}).send()).
+                getReturn(Boolean.class);
+        if (result == null) {
+            System.out.println("更新点赞数失败！响应为null");
+        }else if (result){
+                System.out.println("更新点赞数成功！");
+        }else{
+            System.out.println("更新点赞数失败！");
+        }
+    }
+
 
     // 显示回复列表
     private void showReplyList() {
@@ -160,6 +176,7 @@ public class PostDetailsGUI extends JFrame {
         SwingUtilities.invokeLater(() -> {
             pnlReplyList.removeAll(); // 清空当前的回复列表 用于刷新
             for (PostInfo reply : replyList) {
+                System.out.println(reply.toString());
 
                 JPanel replyPanel = new JPanel();
                 replyPanel.setLayout(new BoxLayout(replyPanel, BoxLayout.Y_AXIS)); // 使用 BoxLayout 垂直布局
@@ -190,16 +207,55 @@ public class PostDetailsGUI extends JFrame {
 
                 replyPanel.add(userAndDatePanel);
 
-                // 添加间隔a
+                // 点赞数
+                JLabel lblThumb = new JLabel("点赞数: " + reply.getThumbup());
+
+                lblThumb.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0)); // 添加底部边距
+                lblThumb.setAlignmentX(Component.LEFT_ALIGNMENT);
+                replyPanel.add(lblThumb);
+
+                // 点赞按钮
+                JButton btnThumb = new JButton("点赞");
+                if (likedReplies.contains(reply.getId())) {
+                    btnThumb.setText("取消点赞");
+                    btnThumb.setBackground(Color.YELLOW); // 设置点赞后的背景颜色
+                }
+                btnThumb.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String replyId = reply.getId();
+                        if (likedReplies.contains(replyId)) {
+                            // 取消点赞
+                            likedReplies.remove(replyId);
+                            reply.setThumbup(reply.getThumbup() - 1);
+                            btnThumb.setText("点赞");
+                            btnThumb.setBackground(null); // 恢复默认背景颜色
+                        } else {
+                            // 点赞
+                            likedReplies.add(replyId);
+                            reply.setThumbup(reply.getThumbup() + 1);
+                            btnThumb.setText("取消点赞");
+                            btnThumb.setBackground(Color.YELLOW); // 设置点赞后的背景颜色
+                        }
+                        lblThumb.setText("点赞数: " + reply.getThumbup());
+
+                        // 这里可以添加代码来更新数据库中的点赞数
+                        updateThumbInDatabase(reply.getId(), reply.getThumbup());
+                    }
+                });
+                replyPanel.add(btnThumb);
+
+                // 添加间隔
                 JPanel spacer = new JPanel();
                 spacer.setPreferredSize(new Dimension(1, 10)); // 设置间隔高度
                 pnlReplyList.add(replyPanel);
                 pnlReplyList.add(spacer);
 
-                System.out.println(reply.getId() + " " + reply.getUser_id());
+                System.out.println(reply.getId() + " " + reply.getUser_id()+" "+reply.getThumbup());
             }
             pnlReplyList.revalidate();
             pnlReplyList.repaint();
         });
     }
 }
+

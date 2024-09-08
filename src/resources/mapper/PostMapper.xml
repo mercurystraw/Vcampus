@@ -10,7 +10,8 @@
             `id` as "id",
             `content` as "content",
             `date` as "date",
-            `userid` as "userid"
+            `userid` as "userid",
+            `thumbup` as "thumbup"
         FROM `tb_bbs`
         WHERE RIGHT(`id`, 4) = '0000'
     </select>
@@ -19,7 +20,8 @@
             `id` as "id",
             `content` as "content",
             `date` as "date",
-            `userid` as "userid"
+            `userid` as "userid",
+            `thumbup` as "thumbup"
         FROM `tb_bbs`
         WHERE LEFT(`id`, 3) = LEFT(#{postId}, 3)
           AND `id` != #{postId}
@@ -29,7 +31,8 @@
             `id` as "id",
             `content` as "content",
             `date` as "date",
-            `userid` as "userid"
+            `userid` as "userid",
+            `thumbup` as "thumbup"
         FROM `tb_bbs`
         WHERE `id` = #{postId}
     </select>
@@ -40,8 +43,8 @@
     </select>
 
     <insert id="insertNewPost" parameterType="PostInfo" >
-        INSERT INTO `tb_bbs` (`id`, `content`, `date`, `userid`)
-        VALUES (#{id}, #{content}, #{date}, #{userid})
+        INSERT INTO `tb_bbs` (`id`, `content`, `date`, `userid`,`thumbup`)
+        VALUES (#{id}, #{content}, #{date}, #{userid},0)
     </insert>
 
     <select id="getMaxReplyPostid" parameterType="String" resultType="Integer">
@@ -51,8 +54,8 @@
     </select>
 
     <insert id ="insertReplyPost" parameterType="PostInfo">
-        INSERT INTO `tb_bbs` (`id`, `content`, `date`, `userid`)
-        VALUES (#{id}, #{content}, #{date}, #{userid})
+        INSERT INTO `tb_bbs` (`id`, `content`, `date`, `userid`, `thumbup`)
+        VALUES (#{id}, #{content}, #{date}, #{userid},0)
     </insert>
 
     <delete id="deletePost" parameterType="String">
@@ -73,5 +76,10 @@
 <!--        FROM `tb_bbs`-->
 <!--        WHERE `userid` = #{userId}-->
 <!--    </select>-->
+    <update id="updateThumbup">
+        UPDATE tb_bbs
+        SET thumbup = #{thumbup}
+        WHERE `id` = #{postId}
 
+    </update>
 </mapper>

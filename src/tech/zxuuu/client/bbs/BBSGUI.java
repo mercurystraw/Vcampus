@@ -12,14 +12,18 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class BBSGUI extends JFrame {
     private JPanel contentPane;
     private JPanel pnlPostList;
     private JScrollPane spnPostList;
+    private static Set<String> likedPosts = new HashSet<>(); // 用于存储已点赞的帖子ID
 
     private void showParentPostList() {
+
         List<PostInfo> ParentPostList = ResponseUtils.getResponseByHash(
                         new Request(App.connectionToServer, null, "tech.zxuuu.server.bbs.BBSGUI.getParentPostList", null).send())
                 .getListReturn(PostInfo.class);
@@ -27,8 +31,8 @@ public class BBSGUI extends JFrame {
         for (PostInfo post : ParentPostList) {
 //            int idPrefix = Integer.parseInt(post.getId().substring(0, 3));
 //            String idPrefixStr = String.valueOf(idPrefix);
-            pnlPostList.add(new PostInfoPane(post.getId(), post.getContent(), post.getDate(), post.getUser_id()));
-            System.out.println(post.getId() +" "+ post.getUser_id());
+            pnlPostList.add(new PostInfoPane(post.getId(), post.getContent(), post.getDate(), post.getUser_id(),post.getThumbup(),likedPosts));
+            System.out.println("用于测试点赞设置哎"+post.getId() +" "+ post.getUser_id()+" "+post.getThumbup());
         }
         pnlPostList.setPreferredSize(new Dimension(spnPostList.getWidth(), ParentPostList.size() * PostInfoPane.HEIGHT));
     }
