@@ -82,4 +82,11 @@
         WHERE `id` = #{postId}
 
     </update>
+    <select id ="getTop3Post" resultType="PostInfo">
+        SELECT `id`, `content`, `date`, `userid`, `thumbup`
+        FROM `tb_bbs`
+        ORDER BY `thumbup` DESC
+        LIMIT 3
+
+    </select>
 </mapper>
