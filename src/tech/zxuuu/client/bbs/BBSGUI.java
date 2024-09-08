@@ -12,9 +12,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashSet;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
 
 public class BBSGUI extends JFrame {
     private JPanel contentPane;
@@ -27,6 +26,15 @@ public class BBSGUI extends JFrame {
         List<PostInfo> ParentPostList = ResponseUtils.getResponseByHash(
                         new Request(App.connectionToServer, null, "tech.zxuuu.server.bbs.BBSGUI.getParentPostList", null).send())
                 .getListReturn(PostInfo.class);
+        // 按照点赞数降序排列主贴子
+
+        Collections.sort(ParentPostList, new Comparator<PostInfo>() {
+            @Override
+            public int compare(PostInfo post1, PostInfo post2) {
+                return Integer.compare(post2.getThumbup(), post1.getThumbup()); // 降序排序
+            }
+        });
+
         pnlPostList.removeAll(); // 清空当前的帖子列表
         for (PostInfo post : ParentPostList) {
 //            int idPrefix = Integer.parseInt(post.getId().substring(0, 3));
