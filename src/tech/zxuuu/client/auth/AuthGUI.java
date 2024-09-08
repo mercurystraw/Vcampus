@@ -7,7 +7,6 @@ import javax.swing.border.EmptyBorder;
 
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,30 +16,36 @@ import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 
 import tech.zxuuu.client.main.App;
+import tech.zxuuu.client.rounded.RoundedButton;
+import tech.zxuuu.client.rounded.RoundedPasswordField;
+import tech.zxuuu.client.rounded.RoundedTextField;
+import tech.zxuuu.client.rounded.NoFocusJRadioButton;
 import tech.zxuuu.entity.Manager;
 import tech.zxuuu.entity.Student;
 import tech.zxuuu.entity.Teacher;
 import tech.zxuuu.entity.UserType;
 import tech.zxuuu.net.Session;
 import tech.zxuuu.util.SwingUtils;
-import javax.swing.JPasswordField;
+
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
-
+import java.awt.Color;
 /**
  * 登陆界面GUI
- * 
+ *
  * @author z0gSh1u
  */
+
+
 public class AuthGUI extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField txtUsername;
-	private JPasswordField txtPassword;
-	private JButton btnLogin;
-	private JRadioButton rdoStudent;
-	private JRadioButton rdoTeacher;
-	private JRadioButton rdoManager;
+	public static JPanel contentPane;
+	private RoundedTextField txtUsername;
+	private RoundedPasswordField txtPassword;
+	private RoundedButton btnLogin;
+	private NoFocusJRadioButton rdoStudent;
+	private NoFocusJRadioButton rdoTeacher;
+	private NoFocusJRadioButton rdoManager;
 
 	private void login() {
 		// 输入合法检查
@@ -100,40 +105,53 @@ public class AuthGUI extends JFrame {
 	 */
 	public AuthGUI() {
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(AuthGUI.class.getResource("/resources/assets/icon/fav.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(AuthGUI.class.getResource("/resources/assets/icon/seu_icon.png")));
 		setTitle("统一登录认证 - VCampus");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 866, 549);
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setBackground(new Color(255, 255, 255));
 		setContentPane(contentPane);
 
 		JPanel pBody = new JPanel();
 		contentPane.add(pBody, BorderLayout.CENTER);
 		pBody.setLayout(null);
 
-		JLabel lblUsername = new JLabel("用户名：");
+		// Add green strip at the top
+		JLabel greenStrip = new JLabel("");
+		greenStrip.setOpaque(true);
+		greenStrip.setBackground(new Color(0, 100, 0)); // Green color
+		greenStrip.setBounds(0, 0, 866, 40); // Adjust the height as needed
+		pBody.add(greenStrip);
+
+		JLabel lblUsername = new JLabel("用户名");
 		lblUsername.setBounds(531, 219, 60, 18);
+		lblUsername.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		pBody.add(lblUsername);
 
-		txtUsername = new JTextField();
-		txtUsername.setFont(new Font("宋体", Font.PLAIN, 20));
+		txtUsername = new RoundedTextField(10);
+		txtUsername.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		txtUsername.setBounds(605, 214, 190, 24);
+		txtUsername.setBorder(null);
 		pBody.add(txtUsername);
 		txtUsername.setColumns(10);
 
-		JLabel lblPassword = new JLabel("密码：");
+		JLabel lblPassword = new JLabel(" 密码");
 		lblPassword.setBounds(531, 271, 45, 18);
+		lblPassword.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		pBody.add(lblPassword);
 
-		JLabel lblType = new JLabel("用户类型：");
+		JLabel lblType = new JLabel("用户类型");
 		lblType.setBounds(531, 324, 75, 18);
+		lblType.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		pBody.add(lblType);
 
-		rdoStudent = new JRadioButton("学生");
-		rdoTeacher = new JRadioButton("教师");
-		rdoManager = new JRadioButton("管理员");
+		rdoStudent = new NoFocusJRadioButton("学生");
+		rdoTeacher = new NoFocusJRadioButton("教师");
+		rdoManager = new NoFocusJRadioButton("管理员");
 		rdoStudent.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -175,9 +193,9 @@ public class AuthGUI extends JFrame {
 		pBody.add(rdoManager);
 		rdoStudent.setSelected(true);
 
-		JButton btnLogin = new JButton("登陆");
+		JButton btnLogin = new RoundedButton("登 录",20);
 		btnLogin.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-		btnLogin.setIcon(new ImageIcon(AuthGUI.class.getResource("/resources/assets/icon/right-circle.png")));
+		btnLogin.setBounds(571, 372, 200, 40);
 		btnLogin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -194,12 +212,12 @@ public class AuthGUI extends JFrame {
 			}
 		};
 
-		btnLogin.setBounds(591, 372, 167, 85);
 		pBody.add(btnLogin);
 
-		txtPassword = new JPasswordField();
+		txtPassword = new RoundedPasswordField(10);
 		txtPassword.setFont(new Font("宋体", Font.PLAIN, 18));
 		txtPassword.setBounds(605, 266, 190, 24);
+		txtPassword.setBorder(null);
 		pBody.add(txtPassword);
 
 		txtUsername.addKeyListener(loginKeyAdapter);
@@ -210,20 +228,16 @@ public class AuthGUI extends JFrame {
 
 		JLabel leftPicture = new JLabel("");
 		leftPicture.setHorizontalAlignment(SwingConstants.CENTER);
-		leftPicture.setBounds(0, 0, 516, 511);
+		leftPicture.setBounds(0, 0, 516, 500);
 		leftPicture.setIcon(new ImageIcon(AuthGUI.class.getResource("/resources/assets/picture/seu-1.jpg")));
 		pBody.add(leftPicture);
 
-		JLabel label = new JLabel("统一登录认证");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("微软雅黑", Font.PLAIN, 35));
-		label.setBounds(557, 105, 233, 82);
-		pBody.add(label);
 
 		JLabel iconFavicon = new JLabel("");
 		iconFavicon.setIcon(new ImageIcon(AuthGUI.class.getResource("/resources/assets/icon/fav.png")));
-		iconFavicon.setBounds(642, 48, 64, 64);
+		iconFavicon.setBounds(530, 0, 420, 250);
 		pBody.add(iconFavicon);
+
 
 	}
 }

@@ -439,32 +439,32 @@ public class AppStudent extends JFrame {
 			contentPane.add(noticeBlock4);
 		}
 
-		//考虑加一个icon“热门帖子”
+			//考虑加一个icon“热门帖子”
 
-		List<PostInfo> postInfos = ResponseUtils.getResponseByHash(
-						new Request(App.connectionToServer, null, "tech.zxuuu.server.main.UtilsApi.getTop3Post", null).send())
-				.getListReturn(PostInfo.class);
+			List<PostInfo> postInfos = ResponseUtils.getResponseByHash(
+							new Request(App.connectionToServer, null, "tech.zxuuu.server.main.UtilsApi.getTop3Post", null).send())
+					.getListReturn(PostInfo.class);
 
-		if (postInfos.size() > 0) {
-			PostBlock postBlock1 = new PostBlock(postInfos.get(0).getId(), postInfos.get(0).getContent(),
-					quickFormatDate(postInfos.get(0).getDate()), postInfos.get(0).getUser_id(), postInfos.get(0).getThumbup());
-			postBlock1.setBounds(57, 422, 660, 80); // 调整位置
-			contentPane.add(postBlock1);
-		}
+			if (postInfos.size() > 0) {
+				PostBlock postBlock1 = new PostBlock(postInfos.get(0).getId(), postInfos.get(0).getContent(),
+						quickFormatDate(postInfos.get(0).getDate()), postInfos.get(0).getUser_id(), postInfos.get(0).getThumbup());
+				postBlock1.setBounds(57, 422, 660, 80); // 调整位置
+				contentPane.add(postBlock1);
+			}
 
-		if (postInfos.size() > 1) {
-			PostBlock postBlock2 = new PostBlock(postInfos.get(1).getId(), postInfos.get(1).getContent(),
-					quickFormatDate(postInfos.get(1).getDate()), postInfos.get(1).getUser_id(), postInfos.get(1).getThumbup());
-			postBlock2.setBounds(57, 512, 660, 80); // 调整位置
-			contentPane.add(postBlock2);
-		}
+			if (postInfos.size() > 1) {
+				PostBlock postBlock2 = new PostBlock(postInfos.get(1).getId(), postInfos.get(1).getContent(),
+						quickFormatDate(postInfos.get(1).getDate()), postInfos.get(1).getUser_id(), postInfos.get(1).getThumbup());
+				postBlock2.setBounds(57, 512, 660, 80); // 调整位置
+				contentPane.add(postBlock2);
+			}
 
-		if (postInfos.size() > 2) {
-			PostBlock postBlock3 = new PostBlock(postInfos.get(2).getId(), postInfos.get(2).getContent(),
-					quickFormatDate(postInfos.get(2).getDate()), postInfos.get(2).getUser_id(), postInfos.get(2).getThumbup());
-			postBlock3.setBounds(57, 602, 660, 80); // 调整位置
-			contentPane.add(postBlock3);
-		}
+			if (postInfos.size() > 2) {
+				PostBlock postBlock3 = new PostBlock(postInfos.get(2).getId(), postInfos.get(2).getContent(),
+						quickFormatDate(postInfos.get(2).getDate()), postInfos.get(2).getUser_id(), postInfos.get(2).getThumbup());
+				postBlock3.setBounds(57, 602, 660, 80); // 调整位置
+				contentPane.add(postBlock3);
+			}
 
 
 

@@ -19,7 +19,7 @@ public class Bootstrap_client {
 		System.out.println("Client started.");
 		
 		try {
-			javax.swing.UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
+//			javax.swing.UIManager.setLookAndFeel("com.birosoft.liquid.LiquidLookAndFeel");
 		} catch (Exception e) {
 			SwingUtils.showError(null, "主题加载失败。", "错误");
 		}
