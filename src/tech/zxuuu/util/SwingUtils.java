@@ -2,13 +2,13 @@ package tech.zxuuu.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import tech.zxuuu.client.rounded.CustomOptionPane;
 import javax.swing.*;
 
 /**
  * Swing GUI设计实用工具
- * 
- * @author z0gSh1u
+ *
+ * 作者 z0gSh1u
  */
 public final class SwingUtils {
 
@@ -23,21 +23,21 @@ public final class SwingUtils {
 	 * 弹出信息提示框
 	 */
 	static public void showMessage(JPanel parent, String msg, String title) {
-		JOptionPane.showMessageDialog(parent, msg, title, JOptionPane.WARNING_MESSAGE);
+		CustomOptionPane.showMessageDialog(parent, msg, title, CustomOptionPane.WARNING_MESSAGE);
 	}
 
 	/**
 	 * 弹出错误提示框
 	 */
 	static public void showError(JPanel parent, String msg, String title) {
-		JOptionPane.showMessageDialog(parent, msg, title, JOptionPane.ERROR_MESSAGE);
+		CustomOptionPane.showMessageDialog(parent, msg, title, CustomOptionPane.ERROR_MESSAGE);
 	}
 
 	/**
 	 * 弹出小型输入框，返回输入内容
 	 */
-	static public String popInput(String msg) {
-		return JOptionPane.showInputDialog(msg);
+	static public String popInput( JPanel parent, String msg) {
+		return CustomOptionPane.showInputDialog(parent, msg);
 	}
 
 	/**

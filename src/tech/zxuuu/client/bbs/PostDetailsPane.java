@@ -1,4 +1,4 @@
-//package tech.zxuuu.client.bbs;
+package tech.zxuuu.client.bbs;//package tech.zxuuu.client.bbs;
 //
 //import javax.swing.*;
 //import java.awt.*;

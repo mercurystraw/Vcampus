@@ -44,10 +44,9 @@ public class App extends JFrame {
 				: userType == userType.TEACHER ? new AppTeacher()
 						: userType == userType.MANAGER
 								? (managerType == ManagerType.LIBRARY ? new AppLibraryManager()
-										: managerType == ManagerType.OPENCOURSE ? new AppOpencourseManager()
+							: managerType == ManagerType.POST ? new AppPostManager()
 												: managerType == ManagerType.SHOP ? new AppShopManager()
-														: managerType == ManagerType.POST ? new AppPostManager()
-																: managerType == ManagerType.TEACHING ? new AppTeachingManager() : null)
+														: managerType == ManagerType.TEACHING ? new AppTeachingManager() : null)
 								: null;
 		if (target == null) {
 			SwingUtils.showError(null, "界面路由失败！", "错误");

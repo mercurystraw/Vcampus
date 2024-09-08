@@ -1,6 +1,6 @@
 package tech.zxuuu.client.teaching.studentSide;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,9 +61,6 @@ public class ScheduleTablePane extends JPanel {
 			return;
 		}
 		String[] course = temp.split(",");
-//		System.out.println(temp);
-//		System.out.println(course.length);
-
 
 		// FIX: course.length -> course.length - 1, since `temp` is ended with `,`
 		// WRONG FIX, INVERTED.
@@ -73,58 +70,21 @@ public class ScheduleTablePane extends JPanel {
 					.setText("<html>" + cla.getClassName() + "<br>" + cla.getTeacher() + "<br>" + cla.getClassroom() + "<html>");
 			labels[Integer.valueOf(course[i].charAt(9)) - 48 + (Integer.valueOf(course[i].charAt(11)) - 48) / 2 * 6]
 					.setText("<html>" + cla.getClassName() + "<br>" + cla.getTeacher() + "<br>" + cla.getClassroom() + "<html>");
-			System.out.println(cla.getID());
-			System.out.println(cla.getClassName()+cla.getTeacher()+cla.getClassroom());
-			System.out.println(Integer.valueOf(course[i].charAt(3))-48);
-//			int index1 = Integer.valueOf(cla.getID().charAt(2))-48;
-//			int index2 = Integer.valueOf(cla.getID().charAt(3))-48;
-//			int index_final = index1 + index2 * 6;
-//			if (index_final >= 0 && index_final < labels.length) {
-//				labels[index_final].setText("<html>" + cla.getClassName() + "<br>" + cla.getTeacher() + "<br>"+ cla.getClassroom() + "<html>");
-//			}
-
-//			labels[Integer.valueOf(course[i].charAt(3))-48]
-//					.setText("<html>" + cla.getClassName() + "<br>" + cla.getTeacher() + "<br>" + cla.getClassroom() + "<html>");
-//			labels[Integer.valueOf(course[i].charAt(3))]
-//					.setText("<html>" + cla.getClassName() + "<br>" + cla.getTeacher() + "<br>" + cla.getClassroom() + "<html>");
 		}
 
 	}
 
 	public void teacherSchedule() {
-		List<ClassInfo> cla = getClassOfOneTeacher(App.session.getTeacher().getCardNumber());
-		if (cla == null) {
-			System.out.println("Error: getClassOfOneTeacher returned null");
-			return;
-		}
+		List<ClassInfo> cla = getClassOfOneTeacher(App.session.getTeacher().getName());
 		String[] course = new String[cla.size() * 2];
 		for (int i = 0; i < cla.size(); i++) {
 			course[i] = cla.get(i).getID();
 		}
 		for (int i = 0; i < cla.size(); i++) {
-			String id = course[i];
-
-			System.out.println("Course ID: " + id);
-
-			if (id.length() > 0) {
-				int index1 = Integer.valueOf(id.charAt(6)) - 48 + (Integer.valueOf(id.charAt(8)) - 48) / 2 * 6;
-				int index2 = Integer.valueOf(id.charAt(9)) - 48 + (Integer.valueOf(id.charAt(11)) - 48) / 2 * 6;
-				//设置课程表课程的位置 表格从左到右 从上到下索引
-//				int index1 = Integer.valueOf(id.charAt(2))-48;
-//				int index2 = Integer.valueOf(id.charAt(3))-48;
-				// 通过index1和index2找到对应的label
-//				int index_final = index1 + index2 * 6;
-
-				if (index1 >= 0 && index1 < labels.length) {
-					labels[index1].setText("<html>" + cla.get(i).getClassName() + "<br>" + cla.get(i).getClassroom() + "<html>");
-				}
-				if(index2 >= 0 && index2 < labels.length) {
-					labels[index2].setText("<html>" + cla.get(i).getClassName() + "<br>" + cla.get(i).getClassroom() + "<html>");
-				}
-
-			} else {
-				System.out.println("Error: Course ID is invalid: " + id);
-			}
+			labels[Integer.valueOf(course[i].charAt(6)) - 48 + (Integer.valueOf(course[i].charAt(8)) - 48) / 2 * 6]
+					.setText("<html>" + cla.get(i).getClassName() + "<br>" + cla.get(i).getClassroom() + "<html>");
+			labels[Integer.valueOf(course[i].charAt(9)) - 48 + (Integer.valueOf(course[i].charAt(11)) - 48) / 2 * 6]
+					.setText("<html>" + cla.get(i).getClassName() + "<br>" + cla.get(i).getClassroom() + "<html>");
 		}
 	}
 
@@ -140,15 +100,10 @@ public class ScheduleTablePane extends JPanel {
 		centerNullPanel.setBounds(0, 0, 948, 627);
 		this.add(centerNullPanel);
 
-		JLabel lblNewLabel = new JLabel("再次点击查看课表即可刷新课表");
-		lblNewLabel.setBounds(711, 641, 226, 18);
-		add(lblNewLabel);
 
-		Color lightblue = new Color(208, 227, 234);
-		Color silvergray = new Color(233, 241, 244);
-		Color gemblue = new Color(85, 169, 208);
-		Color darkerGray = Color.GRAY.darker();
-		Color ligherBlack = darkerGray.darker().darker().darker();
+		Color lightblue = new Color(234, 255, 234);
+		Color silvergray = new Color(255, 255, 255);
+		Color gemblue = new Color(214, 255, 214);
 		labels = new JLabel[36];
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 6; j++) {
@@ -167,6 +122,7 @@ public class ScheduleTablePane extends JPanel {
 				labels[index].setForeground(Color.BLACK);
 				labels[index].setBorder(BorderFactory.createLineBorder(Color.WHITE));
 				centerNullPanel.add(labels[index]);
+				labels[index].setFont(new Font("微软雅黑",Font.PLAIN,20));
 			}
 		}
 
@@ -187,12 +143,11 @@ public class ScheduleTablePane extends JPanel {
 
 		labels[0].setText("<html><body><h1>课程表</h1></body></html>");
 		ScheduleUtilities.setWeekLabels(labels);
-		labels[6].setText("<html><body><h2>第1-2节<br /></h2>08:00-09:35</body></html>");
-		labels[12].setText("<html><body><h2>第3-4节<br /></h2>09:50-11:25</body></html>");
-		labels[18].setText("<html><body><h2>第5-6节<br /></h2>14:00-15:35</body></html>");
-		labels[24].setText("<html><body><h2>第7-8节<br /></h2>15:50-17:25</body></html>");
-		labels[30].setText("<html><body><h2>第9-10节<br /></h2>18:30-20:05</body></html>");
-
+		labels[6].setText("<html><body><h2>第1-2节<br /></h2>上午</body></html>");
+		labels[12].setText("<html><body><h2>第3-4节<br /></h2>上午</body></html>");
+		labels[18].setText("<html><body><h2>第5-6节<br /></h2>下午</body></html>");
+		labels[24].setText("<html><body><h2>第7-8节<br /></h2>下午</body></html>");
+		labels[30].setText("<html><body><h2>第9-10节<br /></h2>晚上</body></html>");
 
 	}
 

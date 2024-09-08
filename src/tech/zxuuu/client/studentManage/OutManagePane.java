@@ -17,6 +17,8 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.Font;
 import javax.swing.ImageIcon;
+import tech.zxuuu.client.rounded.RoundedButton;
+import tech.zxuuu.client.rounded.RoundedTextField;
 
 /**
  * 退学功能面板
@@ -26,14 +28,14 @@ import javax.swing.ImageIcon;
  */
 public class OutManagePane extends JPanel {
 
-	private JTextField textCardNumber;
+	private RoundedTextField textCardNumber;
 
 	public OutManagePane() {
 		setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 
-		JButton buttonYes = new JButton("确定");
-		buttonYes.setIcon(new ImageIcon(OutManagePane.class.getResource("/resources/assets/icon/tick.png")));
-		buttonYes.setBounds(385, 187, 115, 57);
+		RoundedButton buttonYes = new RoundedButton("确 定",10);
+		buttonYes.setBounds(276, 373, 167, 50);
+		buttonYes.setFont(new Font("微软雅黑", Font.PLAIN, 25));
 		buttonYes.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -49,7 +51,7 @@ public class OutManagePane extends JPanel {
 					SwingUtils.showError(null, "查无此人，退学失败！", "提示");
 					return;
 				}
-				String reInput = SwingUtils.popInput("要退学的学生姓名为 " + studentName + " ，请再次输入一卡通号确认：");
+				String reInput = SwingUtils.popInput(null,"要退学的学生姓名为 " + studentName + " ，请再次输入一卡通号确认：");
 				if (!reInput.equals(cardnumber)) {
 					SwingUtils.showMessage(null, "退学已取消！", "提示");
 					return;
@@ -67,17 +69,18 @@ public class OutManagePane extends JPanel {
 		setLayout(null);
 		this.add(buttonYes);
 
-		JLabel lblOutManage = new JLabel("学生退学");
-		lblOutManage.setBounds(254, 51, 100, 34);
-		lblOutManage.setFont(new Font("微软雅黑", Font.PLAIN, 25));
-		this.add(lblOutManage);
+		JLabel lblNewLabel = new JLabel("学生退学");
+		lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 30));
+		lblNewLabel.setBounds(285, 30, 150, 34);
+		add(lblNewLabel);
 
 		JLabel lblCardNumber = new JLabel("一卡通号");
-		lblCardNumber.setBounds(159, 129, 60, 18);
+		lblCardNumber.setBounds(120, 200, 100, 37);
+		lblCardNumber.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		this.add(lblCardNumber);
 
-		textCardNumber = new JTextField();
-		textCardNumber.setBounds(233, 120, 267, 37);
+		textCardNumber = new RoundedTextField(10);
+		textCardNumber.setBounds(300, 200, 270, 37);
 		this.add(textCardNumber);
 		textCardNumber.setColumns(10);
 	}

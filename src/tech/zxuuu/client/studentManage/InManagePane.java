@@ -16,6 +16,9 @@ import tech.zxuuu.net.Response;
 import tech.zxuuu.util.OtherUtils;
 import tech.zxuuu.util.ResponseUtils;
 import tech.zxuuu.util.SwingUtils;
+import tech.zxuuu.client.rounded.RoundedButton;
+import tech.zxuuu.client.rounded.RoundedTextField;
+import tech.zxuuu.client.rounded.RoundedPasswordField;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.border.BevelBorder;
@@ -28,11 +31,11 @@ import javax.swing.border.BevelBorder;
  */
 public class InManagePane extends JPanel {
 
-	private JTextField textCardNumber;
-	private JTextField textStudentNumber;
-	private JTextField textName;
-	private JPasswordField passwordField;
-	private JPasswordField passwordConfirm;
+	private RoundedTextField textCardNumber;
+	private RoundedTextField textStudentNumber;
+	private RoundedTextField textName;
+	private RoundedPasswordField passwordField;
+	private RoundedPasswordField passwordConfirm;
 
 	/**
 	 * Create the panel.
@@ -41,56 +44,61 @@ public class InManagePane extends JPanel {
 		setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		this.setLayout(null);
 
-		JLabel lblInManager = new JLabel("学生入学");
-		lblInManager.setFont(new Font("微软雅黑", Font.PLAIN, 25));
-		lblInManager.setBounds(281, 39, 100, 34);
-		this.add(lblInManager);
+		JLabel lblNewLabel = new JLabel("学生入学");
+		lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 30));
+		lblNewLabel.setBounds(285, 30, 150, 40);
+		this.add(lblNewLabel);
 
 		JLabel lblCardNumber = new JLabel("一卡通号");
-		lblCardNumber.setBounds(175, 111, 60, 18);
+		lblCardNumber.setBounds(120, 120, 100, 37);
+		lblCardNumber.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		this.add(lblCardNumber);
 
 		JLabel lbl_StudentNumber = new JLabel("学号");
-		lbl_StudentNumber.setBounds(205, 159, 30, 18);
+		lbl_StudentNumber.setBounds(120, 180, 100, 37);
+		lbl_StudentNumber.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		this.add(lbl_StudentNumber);
 
 		JLabel lblName = new JLabel("姓名");
-		lblName.setBounds(205, 205, 30, 18);
+		lblName.setBounds(120, 240, 100, 37);
+		lblName.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		this.add(lblName);
 
 		JLabel lblPassword = new JLabel("密码");
-		lblPassword.setBounds(205, 255, 30, 18);
+		lblPassword.setBounds(120, 300, 100, 37);
+		lblPassword.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		this.add(lblPassword);
 
-		textCardNumber = new JTextField();
-		textCardNumber.setBounds(249, 103, 248, 35);
+		textCardNumber = new RoundedTextField(10);
+		textCardNumber.setBounds(300, 120, 270, 37);
 		this.add(textCardNumber);
 		textCardNumber.setColumns(10);
 
-		textStudentNumber = new JTextField();
-		textStudentNumber.setBounds(249, 151, 248, 35);
+		textStudentNumber = new RoundedTextField(10);
+		textStudentNumber.setBounds(300, 180, 270, 37);
 		this.add(textStudentNumber);
 		textStudentNumber.setColumns(10);
 
-		textName = new JTextField();
-		textName.setBounds(248, 199, 249, 35);
+		textName = new RoundedTextField(10);
+		textName.setBounds(300, 240, 270, 37);
 		this.add(textName);
 		textName.setColumns(10);
 
-		passwordField = new JPasswordField();
-		passwordField.setBounds(249, 247, 248, 35);
+		passwordField = new RoundedPasswordField(10);
+		passwordField.setBounds(300, 300, 270, 37);
 		this.add(passwordField);
 
 		JLabel lblPasswordConfirm = new JLabel("确认密码");
-		lblPasswordConfirm.setBounds(175, 304, 60, 18);
+		lblPasswordConfirm.setBounds(120, 360, 100, 37);
+		lblPasswordConfirm.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		this.add(lblPasswordConfirm);
 
-		passwordConfirm = new JPasswordField();
-		passwordConfirm.setBounds(249, 296, 248, 35);
+		passwordConfirm = new RoundedPasswordField(10);
+		passwordConfirm.setBounds(300, 360, 270, 37);
+		passwordConfirm.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		this.add(passwordConfirm);
 
-		JButton buttonYes = new JButton("确认");
-		buttonYes.setIcon(new ImageIcon(InManagePane.class.getResource("/resources/assets/icon/tick.png")));
+		RoundedButton buttonYes = new RoundedButton("确 认",10);
 		buttonYes.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -119,7 +127,8 @@ public class InManagePane extends JPanel {
 				}
 			}
 		});
-		buttonYes.setBounds(347, 354, 150, 57);
+		buttonYes.setFont(new Font("微软雅黑", Font.PLAIN, 25));
+		buttonYes.setBounds(276, 450, 167, 50);
 		this.add(buttonYes);
 	}
 

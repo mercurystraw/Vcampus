@@ -12,19 +12,19 @@ import tech.zxuuu.entity.Book;
 import tech.zxuuu.net.Request;
 import tech.zxuuu.util.ResponseUtils;
 import tech.zxuuu.util.SwingUtils;
-
+import tech.zxuuu.client.rounded.*;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import java.awt.*;
 import java.awt.event.ActionListener;
-import java.net.URL;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JEditorPane;
 import javax.swing.JTextArea;
+import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 /**
  * 书籍详情窗口
@@ -38,6 +38,7 @@ public class BookDetails extends JDialog {
 	public JTable tblRecommand;
 	private DefaultTableModel model;
 	public JTextField txtCategory;
+	public  JTextField txtName;
 	public String title;
 	public String ISBN;
 	private List<Book> list = null;
@@ -51,24 +52,23 @@ public class BookDetails extends JDialog {
 		setTitle("图书详情 - " + title + " - VCampus");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(BookDetails.class.getResource("/resources/assets/icon/fav.png")));
 		setResizable(false);
-		setBounds(100, 100, 680, 550);
+		setBounds(100, 100, 680, 350);
 		getContentPane().setLayout(null);
 		contentPanel.setBounds(0, 0, 432, 1);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel);
 		contentPanel.setLayout(null);
 
-		JLabel lblCategory = new JLabel("分类");
-		lblCategory.setIcon(new ImageIcon(BookDetails.class.getResource("/resources/assets/icon/fenlei.png")));
-		lblCategory.setFont(new Font("微软雅黑", Font.PLAIN, 17));
-		lblCategory.setBounds(14, 25, 100, 32); // 调整宽度以适应文本
-		getContentPane().add(lblCategory);
-
 		JLabel lblDetails = new JLabel("图书简介");
-		lblDetails.setIcon(new ImageIcon(BookDetails.class.getResource("/resources/assets/icon/jianjie.png")));
 		lblDetails.setFont(new Font("微软雅黑", Font.PLAIN, 17));
-		lblDetails.setBounds(14, 78, 150, 32); // 调整宽度以适应文本
+		lblDetails.setBounds(14, 150, 104, 32);
 		getContentPane().add(lblDetails);
+
+
+		JLabel lblName= new JLabel("图书标题");
+		lblName.setFont(new Font("微软雅黑", Font.PLAIN, 17));
+		lblName.setBounds(14, 22, 104, 32);
+		getContentPane().add(lblName);
 
 		String[] head = { "藏书号", "书名", "作者", "被借次数" };
 		model = new DefaultTableModel(null, head);
@@ -79,14 +79,21 @@ public class BookDetails extends JDialog {
 		JScrollPane jsp = new JScrollPane(tblRecommand);
 		jsp.setBounds(14, 336, 624, 154);
 		getContentPane().add(jsp);
-
-		txtCategory = new JTextField();
+		txtCategory = new RoundedTextField(10);
 		txtCategory.setEditable(false);
 		txtCategory.setFont(new Font("微软雅黑", Font.PLAIN, 17));
-		txtCategory.setBounds(140, 22, 119, 40);
+		txtCategory.setBounds(140, 82, 119, 40);
 		getContentPane().add(txtCategory);
 		txtCategory.setColumns(10);
 		this.txtCategory.setText(category);
+		txtName= new RoundedTextField(10);
+		txtName.setEditable(false);
+		txtName.setFont(new Font("微软雅黑", Font.PLAIN, 17));
+		txtName.setBounds(140, 22, 119, 40);
+		getContentPane().add(txtName);
+		txtName.setColumns(10);
+		this.txtName.setText(title);
+
 		list = ResponseUtils.getResponseByHash(new Request(App.connectionToServer, null,
 				"tech.zxuuu.server.library.BookServer.searchSimilarBook", new Object[] { title, txtCategory.getText() }).send())
 				.getListReturn(Book.class);
@@ -115,45 +122,34 @@ public class BookDetails extends JDialog {
 		tblRecommand.setModel(model);
 
 
-		// 使用 JLabel 和 ImageIcon 显示图片
-		JLabel imageLabel = new JLabel();
-		imageLabel.setBounds(453, 21, 185, 260); // 设置位置和大小
-		getContentPane().add(imageLabel);
+		JLabel lblCategory = new JLabel("分类");
+		lblCategory.setFont(new Font("微软雅黑", Font.PLAIN, 17));
+		lblCategory.setBounds(14, 85, 70, 32);
+		getContentPane().add(lblCategory);
+
+		JEditorPane editPicture = new JEditorPane();
+		editPicture.setEditable(false);
+		editPicture.setBounds(453, 21, 185, 260);
+		editPicture.setContentType("text/html");
+		getContentPane().add(editPicture);
 
 		String result = ResponseUtils
 				.getResponseByHash(new Request(App.connectionToServer, null,
 						"tech.zxuuu.server.library.BookServer.searchPicture", new Object[] { ISBN }).send())
 				.getReturn(String.class);
 
-		txtDetails = new JTextArea();
+		txtDetails = new RoundedTextArea(10,10);
 		txtDetails.setFont(new Font("微软雅黑", Font.PLAIN, 17));
 		txtDetails.setEditable(false);
-		txtDetails.setBounds(140, 85, 264, 190);
+		txtDetails.setBounds(150, 150, 264, 120);
 		getContentPane().add(txtDetails);
 		txtDetails.setLineWrap(true);
 		txtDetails.setWrapStyleWord(true);
 		this.txtDetails.setText(details);
 
-		try {
-			URL url = new URL(result);
-			ImageIcon icon = new ImageIcon(url);
+		editPicture.setText("<html><body><img src=\"" + result + "\"></body></html>");
+		editPicture.setEditable(false);
 
-			// 调整图片大小以适应 JLabel
-			Image image = icon.getImage();
-			Image scaledImage = image.getScaledInstance(185, 260, Image.SCALE_SMOOTH);
-			imageLabel.setIcon(new ImageIcon(scaledImage));
-		} catch (Exception e) {
-			e.printStackTrace();
-			imageLabel.setText("无法加载图片");
-		}
-
-		JLabel label = new JLabel("相似图书推荐");
-		label.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-		label.setIcon(new ImageIcon(BookDetails.class.getResource("/resources/assets/icon/zhishiku.png")));
-		label.setBounds(248, 302, 144, 32);
-		getContentPane().add(label);
-		this.title = title;
-		this.ISBN = ISBN;
 
 	}
 }

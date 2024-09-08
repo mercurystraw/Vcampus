@@ -3,7 +3,6 @@ package tech.zxuuu.client.library;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -11,13 +10,12 @@ import javax.swing.JTextField;
 //import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import tech.zxuuu.client.main.App;
-import tech.zxuuu.client.messageQueue.ResponseQueue;
 import tech.zxuuu.net.Request;
-import tech.zxuuu.net.Response;
 import tech.zxuuu.util.ResponseUtils;
 import tech.zxuuu.util.SwingUtils;
+import tech.zxuuu.client.rounded.RoundedButton;
 import java.awt.Font;
-import javax.swing.ImageIcon;
+import tech.zxuuu.client.rounded.RoundedTextField;
 
 /**
  * 书籍删除面板
@@ -27,7 +25,7 @@ import javax.swing.ImageIcon;
  */
 public class DeleteBookPane extends JPanel {
 
-	private JTextField txtISBN;
+	private RoundedTextField txtISBN;
 
 	/**
 	 * Create the panel.
@@ -35,8 +33,10 @@ public class DeleteBookPane extends JPanel {
 	public DeleteBookPane() {
 		this.setLayout(null);
 
-		txtISBN = new JTextField();
+		txtISBN = new RoundedTextField(10);
 		txtISBN.setBounds(337, 223, 272, 27);
+		txtISBN.setBorder(null);
+		txtISBN.setFont(new Font("微软雅黑",Font.PLAIN,18));
 		this.add(txtISBN);
 		txtISBN.setColumns(10);
 
@@ -45,7 +45,9 @@ public class DeleteBookPane extends JPanel {
 		lblISBN.setBounds(164, 219, 140, 33);
 		this.add(lblISBN);
 
-		JButton btnComfirm = new JButton("确定");
+		RoundedButton btnComfirm = new RoundedButton("确 定",10);
+		btnComfirm.setFont(new Font("微软雅黑", Font.PLAIN, 24));
+		btnComfirm.setBounds(381, 440, 124, 39);
 		btnComfirm.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -61,14 +63,9 @@ public class DeleteBookPane extends JPanel {
 				}
 			}
 		});
-		btnComfirm.setBounds(365, 306, 113, 27);
 		this.add(btnComfirm);
 
-		JLabel label = new JLabel(" 删除书籍");
-		label.setIcon(new ImageIcon(DeleteBookPane.class.getResource("/resources/assets/icon/delete.png")));
-		label.setFont(new Font("微软雅黑", Font.PLAIN, 24));
-		label.setBounds(45, 40, 245, 64);
-		add(label);
+
 	}
 
 }

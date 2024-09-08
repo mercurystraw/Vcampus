@@ -29,7 +29,7 @@ import java.awt.event.MouseEvent;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import java.awt.Font;
-
+import tech.zxuuu.client.rounded.*;
 /**
  * 书籍搜索与借阅窗口
  * 
@@ -39,11 +39,11 @@ import java.awt.Font;
 public class QueryBook extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtTitle;
-	private JTextField txtAuthor;
+	private RoundedTextField txtTitle;
+	private RoundedTextField txtAuthor;
 	private JTable tblSearch;
 	private DefaultTableModel model;
-	private JTextField txtISBN;
+	private RoundedTextField txtISBN;
 	private List<Book> list = null;
 
 	/**
@@ -52,34 +52,39 @@ public class QueryBook extends JDialog {
 	public QueryBook() {
 		setResizable(false);
 		setTitle("书籍检索与借阅 - VCampus");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(QueryBook.class.getResource("/resources/assets/icon/fav.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(QueryBook.class.getResource("/resources/assets/icon/seu_icon.png")));
 		setBounds(100, 100, 808, 467);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		txtTitle = new JTextField();
+		txtTitle = new RoundedTextField(10);
 		txtTitle.setBounds(65, 15, 233, 30);
+		txtTitle.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		contentPanel.add(txtTitle);
 		txtTitle.setColumns(10);
 
 		JLabel lblTitle = new JLabel("书名");
-		lblTitle.setBounds(21, 21, 30, 18);
+		lblTitle.setBounds(21, 21, 50, 18);
+		lblTitle.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		contentPanel.add(lblTitle);
 
-		txtAuthor = new JTextField();
+		txtAuthor = new RoundedTextField(10);
 		txtAuthor.setBounds(356, 15, 157, 30);
 		txtAuthor.setText("");
+		txtAuthor.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		contentPanel.add(txtAuthor);
 		txtAuthor.setColumns(10);
 
 		JLabel lblAuthor = new JLabel("作者");
-		lblAuthor.setBounds(312, 21, 30, 18);
+		lblAuthor.setBounds(312, 21, 50, 18);
+		lblAuthor.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		contentPanel.add(lblAuthor);
 
 		String[] tableHeader = { "书目编号", "书名", "作者" };
 		model = new DefaultTableModel(null, tableHeader);
 		tblSearch = new JTable();
+		tblSearch.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		tblSearch.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -98,9 +103,11 @@ public class QueryBook extends JDialog {
 			}
 		});
 		JScrollPane jsp = new JScrollPane(tblSearch);
+		jsp.setBounds(21, 140, 740, 266);
 
-		JButton btnSearch = new JButton("检索");
-		btnSearch.setBounds(546, 15, 100, 30);
+		RoundedButton btnSearch = new RoundedButton("检 索",10);
+		btnSearch.setFont(new Font("微软雅黑", Font.PLAIN, 22));
+		btnSearch.setBounds(600, 10, 121, 40);
 
 		btnSearch.addActionListener(new ActionListener() {
 			@Override
@@ -134,36 +141,24 @@ public class QueryBook extends JDialog {
 		});
 
 		contentPanel.add(btnSearch);
-		JButton btnReset = new JButton("重置");
-		btnReset.setBounds(661, 15, 100, 30);
-		btnReset.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				txtTitle.setText("");
-				txtAuthor.setText("");
-				model.setRowCount(0);
-			}
-		});
-		contentPanel.add(btnReset);
 
-		jsp.setBounds(21, 66, 740, 266);
 		contentPanel.add(jsp);
 		tblSearch.setModel(model);
 		tblSearch.setBounds(2, 2, 300, 300);
 
-		txtISBN = new JTextField();
-		txtISBN.setBounds(271, 379, 267, 30);
+		txtISBN = new RoundedTextField(10);
+		txtISBN.setBounds(271, 80, 267, 30);
 		contentPanel.add(txtISBN);
 		txtISBN.setColumns(10);
 
 		JLabel lblISBN = new JLabel("需要借阅的书目编号");
-		lblISBN.setBounds(122, 385, 135, 18);
+		lblISBN.setBounds(50, 85, 200, 22);
+		lblISBN.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 		contentPanel.add(lblISBN);
 
-		JButton btnComfirm = new JButton("确认");
-		btnComfirm.setFont(new Font("宋体", Font.PLAIN, 18));
-		btnComfirm.setIcon(new ImageIcon(QueryBook.class.getResource("/resources/assets/icon/tick.png")));
-		btnComfirm.setBounds(552, 362, 121, 57);
+		RoundedButton btnComfirm = new RoundedButton("确 认",10);
+		btnComfirm.setFont(new Font("微软雅黑", Font.PLAIN, 22));
+		btnComfirm.setBounds(600, 75, 121, 40);
 		btnComfirm.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -185,8 +180,5 @@ public class QueryBook extends JDialog {
 		});
 		contentPanel.add(btnComfirm);
 
-		JLabel lblNewLabel = new JLabel("双击表项查看书籍详情...");
-		lblNewLabel.setBounds(21, 345, 174, 18);
-		contentPanel.add(lblNewLabel);
 	}
 }

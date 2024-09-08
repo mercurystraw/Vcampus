@@ -23,17 +23,14 @@ import tech.zxuuu.util.ResponseUtils;
 import tech.zxuuu.util.SwingUtils;
 import javax.swing.border.BevelBorder;
 import java.awt.Font;
+import tech.zxuuu.client.rounded.RoundedTextField;
+import tech.zxuuu.client.rounded.RoundedButton;
 
-/**
- * 学生查询功能面板
- * 
- * @author 沈汉唐
- * @author z0gSh1u
- */
+
 public class StudentTablePane extends JPanel {
 
 	private JTable infoTable;
-	private JTextField textGrade;
+	private RoundedTextField textGrade;
 	List<Student> result = null;
 	String[][] rowData = null;
 	DefaultTableModel model = new DefaultTableModel() {
@@ -49,33 +46,43 @@ public class StudentTablePane extends JPanel {
 	public StudentTablePane() {
 		setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		this.setLayout(null);
+		JLabel lblNewLabel = new JLabel("学生查询");
+		lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 30));
+		lblNewLabel.setBounds(285, 30, 150, 40);
+		this.add(lblNewLabel);
+
 		infoTable = new JTable();
-		infoTable.setBounds(0, 67, 774, 477);
+		infoTable.setBounds(0, 108, 774, 300);
+		infoTable.setFont(new Font("微软雅黑", Font.PLAIN, 14));
 		String[] head = { "一卡通", "学号", "院系", "姓名" };
 		JScrollPane jsp = new JScrollPane(infoTable);
-		jsp.setBounds(43, 108, 572, 439);
+		jsp.setBounds(43, 220, 572, 300);
 		model.setDataVector(rowData, head);
 		infoTable.setModel(model);
 		this.add(jsp);
+
 		JComboBox comboAcademy = new JComboBox();
-		comboAcademy.setBounds(90, 60, 243, 35);
+		comboAcademy.setBounds(150, 100, 200, 37);
+		comboAcademy.setFont(new Font("微软雅黑", Font.PLAIN, 16));
 		this.add(comboAcademy);
 
 		JLabel lblAcademy = new JLabel("院系");
-		lblAcademy.setBounds(46, 68, 30, 18);
+		lblAcademy.setBounds(60, 100, 100, 37);
+		lblAcademy.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 		this.add(lblAcademy);
 
 		JLabel lblGrade = new JLabel("年级");
-		lblGrade.setBounds(347, 68, 30, 18);
+		lblGrade.setBounds(400, 100, 100, 35);
+		lblGrade.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 		this.add(lblGrade);
 
-		textGrade = new JTextField();
-		textGrade.setBounds(391, 60, 121, 35);
+		textGrade = new RoundedTextField(10);
+		textGrade.setBounds(480, 100, 100, 35);
 		this.add(textGrade);
 		textGrade.setColumns(10);
 
-		JButton buttonSearch = new JButton("查询");
-
+		RoundedButton buttonSearch = new RoundedButton("查 询",10);
+		buttonSearch.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		buttonSearch.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -102,13 +109,10 @@ public class StudentTablePane extends JPanel {
 				}
 			}
 		});
-		buttonSearch.setBounds(526, 59, 82, 36);
+		buttonSearch.setBounds(280, 160, 100, 36);
 		this.add(buttonSearch);
 		
-		JLabel lblNewLabel = new JLabel("院系学生查询");
-		lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-		lblNewLabel.setBounds(273, 13, 108, 24);
-		add(lblNewLabel);
+
 
 		List<String> academies = new ArrayList<>(
 				Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16",

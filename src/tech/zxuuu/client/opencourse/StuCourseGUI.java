@@ -234,7 +234,7 @@ public class StuCourseGUI extends JFrame {
 						}
 
 						@Override
-						protected void process(java.util.List<Integer> chunks) {
+						protected void process(List<Integer> chunks) {
 							for (int v : chunks) {
 								videoFrame.getProgressBar().setValue(v);
 							}

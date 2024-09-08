@@ -78,14 +78,10 @@ public class QueryScorePane extends JPanel {
 		}
 
 		table.setModel(model);
-		
-		JLabel lblNewLabel = new JLabel("重新进入教务平台以刷新成绩信息");
-		lblNewLabel.setBounds(656, 587, 225, 18);
-		add(lblNewLabel);
+
 		
 		JLabel lblNewLabel_1 = new JLabel("课程成绩");
-		lblNewLabel_1.setIcon(new ImageIcon(QueryScorePane.class.getResource("/resources/assets/icon/cj.png")));
-		lblNewLabel_1.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+		lblNewLabel_1.setFont(new Font("微软雅黑", Font.PLAIN, 22));
 		lblNewLabel_1.setBounds(385, 13, 124, 48);
 		add(lblNewLabel_1);
 

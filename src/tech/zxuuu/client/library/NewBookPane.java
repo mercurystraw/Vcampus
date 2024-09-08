@@ -1,30 +1,20 @@
 package tech.zxuuu.client.library;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 //import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import tech.zxuuu.client.main.App;
-import tech.zxuuu.client.messageQueue.ResponseQueue;
 import tech.zxuuu.net.Request;
-import tech.zxuuu.net.Response;
 import tech.zxuuu.util.ResponseUtils;
 import tech.zxuuu.util.SwingUtils;
-
-import java.awt.Desktop;
-import java.awt.Font;
-import javax.swing.ImageIcon;
+import tech.zxuuu.client.rounded.RoundedTextField;
+import tech.zxuuu.client.rounded.RoundedButton;
+import tech.zxuuu.client.rounded.RoundedTextArea;
 
 /**
  * 书籍添加面板
@@ -34,16 +24,16 @@ import javax.swing.ImageIcon;
  */
 public class NewBookPane extends JPanel {
 
-	private JTextField txtTitle;
-	private JTextField txtauthor;
+	private RoundedTextField txtTitle;
+	private RoundedTextField txtauthor;
 	private JLabel lbl;
 	private JLabel lblAuthor;
-	private JTextField txtSetISBN;
+	private RoundedTextField txtSetISBN;
 	private JLabel lblSetISBN;
-	private JButton btnComfirm;
+	private RoundedButton btnComfirm;
 	private JLabel lblCategory;
-	private JTextArea txtAreaDetails;
-	private JTextField txtPictureURL;
+	private RoundedTextArea txtAreaDetails;
+	private RoundedTextField txtPictureURL;
 	private JLabel label;
 	private JLabel lblPx;
 	JComboBox<String> combCategory;
@@ -55,28 +45,34 @@ public class NewBookPane extends JPanel {
 	public NewBookPane() {
 		this.setLayout(null);
 
-		txtTitle = new JTextField();
-		txtTitle.setBounds(224, 102, 175, 30);
+		txtTitle = new RoundedTextField(10);
+		txtTitle.setBounds(224, 20, 542, 30);
+		txtTitle.setBorder(null);
+		txtTitle.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 		this.add(txtTitle);
 		txtTitle.setColumns(10);
 
-		txtauthor = new JTextField();
-		txtauthor.setBounds(591, 102, 175, 30);
+		txtauthor = new RoundedTextField(10);
+		txtauthor.setBounds(224, 85, 542, 30);
+		txtauthor.setBorder(null);
+		txtauthor.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 		this.add(txtauthor);
 		txtauthor.setColumns(10);
 
-		lbl = new JLabel("标题");
+		lbl = new JLabel("图书名称");
 		lbl.setFont(new Font("微软雅黑", Font.PLAIN, 22));
-		lbl.setBounds(46, 106, 48, 29);
+		lbl.setBounds(46, 20, 175, 29);
 		this.add(lbl);
 
-		lblAuthor = new JLabel("作者");
+		lblAuthor = new JLabel("图书作者");
 		lblAuthor.setFont(new Font("微软雅黑", Font.PLAIN, 22));
-		lblAuthor.setBounds(467, 102, 48, 29);
+		lblAuthor.setBounds(46, 85, 175, 29);
 		this.add(lblAuthor);
 
-		txtSetISBN = new JTextField();
+		txtSetISBN = new RoundedTextField(10);
 		txtSetISBN.setBounds(224, 153, 175, 30);
+		txtSetISBN.setBorder(null);
+		txtSetISBN.setFont(new Font("微软雅黑",Font.PLAIN,18));
 		this.add(txtSetISBN);
 		txtSetISBN.setColumns(10);
 
@@ -85,9 +81,9 @@ public class NewBookPane extends JPanel {
 		lblSetISBN.setBounds(46, 153, 157, 30);
 		this.add(lblSetISBN);
 
-		btnComfirm = new JButton("确定");
+		btnComfirm = new RoundedButton("确 定",10);
 		btnComfirm.setFont(new Font("微软雅黑", Font.PLAIN, 24));
-		btnComfirm.setBounds(481, 440, 124, 39);
+		btnComfirm.setBounds(381, 440, 124, 39);
 		btnComfirm.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -106,7 +102,7 @@ public class NewBookPane extends JPanel {
 		});
 		this.add(btnComfirm);
 
-		JLabel lblDetails = new JLabel("图书详情");
+		JLabel lblDetails = new JLabel("图书简介");
 		lblDetails.setFont(new Font("微软雅黑", Font.PLAIN, 22));
 		lblDetails.setBounds(48, 230, 88, 30);
 		this.add(lblDetails);
@@ -122,6 +118,7 @@ public class NewBookPane extends JPanel {
 		combCategory.addItem("励志");
 		combCategory.addItem("体育");
 		combCategory.setVisible(true);
+		combCategory.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 		add(combCategory);
 
 		lblCategory = new JLabel("分类");
@@ -129,43 +126,29 @@ public class NewBookPane extends JPanel {
 		lblCategory.setBounds(467, 153, 48, 29);
 		this.add(lblCategory);
 
-		txtAreaDetails = new JTextArea();
+		txtAreaDetails = new RoundedTextArea(5,10);
 		txtAreaDetails.setBounds(224, 230, 542, 123);
+		txtAreaDetails.setFont(new Font("微软雅黑",Font.PLAIN,18));
 		txtAreaDetails.setLineWrap(true);
+		txtAreaDetails.setBorder(null);
 		this.add(txtAreaDetails);
 
-		JLabel lblurl = new JLabel("封面图片URL");
+		JLabel lblurl = new JLabel("图书封面网址");
 		lblurl.setFont(new Font("微软雅黑", Font.PLAIN, 22));
+
 		lblurl.setBounds(46, 382, 157, 30);
 		this.add(lblurl);
 
-		txtPictureURL = new JTextField();
+		txtPictureURL = new RoundedTextField(10);
 		txtPictureURL.setBounds(224, 380, 542, 35);
+		txtPictureURL.setFont(new Font("微软雅黑",Font.PLAIN,18));
+		txtPictureURL.setBorder(null);
 		this.add(txtPictureURL);
 		txtPictureURL.setColumns(10);
 
-		label = new JLabel(" 添加书籍");
-		label.setIcon(new ImageIcon(NewBookPane.class.getResource("/resources/assets/icon/add.png")));
-		label.setFont(new Font("微软雅黑", Font.PLAIN, 24));
-		label.setBounds(21, 20, 245, 64);
-		add(label);
 
-		lblPx = new JLabel("(185 px * 260 px)");
-		lblPx.setBounds(46, 422, 144, 18);
-		add(lblPx);
 		
-		btnNewButton = new JButton("图片外链平台");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					Desktop.getDesktop().browse(new URI("https://www.bilibili.com/video/BV1BDa2eTEzS/?spm_id_from=333.788.recommend_more_video.-1&vd_source=aae5af28fe16885b783d8a9b52561e77"));
-				} catch (IOException | URISyntaxException e1) {
-					SwingUtils.showError(null, "打开失败！", "错误");
-				}
-			}
-		});
-		btnNewButton.setBounds(224, 451, 123, 27);
-		add(btnNewButton);
+
 	}
 
 }

@@ -150,13 +150,7 @@ public class ScoreDetailSetting extends JFrame {
 		contentPane.add(btnSave);
 
 		String rawStudentData = getStudentOfOneClass(classId);
-
-		System.out.println(rawStudentData);
-
 		L1 = rawStudentData.split(",");
-
-		System.out.println(L1.length);
-
 		L2 = new String[L1.length][3];
 
 		if (rawStudentData == null || rawStudentData.length() == 0) {
@@ -168,14 +162,9 @@ public class ScoreDetailSetting extends JFrame {
 			};
 		} else {
 			for (int i = 0; i < L1.length; i++) {
-				//	三项分别是一卡通号 姓名 分数
-				//存储的students信息为前9为为一卡通号，然后是姓名 然后是一卡通号
 				L2[i][0] = L1[i].substring(0, 9);
-				System.out.println(L2[i][0]);
 				L2[i][1] = getStudentNameByCardNumber(L2[i][0]);
-				System.out.println(L2[i][1]);
 				L2[i][2] = L1[i].substring(9).equals("xxx") ? "——" : String.valueOf(Integer.parseInt(L1[i].substring(9)));
-
 			}
 			model = new DefaultTableModel(L2, head) {
 				@Override
@@ -192,7 +181,7 @@ public class ScoreDetailSetting extends JFrame {
 			public void mousePressed(MouseEvent evt) {
 				if (evt.getClickCount() == 2) {
 					int row = ((JTable) evt.getSource()).rowAtPoint(evt.getPoint());
-					String rawInput = SwingUtils.popInput("请输入 " + L2[row][1] + " 的给分（不给分可放空）");
+					String rawInput = SwingUtils.popInput(null,"请输入 " + L2[row][1] + " 的给分（不给分可放空）");
 					if (rawInput.trim().equals("")) {
 						L2[row][2] = "xxx";
 						model.setValueAt("——", row, 2);

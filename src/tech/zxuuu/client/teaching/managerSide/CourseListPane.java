@@ -14,6 +14,8 @@ import tech.zxuuu.net.Request;
 import tech.zxuuu.net.Response;
 import tech.zxuuu.util.OtherUtils;
 import tech.zxuuu.util.ResponseUtils;
+import tech.zxuuu.client.rounded.RoundedTextField;
+import tech.zxuuu.client.rounded.RoundedButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,18 +53,19 @@ public class CourseListPane extends JPanel {
 	public CourseListPane() {
 		setLayout(null);
 
-		JLabel label = new JLabel("查询院系开课");
-		label.setFont(new Font("微软雅黑", Font.PLAIN, 25));
-		label.setBounds(238, 13, 150, 34);
+		JLabel label = new JLabel("课程查询");
+		label.setFont(new Font("微软雅黑", Font.PLAIN, 30));
+		label.setBounds(285, 30, 150, 30);
 		add(label);
 
 		JLabel label_1 = new JLabel("选择院系");
-		label_1.setBounds(55, 58, 72, 18);
+		label_1.setBounds(100, 100, 100, 37);
+		label_1.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		add(label_1);
 
 		JComboBox comboBox = new JComboBox();
-		comboBox.setFont(new Font("宋体", Font.PLAIN, 17));
-		comboBox.setBounds(141, 55, 340, 34);
+		comboBox.setFont(new Font("微软雅黑", Font.PLAIN, 17));
+		comboBox.setBounds(280, 100, 250, 37);
 		add(comboBox);
 
 		List<String> academies = new ArrayList<>(Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
@@ -77,9 +80,10 @@ public class CourseListPane extends JPanel {
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		scrollPane.setBounds(60, 220, 572, 300);
 
-		JButton btnNewButton = new JButton("确定");
-		btnNewButton.setFont(new Font("宋体", Font.PLAIN, 17));
+		JButton btnNewButton = new RoundedButton("确 定",10);
+		btnNewButton.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -105,7 +109,7 @@ public class CourseListPane extends JPanel {
 
 			}
 		});
-		btnNewButton.setBounds(507, 54, 113, 35);
+		btnNewButton.setBounds(280, 160, 100, 36);
 		add(btnNewButton);
 
 	}

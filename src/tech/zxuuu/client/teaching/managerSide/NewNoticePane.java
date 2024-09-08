@@ -15,6 +15,8 @@ import tech.zxuuu.net.Response;
 import tech.zxuuu.util.OtherUtils;
 import tech.zxuuu.util.ResponseUtils;
 import tech.zxuuu.util.SwingUtils;
+import tech.zxuuu.client.rounded.RoundedButton;
+import tech.zxuuu.client.rounded.RoundedTextField;
 
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -23,8 +25,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.BevelBorder;
 
 public class NewNoticePane extends JPanel {
-	private JTextField txtTitle;
-	private JTextField txtUrl;
+	private RoundedTextField txtTitle;
+	private RoundedTextField txtUrl;
 
 	/**
 	 * Create the panel.
@@ -33,21 +35,22 @@ public class NewNoticePane extends JPanel {
 		setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("发布新通知");
-		lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 25));
-		lblNewLabel.setIcon(new ImageIcon(NewNoticePane.class.getResource("/resources/assets/icon/jianjie.png")));
-		lblNewLabel.setBounds(227, 36, 161, 34);
+		JLabel lblNewLabel = new JLabel("发布通知");
+		lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 30));
+		lblNewLabel.setBounds(285, 30, 150, 40);
 		add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("通知标题");
-		lblNewLabel_1.setBounds(122, 115, 72, 18);
-		add(lblNewLabel_1);
+		JLabel label = new JLabel("通知标题");
+		label.setBounds(120, 180, 100, 37);
+		label.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+		add(label);
 
-		JLabel lblNewLabel_2 = new JLabel("跳转网址");
-		lblNewLabel_2.setBounds(122, 180, 72, 18);
+		JLabel lblNewLabel_2 = new JLabel("跳转网页");
+		lblNewLabel_2.setBounds(120, 270, 100, 37);
+		lblNewLabel_2.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		add(lblNewLabel_2);
 
-		JButton btnNewButton = new JButton("发布");
+		JButton btnNewButton = new RoundedButton("发 布",10);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -79,17 +82,17 @@ public class NewNoticePane extends JPanel {
 
 			}
 		});
-		btnNewButton.setIcon(new ImageIcon(NewNoticePane.class.getResource("/resources/assets/icon/tick.png")));
-		btnNewButton.setBounds(248, 258, 115, 57);
+		btnNewButton.setFont(new Font("微软雅黑", Font.PLAIN, 25));
+		btnNewButton.setBounds(276, 410, 167, 50);
 		add(btnNewButton);
 
-		txtTitle = new JTextField();
-		txtTitle.setBounds(208, 112, 274, 24);
+		txtTitle = new RoundedTextField(10);
+		txtTitle.setBounds(300, 180, 270, 37);
 		add(txtTitle);
 		txtTitle.setColumns(10);
 
-		txtUrl = new JTextField();
-		txtUrl.setBounds(208, 177, 274, 24);
+		txtUrl = new RoundedTextField(10);
+		txtUrl.setBounds(300, 270, 270, 37);
 		add(txtUrl);
 		txtUrl.setColumns(10);
 

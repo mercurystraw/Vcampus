@@ -9,7 +9,7 @@ import tech.zxuuu.client.main.App;
 import tech.zxuuu.entity.Student;
 import tech.zxuuu.net.Request;
 import tech.zxuuu.util.ResponseUtils;
-
+import tech.zxuuu.client.rounded.*;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
@@ -23,11 +23,11 @@ import java.awt.event.ActionEvent;
 public class DropCourseGUI extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	JTextField txtClassID;
-	JTextField txtClassName;
-	JTextField txtTime;
-	JTextField txtTeacher;
-	JTextField txtClassroom;
+	RoundedTextField txtClassID;
+	RoundedTextField txtClassName;
+	RoundedTextField txtTime;
+	RoundedTextField txtTeacher;
+	RoundedTextField txtClassroom;
 
 	public Boolean takeClassInv(Student student, String dropClassId) {
 		return ResponseUtils
@@ -51,7 +51,7 @@ public class DropCourseGUI extends JDialog {
 		lbClassID.setBounds(49, 32, 39, 18);
 		contentPanel.add(lbClassID);
 
-		txtClassID = new JTextField();
+		txtClassID = new RoundedTextField(10);
 		txtClassID.setEditable(false);
 		txtClassID.setColumns(10);
 		txtClassID.setBounds(107, 29, 278, 24);
@@ -61,7 +61,7 @@ public class DropCourseGUI extends JDialog {
 		lbClassName.setBounds(49, 63, 57, 18);
 		contentPanel.add(lbClassName);
 
-		txtClassName = new JTextField();
+		txtClassName = new RoundedTextField(10);
 		txtClassName.setEditable(false);
 		txtClassName.setColumns(10);
 		txtClassName.setBounds(107, 60, 278, 24);
@@ -71,7 +71,7 @@ public class DropCourseGUI extends JDialog {
 		lbTime.setBounds(49, 97, 57, 18);
 		contentPanel.add(lbTime);
 
-		txtTime = new JTextField();
+		txtTime = new RoundedTextField(10);
 		txtTime.setEditable(false);
 		txtTime.setColumns(10);
 		txtTime.setBounds(107, 94, 278, 24);
@@ -81,7 +81,7 @@ public class DropCourseGUI extends JDialog {
 		lbTeacher.setBounds(49, 128, 57, 18);
 		contentPanel.add(lbTeacher);
 
-		txtTeacher = new JTextField();
+		txtTeacher = new RoundedTextField(10);
 		txtTeacher.setEditable(false);
 		txtTeacher.setColumns(10);
 		txtTeacher.setBounds(107, 125, 278, 24);
@@ -91,7 +91,7 @@ public class DropCourseGUI extends JDialog {
 		lbClassroom.setBounds(49, 159, 57, 18);
 		contentPanel.add(lbClassroom);
 
-		txtClassroom = new JTextField();
+		txtClassroom = new RoundedTextField(10);
 		txtClassroom.setEditable(false);
 		txtClassroom.setColumns(10);
 		txtClassroom.setBounds(107, 156, 278, 24);
@@ -103,7 +103,8 @@ public class DropCourseGUI extends JDialog {
 			getContentPane().add(buttonPane);
 			buttonPane.setLayout(null);
 			{
-				JButton btnDrop = new JButton("退选课程");
+				JButton btnDrop = new RoundedButton("退选课程",10);
+				btnDrop.setFont(new java.awt.Font("微软雅黑", 0, 12));
 				btnDrop.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
@@ -126,7 +127,8 @@ public class DropCourseGUI extends JDialog {
 				getRootPane().setDefaultButton(btnDrop);
 			}
 			{
-				JButton btnCancel = new JButton("返回");
+				JButton btnCancel = new RoundedButton("返 回",10);
+				btnCancel.setFont(new java.awt.Font("微软雅黑", 0, 12));
 				btnCancel.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {

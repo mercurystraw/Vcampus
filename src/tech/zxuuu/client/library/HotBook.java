@@ -5,8 +5,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.ImageIcon;
-import java.awt.*;
-import java.net.URL;
+import java.awt.Font;
 
 
 /**
@@ -23,24 +22,12 @@ public class HotBook extends JPanel {
 	public HotBook(String PictureURL, String title, String author, int number) {
 		setLayout(null);
 
-		// 使用 JLabel 和 ImageIcon 显示图片
-		JLabel imageLabel = new JLabel();
-		imageLabel.setBounds(14, 13, 185, 260); // 设置位置和大小
-		add(imageLabel);
-
-// 从网址加载图片
-		try {
-			URL url = new URL(PictureURL);
-			ImageIcon icon = new ImageIcon(url);
-
-			// 调整图片大小以适应 JLabel
-			Image image = icon.getImage();
-			Image scaledImage = image.getScaledInstance(185, 260, Image.SCALE_SMOOTH);
-			imageLabel.setIcon(new ImageIcon(scaledImage));
-		} catch (Exception e) {
-			e.printStackTrace();
-			imageLabel.setText("无法加载图片");
-		}
+		JEditorPane editPicture = new JEditorPane();
+		editPicture.setEditable(false);
+		editPicture.setBounds(14, 13, 185, 260);
+		editPicture.setContentType("text/html");
+		add(editPicture);
+		editPicture.setText("<html><body><img src=\"" + PictureURL + "\"></body><html>");
 
 		JLabel lblAuthor = new JLabel("");
 		lblAuthor.setIcon(new ImageIcon(HotBook.class.getResource("/resources/assets/icon/迎宾 (2).png")));

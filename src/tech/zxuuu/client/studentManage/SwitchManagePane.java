@@ -11,6 +11,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import tech.zxuuu.client.rounded.RoundedButton;
+import tech.zxuuu.client.rounded.RoundedTextField;
 
 import tech.zxuuu.client.main.App;
 import tech.zxuuu.entity.Student;
@@ -23,18 +25,18 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
-/**
- * 转系功能面板
- * 
- * @author 沈汉唐
- * @author z0gSh1u
- */
 public class SwitchManagePane extends JPanel {
 
-	private JTextField textCardNumber;
-	private JTextField textNewStudentNumber;
-
+	private RoundedTextField textCardNumber;
+	private RoundedTextField textNewStudentNumber;
+	DefaultTableModel model = new DefaultTableModel() {
+		@Override
+		public boolean isCellEditable(int a, int b) {
+			return false;
+		}
+	};
 	/**
 	 * Create the panel.
 	 */
@@ -43,22 +45,25 @@ public class SwitchManagePane extends JPanel {
 
 		this.setLayout(null);
 
-		JLabel lblSwitch = new JLabel("学生转系");
-		lblSwitch.setFont(new Font("微软雅黑", Font.PLAIN, 25));
-		lblSwitch.setBounds(199, 57, 100, 34);
-		this.add(lblSwitch);
+		JLabel lblNewLabel = new JLabel("学生转系");
+		lblNewLabel.setFont(new Font("微软雅黑", Font.PLAIN, 30));
+		lblNewLabel.setBounds(285, 30, 150, 40);
+		this.add(lblNewLabel);
 
-		textCardNumber = new JTextField();
-		textCardNumber.setBounds(183, 123, 304, 35);
+		textCardNumber = new RoundedTextField(10);
+		textCardNumber.setBounds(300, 120, 270, 37);
+		textCardNumber.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		this.add(textCardNumber);
 		textCardNumber.setColumns(10);
 
 		JLabel lblCardNumber = new JLabel("一卡通号");
-		lblCardNumber.setBounds(109, 131, 60, 18);
+		lblCardNumber.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+		lblCardNumber.setBounds(120, 120, 100, 37);
 		this.add(lblCardNumber);
 
 		JLabel lblSubjectNumber = new JLabel("转系系号");
-		lblSubjectNumber.setBounds(109, 188, 60, 18);
+		lblSubjectNumber.setBounds(120, 200, 100, 37);
+		lblSubjectNumber.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		this.add(lblSubjectNumber);
 
 		JComboBox comboSubjectNumber = new JComboBox();
@@ -69,11 +74,11 @@ public class SwitchManagePane extends JPanel {
 				repaint();
 			}
 		});
-		comboSubjectNumber.setBounds(183, 180, 304, 35);
+		comboSubjectNumber.setBounds(300, 200, 270, 35);
+		comboSubjectNumber.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		this.add(comboSubjectNumber);
 
-		JButton buttonYes = new JButton("确定");
-		buttonYes.setIcon(new ImageIcon(SwitchManagePane.class.getResource("/resources/assets/icon/tick.png")));
+		JButton buttonYes = new RoundedButton("确 定",10);
 		buttonYes.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -106,7 +111,8 @@ public class SwitchManagePane extends JPanel {
 
 			}
 		});
-		buttonYes.setBounds(372, 294, 115, 57);
+		buttonYes.setFont(new Font("微软雅黑", Font.PLAIN, 25));
+		buttonYes.setBounds(276, 400, 167, 50);
 		this.add(buttonYes);
 
 		List<String> academies = new ArrayList<>(Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
@@ -116,11 +122,13 @@ public class SwitchManagePane extends JPanel {
 		}
 
 		JLabel lblNewStudentNumber = new JLabel("新学号");
-		lblNewStudentNumber.setBounds(122, 245, 45, 18);
+		lblNewStudentNumber.setBounds(120, 280, 100, 37);
+		lblNewStudentNumber.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		this.add(lblNewStudentNumber);
 
-		textNewStudentNumber = new JTextField();
-		textNewStudentNumber.setBounds(183, 237, 304, 31);
+		textNewStudentNumber = new RoundedTextField(10);
+		textNewStudentNumber.setBounds(300, 280, 270, 37);
+		textNewStudentNumber.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		this.add(textNewStudentNumber);
 		textNewStudentNumber.setColumns(10);
 

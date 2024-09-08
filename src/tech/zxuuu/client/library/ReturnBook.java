@@ -20,6 +20,7 @@ import tech.zxuuu.net.Request;
 import tech.zxuuu.net.Response;
 import tech.zxuuu.util.ResponseUtils;
 import tech.zxuuu.util.SwingUtils;
+import tech.zxuuu.client.rounded.*;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
@@ -62,17 +63,18 @@ public class ReturnBook extends JDialog {
 		lblISBN.setLayout(null);
 
 		JLabel lblIsbn = new JLabel("请输入书籍编号");
-		lblIsbn.setBounds(54, 60, 118, 18);
+		lblIsbn.setBounds(20, 60, 150, 22);
+		lblIsbn.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 		lblISBN.add(lblIsbn);
 
-		txtISBN = new JTextField();
-		txtISBN.setFont(new Font("宋体", Font.PLAIN, 16));
+		txtISBN = new RoundedTextField(10);
+		txtISBN.setFont(new Font("微软雅黑", Font.PLAIN, 18));
 		txtISBN.setBounds(171, 50, 269, 37);
 		lblISBN.add(txtISBN);
 		txtISBN.setColumns(10);
 
-		JButton btnComfirm = new JButton("确认");
-		btnComfirm.setIcon(new ImageIcon(ReturnBook.class.getResource("/resources/assets/icon/tick.png")));
+		JButton btnComfirm = new RoundedButton("确 认",10);
+		btnComfirm.setFont(new Font("微软雅黑", Font.PLAIN, 22));
 		btnComfirm.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -98,7 +100,7 @@ public class ReturnBook extends JDialog {
 			}
 
 		});
-		btnComfirm.setBounds(181, 110, 115, 57);
+		btnComfirm.setBounds(181, 110, 115, 40);
 		lblISBN.add(btnComfirm);
 
 		JLabel lblNewLabel = new JLabel("书籍归还");

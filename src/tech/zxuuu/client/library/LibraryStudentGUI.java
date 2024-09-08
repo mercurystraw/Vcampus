@@ -1,9 +1,6 @@
 package tech.zxuuu.client.library;
 
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.GridLayout;
-import java.awt.ScrollPane;
+import java.awt.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,19 +18,18 @@ import tech.zxuuu.net.Request;
 import tech.zxuuu.net.Response;
 import tech.zxuuu.util.ResponseUtils;
 import tech.zxuuu.entity.*;
+import tech.zxuuu.client.rounded.RoundedButton;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-
-import java.awt.Toolkit;
 
 /**
  * 图书馆学生主页
@@ -54,21 +50,20 @@ public class LibraryStudentGUI extends JFrame {
 	public LibraryStudentGUI() {
 		setTitle("图书馆 - VCampus");
 		setIconImage(
-				Toolkit.getDefaultToolkit().getImage(LibraryStudentGUI.class.getResource("/resources/assets/icon/fav.png")));
+				Toolkit.getDefaultToolkit().getImage(LibraryStudentGUI.class.getResource("/resources/assets/icon/seu_icon.png")));
 		setResizable(false);
-
 		setVisible(false);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 737, 618);
+		setBounds(100, 100, 737, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
-		JButton btnBorrow = new JButton("借书");
-		btnBorrow.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("/resources/assets/icon/导入.png")));
-		btnBorrow.setFont(new Font("微软雅黑", Font.PLAIN, 17));
-		btnBorrow.setBounds(524, 163, 172, 84);
+		JButton btnBorrow = new RoundedButton("借  书",30);
+		btnBorrow.setFont(new Font("微软雅黑", Font.PLAIN, 28));
+		btnBorrow.setBounds(55, 133, 172, 84);
+		btnBorrow.setBackground(new Color(133, 82, 235));
 		btnBorrow.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -81,10 +76,33 @@ public class LibraryStudentGUI extends JFrame {
 		contentPane.setLayout(null);
 		contentPane.add(btnBorrow);
 
-		JButton btnReturn = new JButton("还书");
-		btnReturn.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("/resources/assets/icon/导出.png")));
-		btnReturn.setFont(new Font("微软雅黑", Font.PLAIN, 17));
-		btnReturn.setBounds(524, 471, 172, 84);
+		btnBorrow.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(java.awt.event.MouseEvent e) {
+				btnBorrow.setBackground(new Color(163, 112, 255));
+			}
+
+			@Override
+			public void mouseReleased(java.awt.event.MouseEvent e) {
+				btnBorrow.setBackground(new Color(133, 82, 235));
+			}
+
+			@Override
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
+				btnBorrow.setBackground(new Color(163, 112, 255)); // 鼠标进入时的颜色
+			}
+
+			@Override
+			public void mouseExited(java.awt.event.MouseEvent evt) {
+				btnBorrow.setBackground(new Color(133, 82, 235)); // 鼠标离开时的颜色
+			}
+
+		});
+
+		JButton btnReturn = new RoundedButton("还  书",30);
+		btnReturn.setFont(new Font("微软雅黑", Font.PLAIN, 28));
+		btnReturn.setBounds(172 + 2 * 55, 133, 172, 84);
+		btnReturn.setBackground(new Color(235, 82, 0));
 		btnReturn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -95,11 +113,33 @@ public class LibraryStudentGUI extends JFrame {
 			}
 		});
 		contentPane.add(btnReturn);
+		btnReturn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(java.awt.event.MouseEvent e) {
+				btnReturn.setBackground(new Color(255, 112, 10));
+			}
 
-		JButton btnRenew = new JButton("我的借阅");
-		btnRenew.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("/resources/assets/icon/续签.png")));
-		btnRenew.setFont(new Font("微软雅黑", Font.PLAIN, 17));
-		btnRenew.setBounds(525, 316, 171, 84);
+			@Override
+			public void mouseReleased(java.awt.event.MouseEvent e) {
+				btnReturn.setBackground(new Color(235, 82, 0));
+			}
+
+			@Override
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
+				btnReturn.setBackground(new Color(255, 112, 10)); // 鼠标进入时的颜色
+			}
+
+			@Override
+			public void mouseExited(java.awt.event.MouseEvent evt) {
+				btnReturn.setBackground(new Color(235, 82, 0)); // 鼠标离开时的颜色
+			}
+
+		});
+
+		JButton btnRenew = new RoundedButton("我的借阅",30);
+		btnRenew.setFont(new Font("微软雅黑", Font.PLAIN, 28));
+		btnRenew.setBounds(2*172 + 3* 55, 133, 171, 84);
+		btnRenew.setBackground(new Color(0, 164, 113));
 		btnRenew.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -109,7 +149,31 @@ public class LibraryStudentGUI extends JFrame {
 			}
 		});
 		contentPane.add(btnRenew);
+		btnRenew.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(java.awt.event.MouseEvent e) {
+				btnRenew.setBackground(new Color(10, 214, 153));
+			}
 
+			@Override
+			public void mouseReleased(java.awt.event.MouseEvent e) {
+				btnRenew.setBackground(new Color(0, 164, 113));
+			}
+
+			@Override
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
+				btnRenew.setBackground(new Color(10, 214, 153)); // 鼠标进入时的颜色
+			}
+
+			@Override
+			public void mouseExited(java.awt.event.MouseEvent evt) {
+				btnRenew.setBackground(new Color(0, 164, 113)); // 鼠标离开时的颜色
+			}
+
+		});
+
+
+/*
 		JPanel HotList = new JPanel();
 		HotList.setLayout(new GridLayout(0, 1));
 
@@ -118,28 +182,23 @@ public class LibraryStudentGUI extends JFrame {
 		contentPane.add(scrollPane);
 		scrollPane.setViewportView(HotList);
 		HotList.setPreferredSize(new Dimension(scrollPane.getWidth() - 50, 300 * 5));
-
+*/
 		JLabel lblLibraryIcon = new JLabel("");
 		lblLibraryIcon.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("/resources/assets/icon/library.png")));
 		lblLibraryIcon.setBounds(21, 10, 64, 64);
 		contentPane.add(lblLibraryIcon);
 
-		JLabel lblVcampus = new JLabel("图书馆 - VCampus");
-		lblVcampus.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVcampus.setFont(new Font("微软雅黑", Font.PLAIN, 28));
-		lblVcampus.setBounds(98, 21, 260, 43);
+		JLabel lblVcampus = new JLabel("图书借阅");
+		lblVcampus.setFont(new Font("微软雅黑", Font.PLAIN, 25));
+		lblVcampus.setForeground(Color.WHITE); // 设置字体颜色为白色
+		lblVcampus.setBounds(102, 27, 239, 34);
 		contentPane.add(lblVcampus);
-
+/*
 		JLabel lblHotBookIcon = new JLabel("热门书籍");
 		lblHotBookIcon.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-		lblHotBookIcon.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("/resources/assets/icon/火.png")));
 		lblHotBookIcon.setBounds(189, 94, 148, 48);
 		contentPane.add(lblHotBookIcon);
 
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon(LibraryStudentGUI.class.getResource("/resources/assets/picture/wddnm.png")));
-		lblNewLabel_2.setBounds(472, -3, 270, 147);
-		contentPane.add(lblNewLabel_2);
 
 		List<Book> list = null;
 		list = ResponseUtils.getResponseByHash(new Request(App.connectionToServer, App.session,
@@ -181,7 +240,7 @@ public class LibraryStudentGUI extends JFrame {
 				scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 				while (true) {
 					scrollPane.getVerticalScrollBar().setValue(nowPos++);
-					if (nowPos >= 1100 /* 容错 */) {
+					if (nowPos >= 1100 ) {
 						nowPos = 0;
 						scrollPane.getVerticalScrollBar().setValue(nowPos++);
 					}
@@ -194,7 +253,12 @@ public class LibraryStudentGUI extends JFrame {
 			}
 		});
 		thread.start();
-
+		*/
+		JLabel greenStrip = new JLabel("");
+		greenStrip.setOpaque(true);
+		greenStrip.setBackground(new Color(0, 100, 0)); // Green color
+		greenStrip.setBounds(0, 0, 866, 80); // Adjust the height as needed
+		contentPane.add(greenStrip, Integer.valueOf(-1)); // Add to the bottom layer
 
 	}
 }
