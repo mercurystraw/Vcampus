@@ -14,6 +14,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class AppPostManager extends JFrame {
@@ -24,12 +26,18 @@ public class AppPostManager extends JFrame {
         List<PostInfo> ParentPostList = ResponseUtils.getResponseByHash(
                         new Request(App.connectionToServer, null, "tech.zxuuu.server.bbs.BBSGUI.getParentPostList", null).send())
                 .getListReturn(PostInfo.class);
+        Collections.sort(ParentPostList, new Comparator<PostInfo>() {
+            @Override
+            public int compare(PostInfo post1, PostInfo post2) {
+                return Integer.compare(post2.getThumbup(), post1.getThumbup()); // 降序排序
+            }
+        });
         pnlPostList.removeAll(); // 清空当前的帖子列表
         for (PostInfo post : ParentPostList) {
             JPanel postPanel = new JPanel();
             postPanel.setLayout(new BorderLayout());
 
-            postPanel.add(new ManagePostInfoPane(post.getId(), post.getContent(), post.getDate(), post.getUser_id()), BorderLayout.CENTER);
+            postPanel.add(new ManagePostInfoPane(post.getId(), post.getContent(), post.getDate(), post.getUser_id(),post.getThumbup()), BorderLayout.CENTER);
 
             JButton btnDelete = new JButton("删除");
             btnDelete.addActionListener(new ActionListener() {

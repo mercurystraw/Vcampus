@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ManageReplyGUI extends JFrame {
@@ -136,6 +138,14 @@ public class ManageReplyGUI extends JFrame {
         System.out.println("replylist end!");
 
         SwingUtilities.invokeLater(() -> {
+
+            Collections.sort(replyList, new Comparator<PostInfo>() { // 回复按点赞数排序
+                @Override
+                public int compare(PostInfo post1, PostInfo post2) {
+                    return Integer.compare(post2.getThumbup(), post1.getThumbup()); // 降序排序
+                }
+            });
+
             pnlReplyList.removeAll(); // 清空当前的回复列表 用于刷新
             for (PostInfo reply : replyList) {
 
@@ -167,6 +177,12 @@ public class ManageReplyGUI extends JFrame {
                 userAndDatePanel.add(lblDate, gbc);
 
                 replyPanel.add(userAndDatePanel);
+
+                // 点赞数
+                JLabel lblThumb = new JLabel("点赞数: " + reply.getThumbup());
+                lblThumb.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0)); // 添加底部边距
+                lblThumb.setAlignmentX(Component.LEFT_ALIGNMENT);
+                replyPanel.add(lblThumb);
 
                 // 删除按钮
                 JButton btnDelete = new JButton("删除");

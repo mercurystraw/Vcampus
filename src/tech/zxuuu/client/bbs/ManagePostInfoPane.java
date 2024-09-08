@@ -12,11 +12,13 @@ public class ManagePostInfoPane extends JPanel {
     private String content; // 帖子内容
     private String date; // 发布日期
     private String userid; // 用户ID
+    private Integer thumbup; // 点赞数
 
     private JLabel lblPostId;
     private JTextPane txtContent; // 使用 JTextPane 显示帖子内容
     private JLabel lblDate;
     private JLabel lblUserId;
+    private JLabel lblThumb; // 显示点赞数的标签
 
     public String getId() {
         return id;
@@ -94,20 +96,28 @@ public class ManagePostInfoPane extends JPanel {
         btnViewDetails.setBounds(600, 100, 150, 70);
         add(btnViewDetails);
 
+
+        this.lblThumb = new JLabel("没什么用的文本反正下面重新设置");
+        lblThumb.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        lblThumb.setBounds(600, 10, 150, 30);
+        add(lblThumb);
+
         setVisible(true);
     }
 
-    public ManagePostInfoPane(String id, String content, String date, String userid) {
+    public ManagePostInfoPane(String id, String content, String date, String userid,Integer thumbup) {
         this();
         this.id = id;
         this.content = content;
         this.date = date;
         this.userid = userid;
+        this.thumbup = thumbup;
 
         this.lblPostId.setText("帖子ID: " + this.id);
         this.txtContent.setText(this.content); // 使用 JTextPane 设置帖子内容
         this.lblDate.setText("日期: " + this.date);
         this.lblUserId.setText("用户ID: " + this.userid);
+        this.lblThumb.setText("点赞数: " + this.thumbup); // 设置初始点赞数
 
         this.validate();
         this.repaint();
