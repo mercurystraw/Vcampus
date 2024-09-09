@@ -20,24 +20,24 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 	<!-- 设置别名和包扫描 -->
 	<typeAliases>
-		<typeAlias type="tech.zxuuu.entity.Student" alias="Student" />
-		<typeAlias type="tech.zxuuu.entity.Product" alias="Product" />
-		<typeAlias type="tech.zxuuu.entity.Teacher" alias="Teacher" />
-		<typeAlias type="tech.zxuuu.entity.Book" alias="Book"/>
-		<typeAlias type="tech.zxuuu.entity.Manager" alias="Manager" />
-		<typeAlias type="tech.zxuuu.entity.ClassInfo"
+		<typeAlias type="tech.mainCode.entity.Student" alias="Student" />
+		<typeAlias type="tech.mainCode.entity.Product" alias="Product" />
+		<typeAlias type="tech.mainCode.entity.Teacher" alias="Teacher" />
+		<typeAlias type="tech.mainCode.entity.Book" alias="Book"/>
+		<typeAlias type="tech.mainCode.entity.Manager" alias="Manager" />
+		<typeAlias type="tech.mainCode.entity.ClassInfo"
 			alias="ClassInfo" />
 
-		<typeAlias type="tech.zxuuu.entity.NoticeInfo"
+		<typeAlias type="tech.mainCode.entity.NoticeInfo"
 			alias="NoticeInfo" />
-		<typeAlias type="tech.zxuuu.entity.PostInfo" alias="PostInfo" />
+		<typeAlias type="tech.mainCode.entity.PostInfo" alias="PostInfo" />
 	</typeAliases>
 
 	<!-- 环境配置 -->
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
-			<dataSource type="tech.zxuuu.util.c3p0DataSourceFactory">
+			<dataSource type="tech.mainCode.util.c3p0DataSourceFactory">
 				<property name="driverClass" value="${jdbc.driverClass}" />
 				<property name="jdbcUrl" value="${jdbc.url}" />
 				<property name="user" value="${jdbc.username}" />

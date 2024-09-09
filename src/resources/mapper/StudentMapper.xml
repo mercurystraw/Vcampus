@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
-<mapper namespace="tech.zxuuu.dao.IStudentMapper">
+<mapper namespace="tech.mainCode.dao.IStudentMapper">
 
 	<!-- Used By Auth Module -->
 

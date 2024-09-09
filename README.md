@@ -17,8 +17,8 @@ VCampus是一款基于C/S架构的软件，主要模拟了东南大学校内与�
 
 然后借助启动类先后启动服务器端和客户端即可：
 
-- 服务器端启动类 - `tech.zxuuu.server.startup.Bootstrap_server`
-- 客户端启动类 - `tech.zxuuu.client.startup.Bootstrap_client`
+- 服务器端启动类 - `tech.mainCode.server.startup.Bootstrap_server`
+- 客户端启动类 - `tech.mainCode.client.startup.Bootstrap_client`
 
 ## 系统架构图
 
