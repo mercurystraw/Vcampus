@@ -27,8 +27,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="tech.zxuuu.entity.Manager" alias="Manager" />
 		<typeAlias type="tech.zxuuu.entity.ClassInfo"
 			alias="ClassInfo" />
-		<typeAlias type="tech.zxuuu.entity.OpenCourseInfo"
-			alias="OpenCourseInfo" />
+
 		<typeAlias type="tech.zxuuu.entity.NoticeInfo"
 			alias="NoticeInfo" />
 		<typeAlias type="tech.zxuuu.entity.PostInfo" alias="PostInfo" />
@@ -58,7 +57,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="resources/mapper/ProductMapper.xml" />
 		<mapper resource="resources/mapper/BookMapper.xml" />
 		<mapper resource="resources/mapper/ClassMapper.xml" />
-		<mapper resource="resources/mapper/OpenCourseMapper.xml" />
 		<mapper resource="resources/mapper/NoticeMapper.xml" />
 		<mapper resource="resources/mapper/PostMapper.xml"/>
 	</mappers>
