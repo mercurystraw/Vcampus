@@ -10,7 +10,7 @@ import java.net.Socket;
 /**
  * 连接类（数据传输隧道）
  * 
- * @author z0gSh1u
+
  */
 
 public abstract class Connection {

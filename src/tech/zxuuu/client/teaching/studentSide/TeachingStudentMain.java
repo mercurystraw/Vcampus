@@ -19,8 +19,7 @@ import java.awt.Color;
 /**
  * 教务系统学生端主界面
  * 
- * @author 王志华
- * @author z0gSh1u
+
  */
 public class TeachingStudentMain extends JFrame {
 

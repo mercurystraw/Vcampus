@@ -14,8 +14,7 @@ import tech.zxuuu.server.main.App;
 /**
  * 图书馆后端
  * 
- * @author 曾铖
- * @modify z0gSh1u
+
  */
 public class BookServer {
 

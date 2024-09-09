@@ -16,8 +16,7 @@ import tech.zxuuu.entity.*;
 /**
  * 教务老师相关后端
  * 
- * @author z0gSh1u
- * @author 王志华
+
  */
 public class CourseManagerSide {
 

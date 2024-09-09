@@ -9,7 +9,7 @@ import tech.zxuuu.client.main.App;
 /**
  * 客户端启动类
  * 
- * @author z0gSh1u
+
  */
 
 public class Bootstrap_client {

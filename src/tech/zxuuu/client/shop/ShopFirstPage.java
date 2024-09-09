@@ -42,9 +42,8 @@ import javax.swing.SwingUtilities;
 
 /**
  * 商店学生主页
- * 
- * @author 杨鹏杰
- * @modify z0gSh1u
+ *
+
  */
 public class ShopFirstPage extends JFrame {
 

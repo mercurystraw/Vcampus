@@ -6,7 +6,7 @@ import java.net.Socket;
 /**
  * 客户端到服务器的连接，出于类型安全而设置
  * 
- * @author z0gSh1u
+
  */
 public class ConnectionToServer extends Connection {
 

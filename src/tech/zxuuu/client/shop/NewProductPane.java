@@ -40,8 +40,7 @@ public class NewProductPane extends JPanel {
 	/**
 	 * 商品新增面板
 	 *
-	 * @author 杨鹏杰
-	 * @modify z0gSh1u
+
 	 */
 	public NewProductPane() {
 		this.setLayout(null);

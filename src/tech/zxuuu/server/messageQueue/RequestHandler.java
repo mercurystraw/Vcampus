@@ -13,7 +13,7 @@ import tech.zxuuu.util.JSONUtils;
 /**
  * 利用反射处理服务器端请求消息队列中的请求（消费者）
  * 
- * @author z0gSh1u
+
  */
 public class RequestHandler extends Thread {
 	

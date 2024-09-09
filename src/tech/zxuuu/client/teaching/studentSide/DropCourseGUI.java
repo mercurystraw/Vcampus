@@ -18,7 +18,7 @@ import java.awt.event.ActionEvent;
 /**
  * 退选课程窗口
  * 
- * @author 王志华
+
  */
 public class DropCourseGUI extends JDialog {
 

@@ -11,11 +11,6 @@ import tech.zxuuu.dao.IClassMapper;
 import tech.zxuuu.entity.ClassInfo;
 import tech.zxuuu.server.main.App;
 
-/**
- * 20190909版本更新后端，主要是考务管理
- * 
- * @author z0gSh1u
- */
 
 public class Addons {
 

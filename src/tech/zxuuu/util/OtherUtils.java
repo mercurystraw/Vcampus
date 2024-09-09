@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * 不易归类的工具函数
  * 
- * @author z0gSh1u
+
  */
 public class OtherUtils {
 

@@ -30,8 +30,6 @@ import javax.swing.JComboBox;
 /**
  * 商品删除面板
  *
- * @author 杨鹏杰
- * @modify z0gSh1u
  */
 public class DeleteProductPane extends JPanel {
 	private JTextField txtName;

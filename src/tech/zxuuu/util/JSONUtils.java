@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * JSON相关工具函数。仅在.net包调用
  * 
- * @author z0gSh1u
+
  */
 public class JSONUtils {
 

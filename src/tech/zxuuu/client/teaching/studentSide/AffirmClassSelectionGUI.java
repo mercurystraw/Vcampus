@@ -211,7 +211,7 @@ import java.awt.Toolkit;
 /**
  * 确认选课窗口
  *
- * @author 王志华
+
  */
 public class AffirmClassSelectionGUI extends JDialog {
 

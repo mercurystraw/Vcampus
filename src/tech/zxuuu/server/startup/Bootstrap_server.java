@@ -4,11 +4,6 @@ import java.awt.EventQueue;
 import tech.zxuuu.server.main.App;
 import tech.zxuuu.util.SwingUtils;
 
-/**
- * 服务器端启动类
- * 
- * @author z0gSh1u
- */
 
 public class Bootstrap_server {
 

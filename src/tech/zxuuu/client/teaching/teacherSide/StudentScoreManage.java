@@ -23,7 +23,7 @@ import javax.swing.JScrollPane;
 /**
  * 学生成绩管理第一页（教师开课全列表）
  * 
- * @author z0gSh1u
+
  */
 public class StudentScoreManage extends JPanel {
 	private JTable table;

@@ -27,7 +27,7 @@ import javax.swing.border.BevelBorder;
 /**
  * 学生课表
  * 
- * @author 王志华
+
  */
 public class ScheduleTablePane extends JPanel {
 

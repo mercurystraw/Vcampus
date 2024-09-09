@@ -9,8 +9,7 @@ import tech.zxuuu.net.Response;
 
 /**
  * 客户端请求消息队列（生产者-消费者模式）
- * 
- * @author z0gSh1u
+ *
  */
 public class ResponseQueue {
 

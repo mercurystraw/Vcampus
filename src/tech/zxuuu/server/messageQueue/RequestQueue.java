@@ -7,7 +7,7 @@ import tech.zxuuu.server.main.App;
 /**
  * 服务器端请求消息队列（生产者-消费者模式）
  * 
- * @author z0gSh1u
+
  */
 public class RequestQueue {
 

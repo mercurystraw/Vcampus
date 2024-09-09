@@ -21,8 +21,7 @@ import java.awt.Toolkit;
 
 /**
  * 图书管理员主界面
- * 
- * @author z0gSh1u
+ *
  */
 public class AppLibraryManager extends JFrame {
 

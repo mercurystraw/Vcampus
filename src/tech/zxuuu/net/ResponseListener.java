@@ -6,7 +6,7 @@ import tech.zxuuu.client.main.App;
 /**
  * 响应监听器
  * 
- * @author z0gSh1u
+
  */
 public class ResponseListener extends Thread {
 

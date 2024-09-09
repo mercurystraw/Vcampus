@@ -12,7 +12,7 @@ import tech.zxuuu.server.main.App;
 /**
  * 学生管理后端
  * 
- * @author Twileon
+
  */
 public class StudentManage {
 

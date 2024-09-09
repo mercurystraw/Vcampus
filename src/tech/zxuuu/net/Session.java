@@ -5,7 +5,7 @@ import tech.zxuuu.entity.*;
 /**
  * 在请求中携带的用户信息
  * 
- * @author z0gSh1u
+
  */
 
 public class Session {

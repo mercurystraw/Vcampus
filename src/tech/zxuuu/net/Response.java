@@ -16,7 +16,7 @@ import tech.zxuuu.util.JSONUtils;
 /**
  * 响应类
  * 
- * @author z0gSh1u
+
  */
 
 public class Response {

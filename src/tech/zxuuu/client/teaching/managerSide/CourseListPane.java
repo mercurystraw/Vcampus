@@ -29,7 +29,7 @@ import java.awt.Font;
 /**
  * 教务老师院系开课查询
  * 
- * @author z0gSh1u
+
  */
 public class CourseListPane extends JPanel {
 	private JTable table;

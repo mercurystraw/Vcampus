@@ -33,8 +33,6 @@ import javax.swing.SwingUtilities;
 /**
  * 购物车面板
  *
- * @author z0gSh1u
- * @author 杨鹏杰
  */
 public class CartPane extends JPanel {
 	private JTable table;

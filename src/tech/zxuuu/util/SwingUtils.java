@@ -8,7 +8,7 @@ import javax.swing.*;
 /**
  * Swing GUI设计实用工具
  *
- * 作者 z0gSh1u
+
  */
 public final class SwingUtils {
 

@@ -26,8 +26,7 @@ import javax.swing.border.BevelBorder;
 /**
  * 入学功能面板
  * 
- * @author 沈汉唐
- * @author z0gSh1u
+
  */
 public class InManagePane extends JPanel {
 

@@ -20,8 +20,7 @@ import java.awt.event.WindowEvent;
 
 /**
  * 客户端全局根对象（App） 该窗口不会被显示。之所以继承JFrame的原因是便于前期调试。
- * 
- * @author z0gSh1u
+ *
  */
 public class App extends JFrame {
 
@@ -44,7 +43,7 @@ public class App extends JFrame {
 				: userType == userType.TEACHER ? new AppTeacher()
 						: userType == userType.MANAGER
 								? (managerType == ManagerType.LIBRARY ? new AppLibraryManager()
-							: managerType == ManagerType.POST ? new AppPostManager()
+										: managerType == ManagerType.POST ? new AppPostManager()
 												: managerType == ManagerType.SHOP ? new AppShopManager()
 														: managerType == ManagerType.TEACHING ? new AppTeachingManager() : null)
 								: null;

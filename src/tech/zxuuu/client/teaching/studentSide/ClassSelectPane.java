@@ -1,5 +1,3 @@
-
-
 package tech.zxuuu.client.teaching.studentSide;
 
 import java.awt.Panel;

@@ -8,7 +8,7 @@ import tech.zxuuu.net.Response;
 /**
  * 让请求-响应更好用的工具函数
  * 
- * @author z0gSh1u
+
  */
 
 public final class ResponseUtils {

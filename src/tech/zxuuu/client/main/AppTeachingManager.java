@@ -31,8 +31,7 @@ import java.awt.Color;
 
 /**
  * 教务管理员界面
- * 
- * @author z0gSh1u
+ *
  */
 public class AppTeachingManager extends JFrame {
 

@@ -23,7 +23,7 @@ import javax.swing.ImageIcon;
 /**
  * 教务老师新增课程
  * 
- * @author z0gSh1u
+
  */
 public class NewCoursePane extends JPanel {
 	private RoundedTextField txtAca;

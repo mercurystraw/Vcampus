@@ -12,8 +12,6 @@ import tech.zxuuu.entity.Product;
 /**
  * 商品Block
  *
- * @author 杨鹏杰
- * @modify z0gSh1u
  */
 public class Blocks extends JPanel {
 	JTextField jtxt_Price;

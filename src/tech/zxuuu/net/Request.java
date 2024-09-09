@@ -5,7 +5,7 @@ import com.alibaba.fastjson.*;
 /**
  * 请求类
  * 
- * @author z0gSh1u
+
  */
 
 public class Request {
