@@ -152,9 +152,17 @@ public class PostDetailsGUI extends JFrame {
 
         // 更新UI组件内容
         lblPostID.setText("帖子ID：" + mainPost.getId());
+        lblPostID.setFont(new Font("微软雅黑", Font.PLAIN, 16)); // 设置字体大小
+
         txtPostContent.setText(mainPost.getContent());
+        txtPostContent.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16)); // 设置字体大小为16，样式为普通
+        txtPostContent.setEditable(false);
+
         lblPostDate.setText("发布日期：" + mainPost.getDate());
+        lblPostDate.setFont(new Font("微软雅黑", Font.PLAIN, 16)); // 设置字体大小
+
         lblPostUserID.setText("发表用户：" + mainPost.getUser_id());
+        lblPostUserID.setFont(new Font("微软雅黑", Font.PLAIN, 16)); // 设置字体大小
 
         System.out.println("主贴ID" + mainPost.getId() + " " + mainPost.getUser_id());
     }
@@ -198,18 +206,20 @@ public class PostDetailsGUI extends JFrame {
                 System.out.println(reply.toString());
 
                 JPanel replyPanel = new JPanel();
-                replyPanel.setLayout(new BoxLayout(replyPanel, BoxLayout.Y_AXIS)); // 使用 BoxLayout 垂直布局
+                replyPanel.setLayout(new BorderLayout()); // 使用 BorderLayout 布局
 
                 // 回复ID
                 JLabel lblReplyID = new JLabel("回复ID: " + reply.getId());
                 lblReplyID.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0)); // 添加底部边距
                 lblReplyID.setAlignmentX(Component.LEFT_ALIGNMENT);
-                replyPanel.add(lblReplyID);
+                replyPanel.add(lblReplyID, BorderLayout.NORTH);
 
                 // 回复内容
                 JTextArea txtReplyContent = new JTextArea(reply.getContent());
                 txtReplyContent.setEditable(false);
-                replyPanel.add(new JScrollPane(txtReplyContent));
+//                txtReplyContent.setFont(new Font("微软雅黑", Font.PLAIN, 16)); // 设置字体大小
+                txtReplyContent.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16)); // 设置字体大小为16，样式为普通
+                replyPanel.add(new JScrollPane(txtReplyContent), BorderLayout.CENTER);
 
                 // 发表用户和时间
                 JPanel userAndDatePanel = new JPanel(new GridBagLayout());
@@ -224,20 +234,26 @@ public class PostDetailsGUI extends JFrame {
                 gbc.gridx = 1; // 放在第二列
                 userAndDatePanel.add(lblDate, gbc);
 
-                replyPanel.add(userAndDatePanel);
+                replyPanel.add(userAndDatePanel, BorderLayout.SOUTH);
+
+                // 右侧点赞面板
+                JPanel rightPanel = new JPanel();
+                rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS)); // 使用 BoxLayout 垂直布局
 
                 // 点赞数
                 JLabel lblThumb = new JLabel("点赞数: " + reply.getThumbup());
-
                 lblThumb.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0)); // 添加底部边距
-                lblThumb.setAlignmentX(Component.LEFT_ALIGNMENT);
-                replyPanel.add(lblThumb);
+                lblThumb.setAlignmentX(Component.RIGHT_ALIGNMENT);
+                lblThumb.setPreferredSize(new Dimension(100, lblThumb.getPreferredSize().height)); // 设置固定宽度为100像素
+                rightPanel.add(lblThumb);
 
                 // 点赞按钮
-                JButton btnThumb = new LibButton("点  赞",10);
+                JButton btnThumb = new LibButton("点      赞", 10);
                 btnThumb.setFont(new Font("微软雅黑", Font.PLAIN, 16));
                 btnThumb.setBackground(new Color(255, 255, 255));
                 btnThumb.setForeground(Color.BLACK);
+                btnThumb.setPreferredSize(new Dimension(100, 30)); // 设置固定宽度
+
                 if (likedReplies.contains(reply.getId())) {
                     btnThumb.setText("取消点赞");
                     btnThumb.setBackground(new Color(128, 0, 0)); // 设置点赞后的背景颜色
@@ -251,8 +267,8 @@ public class PostDetailsGUI extends JFrame {
                             // 取消点赞
                             likedReplies.remove(replyId);
                             reply.setThumbup(reply.getThumbup() - 1);
-                            btnThumb.setText("点 赞 ");
-                            btnThumb.setBackground(new Color(255,255,255)); // 恢复默认背景颜色
+                            btnThumb.setText("点      赞");
+                            btnThumb.setBackground(new Color(255, 255, 255)); // 恢复默认背景颜色
                             btnThumb.setForeground(Color.BLACK);
                         } else {
                             // 点赞
@@ -268,7 +284,9 @@ public class PostDetailsGUI extends JFrame {
                         updateThumbInDatabase(reply.getId(), reply.getThumbup());
                     }
                 });
-                replyPanel.add(btnThumb);
+                rightPanel.add(btnThumb);
+
+                replyPanel.add(rightPanel, BorderLayout.EAST);
 
                 // 添加间隔
                 JPanel spacer = new JPanel();
@@ -276,11 +294,12 @@ public class PostDetailsGUI extends JFrame {
                 pnlReplyList.add(replyPanel);
                 pnlReplyList.add(spacer);
 
-                System.out.println(reply.getId() + " " + reply.getUser_id()+" "+reply.getThumbup());
+                System.out.println(reply.getId() + " " + reply.getUser_id() + " " + reply.getThumbup());
             }
             pnlReplyList.revalidate();
             pnlReplyList.repaint();
         });
     }
+
 }
 

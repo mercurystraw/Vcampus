@@ -74,7 +74,7 @@ public class ManagePostInfoPane extends JPanel {
         // 使用 JTextPane 来显示帖子内容
         this.txtContent = new JTextPane();
         txtContent.setEditable(false); // 设置为不可编辑
-        txtContent.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 16)); // 设置支持 Emoji 的字体
+        txtContent.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16)); // 设置字体大小为16，样式为普通
         txtContent.setBounds(10, 40, 500, 40); // 设置合适的大小
         txtContent.setOpaque(false); // 使背景透明
         add(txtContent);

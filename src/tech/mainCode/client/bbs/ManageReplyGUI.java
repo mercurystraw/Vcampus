@@ -135,9 +135,17 @@ public class ManageReplyGUI extends JFrame {
 
         // 更新UI组件内容
         lblPostID.setText("帖子ID：" + mainPost.getId());
+        lblPostID.setFont(new Font("微软雅黑", Font.PLAIN, 16)); // 设置字体大小
+
         txtPostContent.setText(mainPost.getContent());
+        txtPostContent.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16)); // 设置字体大小为16，样式为普通
+        txtPostContent.setEditable(false);
+
         lblPostDate.setText("发布日期：" + mainPost.getDate());
+        lblPostDate.setFont(new Font("微软雅黑", Font.PLAIN, 16)); // 设置字体大小
+
         lblPostUserID.setText("发表用户：" + mainPost.getUser_id());
+        lblPostUserID.setFont(new Font("微软雅黑", Font.PLAIN, 16)); // 设置字体大小
 
         System.out.println("主贴ID" + mainPost.getId() + " " + mainPost.getUser_id());
     }
@@ -165,18 +173,19 @@ public class ManageReplyGUI extends JFrame {
             for (PostInfo reply : replyList) {
 
                 JPanel replyPanel = new JPanel();
-                replyPanel.setLayout(new BoxLayout(replyPanel, BoxLayout.Y_AXIS)); // 使用 BoxLayout 垂直布局
+                replyPanel.setLayout(new BorderLayout()); // 使用 BorderLayout 布局
 
                 // 回复ID
                 JLabel lblReplyID = new JLabel("回复ID: " + reply.getId());
                 lblReplyID.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0)); // 添加底部边距
                 lblReplyID.setAlignmentX(Component.LEFT_ALIGNMENT);
-                replyPanel.add(lblReplyID);
+                replyPanel.add(lblReplyID, BorderLayout.NORTH);
 
                 // 回复内容
                 JTextArea txtReplyContent = new JTextArea(reply.getContent());
                 txtReplyContent.setEditable(false);
-                replyPanel.add(new JScrollPane(txtReplyContent));
+                txtReplyContent.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16)); // 设置字体大小为16，样式为普通
+                replyPanel.add(new JScrollPane(txtReplyContent), BorderLayout.CENTER);
 
                 // 发表用户和时间
                 JPanel userAndDatePanel = new JPanel(new GridBagLayout());
@@ -191,16 +200,20 @@ public class ManageReplyGUI extends JFrame {
                 gbc.gridx = 1; // 放在第二列
                 userAndDatePanel.add(lblDate, gbc);
 
-                replyPanel.add(userAndDatePanel);
+                replyPanel.add(userAndDatePanel, BorderLayout.SOUTH);
+
+                // 点赞数和删除按钮
+                JPanel rightPanel = new JPanel();
+                rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS)); // 使用 BoxLayout 垂直布局
 
                 // 点赞数
                 JLabel lblThumb = new JLabel("点赞数: " + reply.getThumbup());
                 lblThumb.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0)); // 添加底部边距
-                lblThumb.setAlignmentX(Component.LEFT_ALIGNMENT);
-                replyPanel.add(lblThumb);
+                lblThumb.setAlignmentX(Component.RIGHT_ALIGNMENT);
+                rightPanel.add(lblThumb);
 
                 // 删除按钮
-                JButton btnDelete = new RoundedButton("删 除",10);
+                JButton btnDelete = new RoundedButton("删 除", 10);
                 btnDelete.setBackground(new Color(128, 0, 0)); // 设置按钮背景色为橙红色
                 btnDelete.setFont(new Font("微软雅黑", Font.PLAIN, 16));
                 btnDelete.addActionListener(new ActionListener() {
@@ -229,14 +242,18 @@ public class ManageReplyGUI extends JFrame {
                     public void mouseEntered(MouseEvent e) {
                         btnDelete.setBackground(new Color(158, 0, 0));
                     }
+
                     public void mouseExited(MouseEvent e) {
                         btnDelete.setBackground(new Color(128, 0, 0));
                     }
+
                     public void mouseReleased(MouseEvent e) {
                         btnDelete.setBackground(new Color(128, 0, 0));
                     }
                 });
-                replyPanel.add(btnDelete);
+                rightPanel.add(btnDelete);
+
+                replyPanel.add(rightPanel, BorderLayout.EAST);
 
                 // 添加间隔
                 JPanel spacer = new JPanel();
@@ -248,6 +265,7 @@ public class ManageReplyGUI extends JFrame {
             }
             pnlReplyList.revalidate();
             pnlReplyList.repaint();
+
         });
     }
 
