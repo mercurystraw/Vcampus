@@ -492,6 +492,7 @@ import javax.swing.ImageIcon;
 import javax.swing.border.LineBorder;
 
 import tech.zxuuu.client.auth.AuthGUI;
+import tech.zxuuu.client.chat.ChatGUI;
 import tech.zxuuu.client.library.LibraryStudentGUI;
 import tech.zxuuu.client.library.MyBorrowGUI;
 import tech.zxuuu.client.opencourse.StuMenuGUI;
@@ -1031,6 +1032,30 @@ public class AppStudent extends JFrame {
 		greenStrip.setBackground(new Color(0, 100, 0)); // Green color
 		greenStrip.setBounds(0, 0, 1150, 80); // Adjust the height as needed
 		contentPane.add(greenStrip, Integer.valueOf(-1)); // Add to the bottom layer
+
+		JButton btnChat = new JButton("VChat");
+		btnChat.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				SwingUtilities.invokeLater(new Runnable()
+				{
+
+					@Override
+					public void run()
+					{
+						ChatGUI chatGUI = new ChatGUI();
+						chatGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						chatGUI.setVisible(true);
+					}
+				});
+			}
+		});
+		btnChat.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+		btnChat.setIcon(new ImageIcon(AppStudent.class.getResource("/resources/assets/icon/chat_logo.png")));
+		btnChat.setBounds(120, 382, 220, 80);
+		contentPane.add(btnChat);
 
 		List<NoticeInfo> noticeInfos = ResponseUtils
 				.getResponseByHash(

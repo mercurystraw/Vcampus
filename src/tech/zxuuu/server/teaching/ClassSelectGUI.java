@@ -11,16 +11,11 @@ import tech.zxuuu.entity.ClassInfo;
 import tech.zxuuu.entity.Student;
 import tech.zxuuu.server.main.App;
 
-/**
- * 学生选课相关后端
- * 
- * @author 王志华
- */
 public class ClassSelectGUI {
 
 	public static List<ClassInfo> getClassInfo(String academy) {
 		List<ClassInfo> result = null;
-		System.out.println("getClassInfo开始：");
+		System.out.println("学生选课getClassInfo开始：");
 		try {
 			SqlSession sqlSession = App.sqlSessionFactory.openSession();
 			IClassMapper classMapper = sqlSession.getMapper(IClassMapper.class);
@@ -30,7 +25,7 @@ public class ClassSelectGUI {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("getClassInfo结束：");
+		System.out.println("学生选课getClassInfo结束：");
 		return result;
 	}
 

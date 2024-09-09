@@ -31,5 +31,6 @@
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="library" name="hutool-all-5.8.16" level="project" />
   </component>
 </module>
