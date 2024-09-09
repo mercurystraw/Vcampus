@@ -1,5 +1,7 @@
 package tech.mainCode.client.bbs;
 
+import tech.mainCode.client.main.AppLibraryManager;
+import tech.mainCode.client.rounded.RoundedButton;
 import tech.mainCode.entity.PostInfo;
 import tech.mainCode.net.Request;
 import tech.mainCode.util.ResponseUtils;
@@ -10,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -26,8 +29,8 @@ public class ManageReplyGUI extends JFrame {
         setResizable(true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        setIconImage(Toolkit.getDefaultToolkit().getImage(ManageReplyGUI.class.getResource("/resources/assets/icon/fav.png")));
-        setTitle("管理回复 - VCampus");
+        setIconImage(Toolkit.getDefaultToolkit().getImage(ManageReplyGUI.class.getResource("/resources/assets/icon/seu_icon.png")));
+        setTitle("管理回复 ");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int) screenSize.getWidth();
         int screenHeight = (int) screenSize.getHeight();
@@ -80,14 +83,20 @@ public class ManageReplyGUI extends JFrame {
         pnlPostDetail.add(pnlPostInfo, BorderLayout.CENTER);
         contentPane.add(pnlPostDetail);
 
-        JLabel lblVcampus = new JLabel("管理回复 - VCampus");
+        JLabel lblVcampus = new JLabel("管理回复");
         lblVcampus.setFont(new Font("微软雅黑", Font.PLAIN, 25));
-        lblVcampus.setBounds(102, 32, 239, 34);
+        lblVcampus.setForeground(Color.WHITE); // 设置字体颜色为白色
+        lblVcampus.setBounds(102, 27, 239, 34);
         contentPane.add(lblVcampus);
 
+        JLabel label = new JLabel("");
+        label.setIcon(new ImageIcon(AppLibraryManager.class.getResource("/resources/assets/icon/seu_icon.png")));
+        label.setBounds(14, 13, 64, 64);
+        contentPane.add(label);
         // 刷新按钮
-        JButton btnRefresh = new JButton("刷新");
-        btnRefresh.setBounds(10, 660, 100, 30); // 设置按钮位置和大小
+        JButton btnRefresh = new RoundedButton("刷 新",10);
+        btnRefresh.setBounds(450, 700, 100, 30); // 设置按钮位置和大小
+        btnRefresh.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         btnRefresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -103,6 +112,12 @@ public class ManageReplyGUI extends JFrame {
                 showReplyList();
             }
         });
+        JLabel greenStrip = new JLabel("");
+        greenStrip.setOpaque(true);
+        greenStrip.setBackground(new Color(0, 100, 0)); // Green color
+        greenStrip.setBounds(0, 0, 1150, 80); // Adjust the height as needed
+        contentPane.add(greenStrip, Integer.valueOf(-1)); // Add to the bottom layer
+
     }
     private void showPostDetail(JLabel lblPostID, JTextArea txtPostContent, JLabel lblPostDate, JLabel lblPostUserID) {
         // 从数据库获取主帖子的信息
@@ -185,7 +200,9 @@ public class ManageReplyGUI extends JFrame {
                 replyPanel.add(lblThumb);
 
                 // 删除按钮
-                JButton btnDelete = new JButton("删除");
+                JButton btnDelete = new RoundedButton("删 除",10);
+                btnDelete.setBackground(new Color(128, 0, 0)); // 设置按钮背景色为橙红色
+                btnDelete.setFont(new Font("微软雅黑", Font.PLAIN, 16));
                 btnDelete.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -201,6 +218,22 @@ public class ManageReplyGUI extends JFrame {
                         if (option == JOptionPane.YES_OPTION) {
                             deleteReply(reply.getId()); // 删除回复
                         }
+                    }
+                });
+                btnDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mousePressed(java.awt.event.MouseEvent evt) {
+                        btnDelete.setBackground(new Color(158, 0, 0));
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                        btnDelete.setBackground(new Color(158, 0, 0));
+                    }
+                    public void mouseExited(MouseEvent e) {
+                        btnDelete.setBackground(new Color(128, 0, 0));
+                    }
+                    public void mouseReleased(MouseEvent e) {
+                        btnDelete.setBackground(new Color(128, 0, 0));
                     }
                 });
                 replyPanel.add(btnDelete);
@@ -225,8 +258,8 @@ public class ManageReplyGUI extends JFrame {
         // 例如：调用服务器端的删除回复接口
 
         Boolean result = ResponseUtils.getResponseByHash(
-                new Request(App.connectionToServer, null,
-                        "tech.mainCode.server.bbs.DeleteReply.deleteReply", new Object[]{postId}).send()).
+                        new Request(App.connectionToServer, null,
+                                "tech.mainCode.server.bbs.DeleteReply.deleteReply", new Object[]{postId}).send()).
                 getReturn(Boolean.class);
         if(result){
             JOptionPane.showMessageDialog(null, "删除回复成功！", "提示", JOptionPane.INFORMATION_MESSAGE);

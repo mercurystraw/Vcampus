@@ -11,7 +11,8 @@ public class PostBlock extends JPanel {
     private String date;
     private String userid;
     private int thumbup;
-
+    private int arcWidth = 20;
+    private int arcHeight = 20;
     /**
      * Create the panel.
      */
@@ -23,32 +24,39 @@ public class PostBlock extends JPanel {
         this.userid = _userid;
         this.thumbup = _thumbup;
         setLayout(null);
+        setOpaque(false);
 
-        JLabel lblDot = new JLabel("·");
-        lblDot.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-        lblDot.setBounds(24, 13, 4, 24);
-        add(lblDot);
+
 
         JLabel lblContent = new JLabel(content);
-        lblContent.setFont(new Font("宋体", Font.PLAIN, 18));
-        lblContent.setBounds(42, 18, 513, 18);
+        lblContent.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        lblContent.setBounds(22, 18, 513, 20);
         add(lblContent);
 
         JLabel lblDate = new JLabel(date);
-        lblDate.setFont(new Font("宋体", Font.PLAIN, 18));
-        lblDate.setBounds(556, 16, 108, 18);
+        lblDate.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        lblDate.setBounds(556, 16, 108, 20);
         add(lblDate);
 
         JLabel lblUserid = new JLabel("用户ID: " + userid);
-        lblUserid.setFont(new Font("宋体", Font.PLAIN, 14));
-        lblUserid.setBounds(42, 40, 200, 14);
+        lblUserid.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+        lblUserid.setBounds(22, 40, 200, 18);
         add(lblUserid);
 
         JLabel lblThumbup = new JLabel("点赞数: " + thumbup);
-        lblThumbup.setFont(new Font("宋体", Font.PLAIN, 14));
-        lblThumbup.setBounds(250, 40, 200, 14);
+        lblThumbup.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+        lblThumbup.setBounds(250, 40, 200, 18);
         add(lblThumbup);
 
 
+    }
+    @Override
+    protected void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g.create();
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setColor(getBackground());
+        g2.fillRoundRect(0, 0, getWidth(), getHeight(), arcWidth, arcHeight);
+        super.paintComponent(g);
+        g2.dispose();
     }
 }

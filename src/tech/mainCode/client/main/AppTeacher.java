@@ -23,7 +23,6 @@ public class AppTeacher extends JFrame {
 	private JPanel newOpencoursePanel;
 	private StudentScoreManage studentScoreManage;
 
-
 	/**
 	 * Create the frame.
 	 */
@@ -72,7 +71,6 @@ public class AppTeacher extends JFrame {
 		pnlOpencourse.setVisible(false);
 
 
-
 		JButton btnCourseList = new LibButton("查看课表",0);
 		btnCourseList.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		btnCourseList.setBackground(new Color(0, 120, 0));
@@ -84,7 +82,7 @@ public class AppTeacher extends JFrame {
 				currentDisplay = coursePanel;
 			}
 		});
-		btnCourseList.setBounds(305, 0, 130, 80);
+		btnCourseList.setBounds(260, 0, 130, 80);
 		contentPane.add(btnCourseList);
 
 
@@ -97,13 +95,32 @@ public class AppTeacher extends JFrame {
 				currentDisplay = studentScoreManage;
 			}
 		});
-		btnManageScore.setBounds(435, 0, 130, 80);
+		btnManageScore.setBounds(390, 0, 130, 80);
 		contentPane.add(btnManageScore);
 
+		JButton btnForum = new LibButton("校园论坛",0);
+		btnForum.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+		btnForum.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SwingUtilities.invokeLater(new Runnable() {
+
+					@Override
+					public void run() {
+						BBSGUI bbsGUI = new BBSGUI();
+						bbsGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						bbsGUI.setVisible(true);
+					}
+				});
+			}
+		});
+		btnForum.setBounds(510, 0, 130, 80);
+		contentPane.add(btnForum);
 		btnCourseList.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 				btnCourseList.setBackground(new Color(0, 120, 0));
 				btnManageScore.setBackground(new Color(0, 100, 0));
+				btnForum.setBackground(new Color(0, 100, 0));
 			}
 
 		});
@@ -111,9 +128,20 @@ public class AppTeacher extends JFrame {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 				btnManageScore.setBackground(new Color(0, 120, 0));
 				btnCourseList.setBackground(new Color(0, 100, 0));
+				btnForum.setBackground(new Color(0, 100, 0));
 			}
 
 		});
+		btnForum.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				btnForum.setBackground(new Color(0, 120, 0));
+				btnCourseList.setBackground(new Color(0, 100, 0));
+				btnManageScore.setBackground(new Color(0, 100, 0));
+			}
+
+		});
+
+
 
 		JButton ExitButton = new LibButton("登出",0);
 		ExitButton.setFont(new Font("微软雅黑", Font.PLAIN, 20));
@@ -139,11 +167,11 @@ public class AppTeacher extends JFrame {
 		label_2.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		label_2.setForeground(Color.WHITE); // 设置字体颜色为白色
 		label_2.setBackground(new Color(0,110,0));
-		label_2.setBounds(620, 23, 100, 34);
+		label_2.setBounds(650, 23, 100, 34);
 		contentPane.add(label_2);
 
 		JLabel label_3 = new JLabel("");
-		label_3.setBounds(720, 23, 100, 34);
+		label_3.setBounds(750, 23, 100, 34);
 		label_3.setForeground(Color.WHITE); // 设置字体颜色为白色
 		label_3.setBackground(new Color(0,110,0));
 		contentPane.add(label_3);
@@ -155,23 +183,7 @@ public class AppTeacher extends JFrame {
 		greenStrip.setBackground(new Color(0, 100, 0)); // Green color
 		greenStrip.setBounds(0, 0, 967, 80); // Adjust the height as needed
 		contentPane.add(greenStrip, Integer.valueOf(-1)); // Add to the bottom layer
-		 //添加校园论坛按钮
-		JButton btnForum = new JButton("校园论坛");
-		btnForum.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				SwingUtilities.invokeLater(new Runnable() {
+		//添加校园论坛按钮
 
-					@Override
-					public void run() {
-						BBSGUI bbsGUI = new BBSGUI();
-						bbsGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-						bbsGUI.setVisible(true);
-					}
-				});
-			}
-		});
-		btnForum.setBounds(323, 58, 107, 27);
-		contentPane.add(btnForum);
 	}
 }

@@ -1,15 +1,36 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import javax.swing.*;
+import javax.swing.text.*;
+import java.awt.*;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("JTextPane Unicode Emoji Example");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(400, 300);
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+            JTextPane textPane = new JTextPane();
+            textPane.setEditable(false); // 设置为不可编辑
+
+            // 获取文本样式
+            StyledDocument doc = textPane.getStyledDocument();
+
+            // 创建样式
+            Style style = textPane.addStyle("EmojiStyle", null);
+            StyleConstants.setFontSize(style, 24); // 设置字体大小
+            StyleConstants.setForeground(style, Color.RED); // 设置颜色
+
+            // 插入文本和表情
+            try {
+                doc.insertString(doc.getLength(), "Hello, ", null);
+                doc.insertString(doc.getLength(), "\uD83D\uDE00", style); // 插入笑脸表情
+                doc.insertString(doc.getLength(), " Welcome to Java!", null);
+            } catch (BadLocationException e) {
+                e.printStackTrace();
+            }
+
+            frame.add(new JScrollPane(textPane));
+            frame.setVisible(true);
+        });
     }
 }

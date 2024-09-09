@@ -1,5 +1,8 @@
 package tech.mainCode.client.bbs;
 
+import tech.mainCode.client.main.AppLibraryManager;
+import tech.mainCode.client.rounded.LibButton;
+import tech.mainCode.client.rounded.RoundedButton;
 import tech.mainCode.entity.PostInfo;
 import tech.mainCode.net.Request;
 import tech.mainCode.util.ResponseUtils;
@@ -28,7 +31,7 @@ public class PostDetailsGUI extends JFrame {
         setResizable(true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        setIconImage(Toolkit.getDefaultToolkit().getImage(PostDetailsGUI.class.getResource("/resources/assets/icon/fav.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(PostDetailsGUI.class.getResource("/resources/assets/icon/seu_icon.png")));
         setTitle("帖子详情 - VCampus");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = (int) screenSize.getWidth();
@@ -81,15 +84,20 @@ public class PostDetailsGUI extends JFrame {
         spnReplyList.setViewportView(pnlReplyList);
 
         contentPane.add(spnReplyList);
+        JLabel label = new JLabel("");
+        label.setIcon(new ImageIcon(AppLibraryManager.class.getResource("/resources/assets/icon/seu_icon.png")));
+        label.setBounds(14, 13, 64, 64);
+        contentPane.add(label);
 
-        JLabel lblVcampus = new JLabel("帖子详情 - VCampus");
+        JLabel lblVcampus = new JLabel("帖子详情");
         lblVcampus.setFont(new Font("微软雅黑", Font.PLAIN, 25));
-        lblVcampus.setBounds(102, 32, 239, 34);
+        lblVcampus.setForeground(Color.WHITE); // 设置字体颜色为白色
+        lblVcampus.setBounds(102, 27, 239, 34);
         contentPane.add(lblVcampus);
-
         // 发表回复按钮
-        JButton btnReply = new JButton("发表回复");
-        btnReply.setBounds(750, 660, 100, 30); // 设置按钮位置和大小
+        JButton btnReply = new RoundedButton("发表回复",20);
+        btnReply.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        btnReply.setBounds(550, 680, 150, 40); // 设置按钮位置和大小
         btnReply.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -102,8 +110,9 @@ public class PostDetailsGUI extends JFrame {
         contentPane.add(btnReply);
 
         // 刷新按钮
-        JButton btnRefresh = new JButton("刷新");
-        btnRefresh.setBounds(10, 660, 100, 30); // 设置按钮位置和大小
+        JButton btnRefresh = new RoundedButton("刷新",20);
+        btnRefresh.setBounds(280, 680, 150, 40); // 设置按钮位置和大小
+        btnRefresh.setFont(new Font("微软雅黑", Font.PLAIN, 18));
         btnRefresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -119,6 +128,11 @@ public class PostDetailsGUI extends JFrame {
                 showReplyList();
             }
         });
+        JLabel greenStrip = new JLabel("");
+        greenStrip.setOpaque(true);
+        greenStrip.setBackground(new Color(0, 100, 0)); // Green color
+        greenStrip.setBounds(0, 0, 1000, 80); // Adjust the height as needed
+        contentPane.add(greenStrip, Integer.valueOf(-1)); // Add to the bottom layer
     }
 
     // 修改 showPostDetail 方法以显示更多信息
@@ -147,13 +161,13 @@ public class PostDetailsGUI extends JFrame {
     private void updateThumbInDatabase(String replyId, int thumb){
         System.out.println("回复帖子ID："+replyId+"更新后点赞数："+thumb);
         Boolean result = ResponseUtils.getResponseByHash(
-                new Request(App.connectionToServer, null,
-                        "tech.mainCode.server.bbs.BBSGUI.updateThumbup", new Object[]{replyId, thumb}).send()).
+                        new Request(App.connectionToServer, null,
+                                "tech.mainCode.server.bbs.BBSGUI.updateThumbup", new Object[]{replyId, thumb}).send()).
                 getReturn(Boolean.class);
         if (result == null) {
             System.out.println("更新点赞数失败！响应为null");
         }else if (result){
-                System.out.println("更新点赞数成功！");
+            System.out.println("更新点赞数成功！");
         }else{
             System.out.println("更新点赞数失败！");
         }
@@ -220,10 +234,14 @@ public class PostDetailsGUI extends JFrame {
                 replyPanel.add(lblThumb);
 
                 // 点赞按钮
-                JButton btnThumb = new JButton("点赞");
+                JButton btnThumb = new LibButton("点  赞",10);
+                btnThumb.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+                btnThumb.setBackground(new Color(255, 255, 255));
+                btnThumb.setForeground(Color.BLACK);
                 if (likedReplies.contains(reply.getId())) {
                     btnThumb.setText("取消点赞");
-                    btnThumb.setBackground(Color.YELLOW); // 设置点赞后的背景颜色
+                    btnThumb.setBackground(new Color(128, 0, 0)); // 设置点赞后的背景颜色
+                    btnThumb.setForeground(Color.WHITE);
                 }
                 btnThumb.addActionListener(new ActionListener() {
                     @Override
@@ -233,14 +251,16 @@ public class PostDetailsGUI extends JFrame {
                             // 取消点赞
                             likedReplies.remove(replyId);
                             reply.setThumbup(reply.getThumbup() - 1);
-                            btnThumb.setText("点赞");
-                            btnThumb.setBackground(null); // 恢复默认背景颜色
+                            btnThumb.setText("点 赞 ");
+                            btnThumb.setBackground(new Color(255,255,255)); // 恢复默认背景颜色
+                            btnThumb.setForeground(Color.BLACK);
                         } else {
                             // 点赞
                             likedReplies.add(replyId);
                             reply.setThumbup(reply.getThumbup() + 1);
                             btnThumb.setText("取消点赞");
-                            btnThumb.setBackground(Color.YELLOW); // 设置点赞后的背景颜色
+                            btnThumb.setBackground(new Color(128, 0, 0)); // 设置点赞后的背景颜色
+                            btnThumb.setForeground(Color.WHITE);
                         }
                         lblThumb.setText("点赞数: " + reply.getThumbup());
 

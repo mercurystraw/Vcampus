@@ -1,6 +1,8 @@
 package tech.mainCode.client.bbs;
 
 import tech.mainCode.client.main.App;
+import tech.mainCode.client.rounded.LibButton;
+import tech.mainCode.client.rounded.RoundedButton;
 import tech.mainCode.net.Request;
 import tech.mainCode.util.ResponseUtils;
 
@@ -99,9 +101,8 @@ public class PostInfoPane extends JPanel {
         lblUserId.setBounds(10, 110, 150, 30);
         add(lblUserId);
 
-        JButton btnViewDetails = new JButton("查看详情");
-        btnViewDetails.setIcon(new ImageIcon(PostInfoPane.class.getResource("/resources/assets/icon/right-circle.png")));
-        btnViewDetails.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        JButton btnViewDetails = new RoundedButton("查看详情",20);
+        btnViewDetails.setFont(new Font("微软雅黑", Font.PLAIN, 20));
         btnViewDetails.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -111,7 +112,7 @@ public class PostInfoPane extends JPanel {
                 postDetailsGUI.setVisible(true);
             }
         });
-        btnViewDetails.setBounds(600, 100, 150, 70);
+        btnViewDetails.setBounds(600, 100, 150, 50);
         add(btnViewDetails);
 
         // 点赞按钮和点赞数标签
@@ -120,8 +121,10 @@ public class PostInfoPane extends JPanel {
         lblThumb.setBounds(600, 10, 150, 30);
         add(lblThumb);
 
-        this.btnThumb = new JButton("点赞");
+        this.btnThumb = new LibButton("点 赞",20);
         btnThumb.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        btnThumb.setBackground(new Color(255, 255, 255));
+        btnThumb.setForeground(Color.BLACK);
         btnThumb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -130,14 +133,16 @@ public class PostInfoPane extends JPanel {
                     // 取消点赞
                     likedPosts.remove(getId());
                     setThumbup(getThumbup() - 1);
-                    btnThumb.setText("点赞");
-                    btnThumb.setBackground(null); // 恢复默认背景颜色
+                    btnThumb.setText("点 赞");
+                    btnThumb.setBackground(new Color(255,255,255)); // 恢复默认背景颜色
+                    btnThumb.setForeground(Color.BLACK);
                 } else {
                     // 点赞
                     likedPosts.add(getId());
                     setThumbup(getThumbup() + 1);
                     btnThumb.setText("取消点赞");
-                    btnThumb.setBackground(Color.YELLOW); // 设置点赞后的背景颜色
+                    btnThumb.setBackground(new Color(128, 0, 0)); // 设置点赞后的背景颜色
+                    btnThumb.setForeground(Color.WHITE);
                 }
                 System.out.println("点击按钮后已点赞的帖子ID集合："+likedPosts );
 
@@ -147,6 +152,7 @@ public class PostInfoPane extends JPanel {
                 updateThumbInDatabase(getId(), getThumbup());
             }
         });
+
         btnThumb.setBounds(600, 40, 150, 30);
         add(btnThumb);
 
@@ -173,7 +179,8 @@ public class PostInfoPane extends JPanel {
         // 初始化点赞按钮状态
         if (likedPosts.contains(id)) {
             btnThumb.setText("取消点赞");
-            btnThumb.setBackground(Color.YELLOW);
+            btnThumb.setBackground(new Color(128, 0, 0)); // 设置点赞后的背景颜色
+            btnThumb.setForeground(Color.WHITE);
         }
 
 
@@ -185,18 +192,18 @@ public class PostInfoPane extends JPanel {
     }
 
     // 模拟更新数据库中的点赞数
-     private void updateThumbInDatabase(String PostId, int thumb){
-         System.out.println("主帖子ID："+PostId+"更新后点赞数："+thumb);
-         Boolean result = ResponseUtils.getResponseByHash(
-                         new Request(App.connectionToServer, null,
-                                 "tech.mainCode.server.bbs.BBSGUI.updateThumbup", new Object[]{PostId, thumb}).send()).
-                 getReturn(Boolean.class);
-         if (result == null) {
-             System.out.println("更新点赞数失败！响应为null");
-         }else if (result){
-             System.out.println("更新点赞数成功！");
-         }else{
-             System.out.println("更新点赞数失败！");
-         }
-     }
+    private void updateThumbInDatabase(String PostId, int thumb){
+        System.out.println("主帖子ID："+PostId+"更新后点赞数："+thumb);
+        Boolean result = ResponseUtils.getResponseByHash(
+                        new Request(App.connectionToServer, null,
+                                "tech.mainCode.server.bbs.BBSGUI.updateThumbup", new Object[]{PostId, thumb}).send()).
+                getReturn(Boolean.class);
+        if (result == null) {
+            System.out.println("更新点赞数失败！响应为null");
+        }else if (result){
+            System.out.println("更新点赞数成功！");
+        }else{
+            System.out.println("更新点赞数失败！");
+        }
+    }
 }

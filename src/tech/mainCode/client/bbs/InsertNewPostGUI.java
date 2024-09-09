@@ -1,6 +1,7 @@
 package tech.mainCode.client.bbs;
 
 import tech.mainCode.client.main.App;
+import tech.mainCode.client.rounded.RoundedButton;
 import tech.mainCode.entity.PostInfo;
 import tech.mainCode.net.Request;
 import tech.mainCode.util.ResponseUtils;
@@ -141,8 +142,8 @@ public class InsertNewPostGUI extends JFrame {
         contentPane.add(scrollPane, BorderLayout.CENTER);
 
         // 提交按钮
-        btnSubmit = new JButton("发布");
-        btnSubmit.setFont(new Font("微软雅黑", Font.BOLD, 18));
+        btnSubmit = new RoundedButton("发布",20);
+        btnSubmit.setFont(new Font("微软雅黑", Font.BOLD, 20));
         contentPane.add(btnSubmit, BorderLayout.SOUTH);
 
         // 创建一个 JPanel 来容纳表情按钮
@@ -150,8 +151,8 @@ public class InsertNewPostGUI extends JFrame {
         emojiPanel.setLayout(new GridLayout(0, 1)); // 一列布局
 
         // Emoji 按钮
-        JButton btnEmoji = new JButton("Emoji"); // 这里可以设置一个默认的 Emoji 图标
-        btnEmoji.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        JButton btnEmoji = new RoundedButton("Emoji",20); // 这里可以设置一个默认的 Emoji 图标
+        btnEmoji.setFont(new Font("微软雅黑", Font.PLAIN, 20));
         emojiPanel.add(btnEmoji);
 
         contentPane.add(emojiPanel, BorderLayout.EAST); // 将 emojiPanel 添加到 contentPane 的右侧

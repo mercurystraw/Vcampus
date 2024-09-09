@@ -1,6 +1,8 @@
 package tech.mainCode.client.bbs;
 
 import tech.mainCode.client.main.App;
+import tech.mainCode.client.rounded.CustomOptionPane;
+import tech.mainCode.client.rounded.RoundedButton;
 import tech.mainCode.entity.PostInfo;
 import tech.mainCode.net.Request;
 import tech.mainCode.util.ResponseUtils;
@@ -27,7 +29,7 @@ public class InsertReplyPostGUI extends JFrame {
         String content = txtReplyContent.getText().trim();
 
         if (content.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "回复内容不能为空", "错误", JOptionPane.ERROR_MESSAGE);
+            CustomOptionPane.showMessageDialog(this, "回复内容不能为空", "错误", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -57,9 +59,9 @@ public class InsertReplyPostGUI extends JFrame {
                 .getReturn(Boolean.class);
 
         if (result) {
-            JOptionPane.showMessageDialog(this, "回复已发布", "提示", JOptionPane.INFORMATION_MESSAGE);
+            CustomOptionPane.showMessageDialog(this, "回复已发布", "提示", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "回复发布失败，请稍后再试", "错误", JOptionPane.ERROR_MESSAGE);
+            CustomOptionPane.showMessageDialog(this, "回复发布失败，请稍后再试", "错误", JOptionPane.ERROR_MESSAGE);
         }
 
         // 清空输入框
@@ -143,8 +145,8 @@ public class InsertReplyPostGUI extends JFrame {
         emojiPanel.setLayout(new GridLayout(0, 1)); // 一列布局
 
         // Emoji 按钮
-        JButton btnEmoji = new JButton("Emoji"); // 这里可以设置一个默认的 Emoji 图标
-        btnEmoji.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+        JButton btnEmoji = new RoundedButton("Emoji",30); // 这里可以设置一个默认的 Emoji 图标
+        btnEmoji.setFont(new Font("微软雅黑", Font.PLAIN, 20));
         emojiPanel.add(btnEmoji);
 
         // 事件监听
@@ -158,8 +160,8 @@ public class InsertReplyPostGUI extends JFrame {
         contentPane.add(emojiPanel, BorderLayout.EAST); // 将 Emoji 面板添加到右侧
 
         // 提交按钮
-        btnSubmit = new JButton("发布回复");
-        btnSubmit.setFont(new Font("微软雅黑", Font.BOLD, 18));
+        btnSubmit = new RoundedButton("发布回复",30);
+        btnSubmit.setFont(new Font("微软雅黑", Font.BOLD, 20));
         contentPane.add(btnSubmit, BorderLayout.SOUTH);
 
         // 事件监听
