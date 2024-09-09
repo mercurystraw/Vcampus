@@ -12,9 +12,7 @@ import tech.zxuuu.client.teaching.teacherSide.StudentScoreManage;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import tech.zxuuu.client.opencourse.ListOpencoursePane;
-import tech.zxuuu.client.opencourse.StuMenuGUI;
-import tech.zxuuu.client.opencourse.TeacherNewOpencoursePane;
+
 import tech.zxuuu.client.rounded.*;
 import tech.zxuuu.client.bbs.BBSGUI;
 public class AppTeacher extends JFrame {
@@ -22,13 +20,10 @@ public class AppTeacher extends JFrame {
 	private JPanel contentPane;
 	private JPanel currentDisplay;
 	private JPanel coursePanel;
-	private ListOpencoursePane listOpencoursePane;
+
 	private JPanel newOpencoursePanel;
 	private StudentScoreManage studentScoreManage;
 
-	public void updateOpenCourseList() {
-		this.listOpencoursePane.updateOpenCourse();
-	}
 
 	/**
 	 * Create the frame.
@@ -77,14 +72,7 @@ public class AppTeacher extends JFrame {
 		pnlOpencourse.setLayout(null);
 		pnlOpencourse.setVisible(false);
 
-		listOpencoursePane = new ListOpencoursePane();
-		listOpencoursePane.setBounds(14, 31, 904, 347);
-		pnlOpencourse.add(listOpencoursePane);
 
-		TeacherNewOpencoursePane teacherNewOpencoursePane = new TeacherNewOpencoursePane(App.session.getTeacher().getName(),
-				this);
-		teacherNewOpencoursePane.setBounds(14, 376, 904, 274);
-		pnlOpencourse.add(teacherNewOpencoursePane);
 
 		JButton btnCourseList = new LibButton("查看课表",0);
 		btnCourseList.setFont(new Font("微软雅黑", Font.PLAIN, 20));

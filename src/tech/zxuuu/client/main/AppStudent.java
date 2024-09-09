@@ -495,7 +495,6 @@ import tech.zxuuu.client.auth.AuthGUI;
 import tech.zxuuu.client.chat.ChatGUI;
 import tech.zxuuu.client.library.LibraryStudentGUI;
 import tech.zxuuu.client.library.MyBorrowGUI;
-import tech.zxuuu.client.opencourse.StuMenuGUI;
 import tech.zxuuu.client.rounded.LibButton;
 import tech.zxuuu.client.shop.ShopFirstPage;
 import tech.zxuuu.client.teaching.studentSide.TeachingStudentMain;
