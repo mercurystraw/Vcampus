@@ -16,11 +16,7 @@ import tech.zxuuu.entity.Student;
 import tech.zxuuu.net.Request;
 import tech.zxuuu.util.ResponseUtils;
 
-/**
- * 教师课表
- * 
- * @author 王志华
- */
+
 public class ScheduleTablePane extends JPanel {
 
 	private JLabel[] labels;
@@ -63,7 +59,7 @@ public class ScheduleTablePane extends JPanel {
 	}
 
 	public void teacherSchedule() {
-		/*
+
 		List<ClassInfo> cla = getClassOfOneTeacher(App.session.getTeacher().getCardNumber());
 		String[] course = new String[cla.size() * 2];
 		for (int i = 0; i < cla.size(); i++) {
@@ -75,7 +71,7 @@ public class ScheduleTablePane extends JPanel {
 			labels[Integer.valueOf(course[i].charAt(9)) - 48 + (Integer.valueOf(course[i].charAt(11)) - 48) / 2 * 6]
 					.setText("<html>" + cla.get(i).getClassName() + "<br>" + cla.get(i).getClassroom() + "<html>");
 		}
-		*/
+
 
 	}
 
