@@ -16,16 +16,16 @@ import tech.zxuuu.client.rounded.*;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import java.awt.*;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JEditorPane;
 import javax.swing.JTextArea;
-import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
-import java.awt.Toolkit;
-
+import java.net.URL;
 /**
  * 书籍详情窗口
  * 
@@ -127,16 +127,28 @@ public class BookDetails extends JDialog {
 		lblCategory.setBounds(14, 85, 70, 32);
 		getContentPane().add(lblCategory);
 
-		JEditorPane editPicture = new JEditorPane();
-		editPicture.setEditable(false);
-		editPicture.setBounds(453, 21, 185, 260);
-		editPicture.setContentType("text/html");
-		getContentPane().add(editPicture);
+		JLabel labelPicture = new JLabel();
+		labelPicture.setBounds(453, 21, 185, 260);
+		getContentPane().add(labelPicture);
+
 
 		String result = ResponseUtils
 				.getResponseByHash(new Request(App.connectionToServer, null,
 						"tech.zxuuu.server.library.BookServer.searchPicture", new Object[] { ISBN }).send())
 				.getReturn(String.class);
+		System.out.println("根据书号检索到的书本图片链接："+result);
+		try {
+			// 从 URL 创建 ImageIcon
+			ImageIcon icon = new ImageIcon(new URL(result));
+			// 获取图片并调整大小
+			Image img = icon.getImage().getScaledInstance(185, 260, Image.SCALE_SMOOTH);
+			// 将 ImageIcon 设置到 JLabel 中
+			labelPicture.setIcon(new ImageIcon(img));
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			// 处理 URL 格式错误的情况
+			labelPicture.setText("图片加载失败");
+		}
 
 		txtDetails = new RoundedTextArea(10,10);
 		txtDetails.setFont(new Font("微软雅黑", Font.PLAIN, 17));
@@ -147,8 +159,6 @@ public class BookDetails extends JDialog {
 		txtDetails.setWrapStyleWord(true);
 		this.txtDetails.setText(details);
 
-		editPicture.setText("<html><body><img src=\"" + result + "\"></body></html>");
-		editPicture.setEditable(false);
 
 
 	}
