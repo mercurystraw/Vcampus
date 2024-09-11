@@ -1,12 +1,8 @@
 package tech.mainCode.server.main;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Font;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import java.io.IOException;
+import java.io.InputStream;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -19,20 +15,13 @@ import tech.mainCode.net.RequestListener;
 import tech.mainCode.server.messageQueue.RequestHandler;
 import tech.mainCode.server.messageQueue.RequestQueue;
 import tech.mainCode.util.ServerUtils;
-import java.io.IOException;
-import java.io.InputStream;
-import javax.swing.JLabel;
-import javax.swing.JTextPane;
-import javax.swing.JScrollPane;
 
 /**
  * 服务器端全局App对象
- * 
-
+ *
+ * @author z0gSh1u
  */
-public class App extends JFrame {
-
-	private JPanel contentPane;
+public class App {
 
 	private RequestListener requestListener; // 请求监听器
 	public static RequestQueue requestQueue; // 服务器端全局请求消息队列
@@ -40,8 +29,6 @@ public class App extends JFrame {
 	public static SqlSessionFactory sqlSessionFactory; // MyBatis连接工厂
 	public static SqlSession foreverSqlSession; // 永久公有MyBatis连接会话，该会话仅一份，可能出现资源争抢，严禁关闭
 	// 如非大量连续请求场景，请使用工厂自行创建SqlSession
-	
-	public static JTextPane paneLog;
 
 	/**
 	 * Launch the application.
@@ -51,44 +38,20 @@ public class App extends JFrame {
 			@Override
 			public void run() {
 				try {
-					App frame = new App();
-					frame.setVisible(true);
+					App app = new App();
+					app.startServer();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-
 	}
 
 	/**
-	 * Create the frame.
+	 * Server startup logic.
 	 */
-	public App() {
+	public void startServer() {
 
-		setResizable(false);
-		setTitle("服务器端 - VCampus");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 718, 493);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(null);
-
-		JLabel label = new JLabel("服务器日志");
-		label.setBounds(302, 13, 75, 18);
-		panel_1.add(label);
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(14, 38, 662, 385);
-		panel_1.add(scrollPane);
-		App.paneLog = new JTextPane();
-		App.paneLog.setEditable(false);
-		scrollPane.setViewportView(paneLog);
-		App.paneLog.setFont(new Font("宋体", Font.PLAIN, 14));
 		/**
 		 * 新增部分
 		 */
@@ -100,36 +63,46 @@ public class App extends JFrame {
 		try {
 			inputStream = Resources.getResourceAsStream(resource);
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-			App.paneLog.setText("数据库配置读取成功！");
+			System.out.println("数据库配置读取成功！");
 		} catch (IOException e) {
-			App.paneLog.setText("严重错误！数据库配置读取失败！" + e.toString());
+			System.out.println("###严重错误！数据库配置读取失败！###" + e.toString());
 			e.printStackTrace();
+			return; // 如果数据库配置读取失败，直接退出
 		}
+
 		// 尝试连接数据库
 		try {
 			SqlSession sqlSession = App.sqlSessionFactory.openSession();
 			IStudentMapper studentMapper = sqlSession.getMapper(IStudentMapper.class);
 			Boolean verifyResult = studentMapper.verifyStudent(new Student("0", null, "0", "0"));
 			sqlSession.commit();
-			App.paneLog.setText("数据库连接成功！");
+			System.out.println("数据库连接成功！");
 		} catch (Exception e) {
-			App.paneLog.setText("严重错误！数据库连接失败！请检查有关配置！");
+			System.out.println("###严重错误！数据库连接失败！请检查有关配置！###");
 			e.printStackTrace();
+			return; // 如果数据库连接失败，直接退出
 		}
+
 		// 启动服务器端侦听
 		requestListener = new RequestListener(Integer.parseInt(ServerUtils.getMainPort()));
 		requestListener.start();
+
 		// 启动请求处理器
 		App.requestHandler = new RequestHandler();
 		App.requestHandler.start();
-		App.paneLog.setText(
-				paneLog.getText() + (paneLog.getText().equals("") ? "" : "\n") + "开始服务器端侦听...端口=" + ServerUtils.getMainPort());
-		foreverSqlSession = sqlSessionFactory.openSession();
 
+		System.out.println("开始服务器端侦听...端口=" + ServerUtils.getMainPort());
+
+		// 初始化永久SqlSession
+		foreverSqlSession = sqlSessionFactory.openSession();
 	}
 
+	/**
+	 * Utility method to print log messages.
+	 */
 	public static void appendLog(String msg) {
-		App.paneLog.setText(App.paneLog.getText() + "\n" + msg);
+		System.out.println(msg);
 	}
 
 }
+

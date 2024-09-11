@@ -81,11 +81,18 @@ public class Blocks extends JPanel {
 			imageLabel.setText("无法加载图片");
 		}
 
-		jtxt_Price = new JTextField();
+		JTextArea txtA_Name = new JTextArea();
+		txtA_Name.setFont(new Font("宋体", Font.BOLD, 18));
+		txtA_Name.setEditable(false);
+		txtA_Name.setBounds(264, 10, 195, 30); // 调整位置
+		txtA_Name.setText(name);
+		add(txtA_Name);
+
+		JTextField jtxt_Price = new JTextField();
 		jtxt_Price.setFont(new Font("幼圆", Font.BOLD, 20));
 		jtxt_Price.setHorizontalAlignment(SwingConstants.CENTER);
 		jtxt_Price.setEditable(false);
-		jtxt_Price.setBounds(339, 149, 120, 59);
+		jtxt_Price.setBounds(340, 180, 120, 30); // 调整位置
 		jtxt_Price.setText(jtxt_Price.getText() + price);
 		add(jtxt_Price);
 		jtxt_Price.setColumns(10);
@@ -93,29 +100,30 @@ public class Blocks extends JPanel {
 		JTextArea txtA_Information = new JTextArea();
 		txtA_Information.setFont(new Font("宋体", Font.BOLD, 18));
 		txtA_Information.setEditable(false);
-		txtA_Information.setBounds(264, 10, 195, 78);
+		txtA_Information.setBounds(264, 50, 195, 78); // 调整位置
 		txtA_Information.setText(information);
 		add(txtA_Information);
 
 		JLabel lbl_Price = new JLabel("价格￥");
 		lbl_Price.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-		lbl_Price.setBounds(268, 149, 70, 59);
+		lbl_Price.setBounds(264, 180, 70, 30); // 调整位置
 		add(lbl_Price);
 
 		JLabel lbl_Type = new JLabel("类型");
 		lbl_Type.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_Type.setFont(new Font("微软雅黑", Font.PLAIN, 18));
-		lbl_Type.setBounds(264, 88, 74, 59);
+		lbl_Type.setBounds(264, 140, 74, 30); // 调整位置
 		add(lbl_Type);
 
-		jtxt_Type = new JTextField();
+		JTextField jtxt_Type = new JTextField();
 		jtxt_Type.setFont(new Font("幼圆", Font.BOLD, 20));
 		jtxt_Type.setHorizontalAlignment(SwingConstants.CENTER);
 		jtxt_Type.setEditable(false);
-		jtxt_Type.setBounds(339, 90, 120, 59);
+		jtxt_Type.setBounds(340, 140, 120, 30); // 调整位置
 		jtxt_Type.setText(type);
 		add(jtxt_Type);
 		jtxt_Type.setColumns(10);
+
 
 	}
 }
