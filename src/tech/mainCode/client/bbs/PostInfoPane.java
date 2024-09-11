@@ -21,6 +21,7 @@ public class PostInfoPane extends JPanel {
     private String date; // 发布日期
     private String userid; // 用户ID
     private int thumbup; // 点赞数
+    private String type; // 帖子类型
 
     private JLabel lblPostId;
     private JTextPane txtContent; // 使用 JTextPane 显示帖子内容
@@ -70,6 +71,14 @@ public class PostInfoPane extends JPanel {
 
     public void setThumbup(int thumbup) {
         this.thumbup = thumbup;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**
@@ -159,13 +168,14 @@ public class PostInfoPane extends JPanel {
         setVisible(true);
     }
 
-    public PostInfoPane(String id, String content, String date, String userid, int thumb,Set<String>likedPosts) {
+    public PostInfoPane(String id, String content, String date, String userid, int thumb,String type,Set<String>likedPosts) {
         this();
         this.id = id;
         this.content = content;
         this.date = date;
         this.userid = userid;
         this.thumbup = thumb;
+        this.type =type;
 
         this.likedPosts = likedPosts;
 

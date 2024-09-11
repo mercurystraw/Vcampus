@@ -11,7 +11,8 @@
             `content` as "content",
             `date` as "date",
             `userid` as "userid",
-            `thumbup` as "thumbup"
+            `thumbup` as "thumbup",
+            `type` as "type"
         FROM `tb_bbs`
         WHERE RIGHT(`id`, 4) = '0000'
     </select>
@@ -21,7 +22,8 @@
             `content` as "content",
             `date` as "date",
             `userid` as "userid",
-            `thumbup` as "thumbup"
+            `thumbup` as "thumbup",
+            `type` as "type"
         FROM `tb_bbs`
         WHERE LEFT(`id`, 3) = LEFT(#{postId}, 3)
           AND `id` != #{postId}
@@ -32,7 +34,8 @@
             `content` as "content",
             `date` as "date",
             `userid` as "userid",
-            `thumbup` as "thumbup"
+            `thumbup` as "thumbup",
+            `type` as "type"
         FROM `tb_bbs`
         WHERE `id` = #{postId}
     </select>
@@ -43,8 +46,8 @@
     </select>
 
     <insert id="insertNewPost" parameterType="PostInfo" >
-        INSERT INTO `tb_bbs` (`id`, `content`, `date`, `userid`,`thumbup`)
-        VALUES (#{id}, #{content}, #{date}, #{userid},0)
+        INSERT INTO `tb_bbs` (`id`, `content`, `date`, `userid`,`thumbup`,`type`)
+        VALUES (#{id}, #{content}, #{date}, #{userid},0,#{type})
     </insert>
 
     <select id="getMaxReplyPostid" parameterType="String" resultType="Integer">
@@ -54,8 +57,8 @@
     </select>
 
     <insert id ="insertReplyPost" parameterType="PostInfo">
-        INSERT INTO `tb_bbs` (`id`, `content`, `date`, `userid`, `thumbup`)
-        VALUES (#{id}, #{content}, #{date}, #{userid},0)
+        INSERT INTO `tb_bbs` (`id`, `content`, `date`, `userid`, `thumbup`,`type`)
+        VALUES (#{id}, #{content}, #{date}, #{userid},0,null)
     </insert>
 
     <delete id="deletePost" parameterType="String">
@@ -83,7 +86,7 @@
 
     </update>
     <select id ="getTop3Post" resultType="PostInfo">
-        SELECT `id`, `content`, `date`, `userid`, `thumbup`
+        SELECT `id`, `content`, `date`, `userid`, `thumbup`, `type`
         FROM `tb_bbs`
         ORDER BY `thumbup` DESC
         LIMIT 3

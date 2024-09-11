@@ -6,13 +6,35 @@ public class PostInfo {
     private String date;
     private String userid;
     private int thumbup;
+    private String type;
 
-    public PostInfo(String id, String date, String content, String userid, int thumbup) {
+    @Override
+    public String toString() {
+        return "PostInfo{" +
+                "id='" + id + '\'' +
+                ", content='" + content + '\'' +
+                ", date='" + date + '\'' +
+                ", userid='" + userid + '\'' +
+                ", thumbup=" + thumbup +
+                ", type='" + type + '\'' +
+                '}';
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public PostInfo(String id, String content, String date, String userid, int thumbup, String type) {
         this.id = id;
-        this.date = date;
         this.content = content;
+        this.date = date;
         this.userid = userid;
         this.thumbup = thumbup;
+        this.type = type;
     }
 
     public int getThumbup() {

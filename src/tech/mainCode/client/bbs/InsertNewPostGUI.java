@@ -23,7 +23,7 @@ public class InsertNewPostGUI extends JFrame {
     private JButton btnSubmit; // 提交文本按钮
 
     // 提交帖子的方法
-    private void submitPost() {
+    private void submitPost(String selectPostType) {
         String content = txtPostContent.getText().trim();
 
         if (content.isEmpty()) {
@@ -50,6 +50,8 @@ public class InsertNewPostGUI extends JFrame {
         } else {
             throw new IllegalStateException("No student or teacher found in session");
         }
+
+        post.setType(selectPostType);
 
         System.out.println("测试学生和老师选取一卡通号同一接口：" + post.toString());
 
@@ -122,7 +124,7 @@ public class InsertNewPostGUI extends JFrame {
         }
     }
 
-    public InsertNewPostGUI() {
+    public InsertNewPostGUI(String selectPostType) {
         setTitle("发布新帖 - VCampus");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(600, 500);
@@ -166,7 +168,7 @@ public class InsertNewPostGUI extends JFrame {
         btnSubmit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                submitPost();
+                submitPost(selectPostType);
             }
         });
     }
