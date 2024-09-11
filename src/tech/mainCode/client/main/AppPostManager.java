@@ -16,26 +16,59 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AppPostManager extends JFrame {
     private JPanel contentPane;
     private JPanel pnlPostList;
     private JScrollPane spnPostList;
+    private String selectPostType;
+    private JPanel btnPanel; // 添加一个成员变量来保存按钮面板
     // AppPostManager.java
     private int calculatePostHeight(String content) {
         // 计算帖子高度的逻辑，可以根据内容长度动态调整
-        int baseHeight = 200; // 增加基础高度
-        int extraHeight = (content.length() / 50) * 20; // 每50个字符增加20像素高度
+        int baseHeight = 250; // 增加基础高度
+        int extraHeight = (content.length() / 50) * 25; // 每50个字符增加20像素高度
         return baseHeight + extraHeight;
     }
 
-    private void showParentPostList() {
+    private BBSGUI.PostType stringToPostType(String type) {
+        switch (type) {
+            case "STUDY":
+                return BBSGUI.PostType.STUDY;
+            case "HEART":
+                return BBSGUI.PostType.HEART;
+            case "LIFE":
+                return BBSGUI.PostType.LIFE;
+            case "SPORTS":
+                return BBSGUI.PostType.SPORTS;
+            default:
+                return null;
+        }
+    }
+    private void resetButtonColors() { //重置按钮颜色
+        for (Component component : btnPanel.getComponents()) { // 使用 btnPanel 来重置按钮颜色
+            if (component instanceof LibButton) {
+                ((LibButton) component).setBackground(new Color(0, 100, 0));
+            }
+        }
+    }
+
+    private void showParentPostList(BBSGUI.PostType postType) {
         List<PostInfo> ParentPostList = ResponseUtils.getResponseByHash(
                         new Request(App.connectionToServer, null, "tech.mainCode.server.bbs.BBSGUI.getParentPostList", null).send())
                 .getListReturn(PostInfo.class);
+        if (postType != null) {
+            ParentPostList = ParentPostList.stream()
+                    .filter(post -> stringToPostType(post.getType()) == postType)
+                    .collect(Collectors.toList());
+        }
+
         Collections.sort(ParentPostList, new Comparator<PostInfo>() {
             @Override
             public int compare(PostInfo post1, PostInfo post2) {
@@ -50,7 +83,7 @@ public class AppPostManager extends JFrame {
             layout.setAutoCreateGaps(true);
             layout.setAutoCreateContainerGaps(true);
 
-            JPanel postInfoPanel = new ManagePostInfoPane(post.getId(), post.getContent(), post.getDate(), post.getUser_id(), post.getThumbup());
+            JPanel postInfoPanel = new ManagePostInfoPane(post.getId(), post.getContent(), post.getDate(), post.getUser_id(), post.getThumbup(),post.getType());
 
             layout.setHorizontalGroup(
                     layout.createSequentialGroup()
@@ -97,7 +130,7 @@ public class AppPostManager extends JFrame {
         pnlPostList = new JPanel();
         pnlPostList.setLayout(new GridLayout(0, 1));
         spnPostList = new JScrollPane(pnlPostList);
-        spnPostList.setBounds(70, 95, 900, 600); // 调整滚动面板大小
+        spnPostList.setBounds(70, 150, 850, 500); // 调整滚动面板大小
         spnPostList.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         spnPostList.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         spnPostList.setViewportView(pnlPostList);
@@ -118,33 +151,14 @@ public class AppPostManager extends JFrame {
         lblVcampus.setBounds(102, 27, 239, 34);
         contentPane.add(lblVcampus);
 
-// 发布新帖按钮 管理员没有该功能 删除！
-//        JButton btnNewPost = new JButton("发布新帖");
-//        btnNewPost.setBounds(850, 670, 100, 30); // 设置按钮位置和大小
-//        btnNewPost.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                SwingUtilities.invokeLater(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        InsertNewPostGUI insertNewPostGUI = new InsertNewPostGUI();
-//                        insertNewPostGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//                        insertNewPostGUI.setVisible(true);
-//                    }
-//                });
-//            }
-//        });
-//
-//        contentPane.add(btnNewPost);
-
         // 刷新按钮
-        JButton btnRefresh = new RoundedButton("刷 新",10);
-        btnRefresh.setBounds(450, 710, 100, 30); // 设置按钮位置和大小
-        btnRefresh.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        LibButton btnRefresh = new LibButton("刷 新", 0);
+        btnRefresh.setBounds(420, 650, 150, 60); // 设置按钮位置和大小
+        btnRefresh.setFont(new Font("微软雅黑", Font.PLAIN, 20));
         btnRefresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                showParentPostList(); // 点击刷新按钮时更新帖子列表
+                showParentPostList(stringToPostType(selectPostType)); // 点击刷新按钮时更新帖子列表
             }
         });
         contentPane.add(btnRefresh);
@@ -152,9 +166,91 @@ public class AppPostManager extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                showParentPostList();
+                showParentPostList(null);
             }
         });
+
+        // 添加版区按钮
+        btnPanel = new JPanel(); // 初始化 btnPanel
+        btnPanel.setLayout(new GridLayout(1, 4, 0, 0)); // 紧凑无间隔布局
+        btnPanel.setBounds(70, 95, 800, 40); // 设置按钮面板位置和大小
+        contentPane.add(btnPanel);
+
+        LibButton btnStudy = new LibButton("学习广角", 0);
+        btnStudy.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        btnStudy.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectPostType = "STUDY";
+                showParentPostList(BBSGUI.PostType.STUDY); // 传递版区参数
+            }
+        });
+        btnStudy.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                selectPostType = "STUDY";
+                resetButtonColors();
+                btnStudy.setBackground(new Color(0, 120, 0));
+            }
+        });
+        btnPanel.add(btnStudy);
+
+        LibButton btnHeart = new LibButton("心灵树洞", 0);
+        btnHeart.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        btnHeart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectPostType = "HEART";
+                showParentPostList(BBSGUI.PostType.HEART); // 传递版区参数
+            }
+        });
+        btnHeart.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                selectPostType = "HEART";
+                resetButtonColors();
+                btnHeart.setBackground(new Color(0, 120, 0));
+            }
+        });
+        btnPanel.add(btnHeart);
+
+        LibButton btnLife = new LibButton("校园生活", 0);
+        btnLife.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        btnLife.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectPostType = "LIFE";
+                showParentPostList(BBSGUI.PostType.LIFE); // 传递版区参数
+            }
+        });
+        btnLife.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                selectPostType = "LIFE";
+                resetButtonColors();
+                btnLife.setBackground(new Color(0, 120, 0));
+            }
+        });
+        btnPanel.add(btnLife);
+
+        LibButton btnSports = new LibButton("场馆运动", 0);
+        btnSports.setFont(new Font("微软雅黑", Font.PLAIN, 16));
+        btnSports.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectPostType = "SPORTS";
+                showParentPostList(BBSGUI.PostType.SPORTS); // 传递版区参数
+            }
+        });
+        btnSports.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                selectPostType = "SPORTS";
+                resetButtonColors();
+                btnSports.setBackground(new Color(0, 120, 0));
+            }
+        });
+        btnPanel.add(btnSports);
 
         JLabel label_2 = new JLabel("登录卡号：");
         label_2.setFont(new Font("微软雅黑", Font.PLAIN, 20));

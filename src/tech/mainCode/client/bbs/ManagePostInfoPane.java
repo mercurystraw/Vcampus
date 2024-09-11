@@ -21,6 +21,7 @@ public class ManagePostInfoPane extends JPanel {
     private String date; // 发布日期
     private String userid; // 用户ID
     private Integer thumbup; // 点赞数
+    private String type;
 
     private JLabel lblPostId;
     private JTextPane txtContent; // 使用 JTextPane 显示帖子内容
@@ -150,13 +151,14 @@ public class ManagePostInfoPane extends JPanel {
         setVisible(true);
     }
 
-    public ManagePostInfoPane(String id, String content, String date, String userid,Integer thumbup) {
+    public ManagePostInfoPane(String id, String content, String date, String userid,Integer thumbup,String type) {
         this();
         this.id = id;
         this.content = content;
         this.date = date;
         this.userid = userid;
         this.thumbup = thumbup;
+        this.type = type;
 
         this.lblPostId.setText("帖子ID: " + this.id);
         this.txtContent.setText(this.content); // 使用 JTextPane 设置帖子内容
