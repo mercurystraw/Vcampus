@@ -4,8 +4,7 @@ import java.awt.BorderLayout;
 
 import java.awt.Dimension;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,23 +18,17 @@ import tech.mainCode.util.ResponseUtils;
 
 import tech.mainCode.util.SwingUtils;
 
-import javax.swing.JLabel;
 import java.awt.Font;
 
 import java.awt.GridLayout;
 
-import javax.swing.JTextField;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
-import javax.swing.JScrollPane;
 
 import java.awt.Toolkit;
-import javax.swing.ImageIcon;
 import java.awt.Color;
-import javax.swing.SwingUtilities;
 
 /**
  * 商店学生主页
@@ -212,7 +205,7 @@ public class ShopFirstPage extends JFrame {
 		btn_Tool.setFont(new Font("微软雅黑", Font.PLAIN, 28));
 
 
-		JButton btn_Thing = new LibButton("日用品",0);
+		JButton btn_Thing = new LibButton("用品",0);
 		btn_Thing.setBounds(0, 170+80*4, 160, 80);
 		panel.add(btn_Thing);
 		btn_Thing.addActionListener(new ActionListener() {
@@ -222,7 +215,7 @@ public class ShopFirstPage extends JFrame {
 			}
 		});
 		btn_Thing.setFont(new Font("微软雅黑", Font.PLAIN, 28));
-/*
+
 		lblCartCount = new JLabel("0");
 		lblCartCount.setHorizontalAlignment(SwingConstants.LEFT);
 		lblCartCount.setBackground(Color.WHITE);
@@ -230,7 +223,7 @@ public class ShopFirstPage extends JFrame {
 		lblCartCount.setForeground(Color.RED);
 		lblCartCount.setBounds(10, 562, 55, 40);
 		panel.add(lblCartCount);
-*/
+
 		JButton btnCart = new JButton("");
 		btnCart.addActionListener(new ActionListener() {
 			@Override

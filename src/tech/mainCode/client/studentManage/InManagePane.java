@@ -117,6 +117,7 @@ public class InManagePane extends JPanel {
 					if (resp.getReturn(Boolean.class)) {
 						SwingUtils.showMessage(null, "入学成功！", "提示");
 					} else {
+						// 设置了一卡通号为主键 所以重复入学会报错
 						SwingUtils.showError(null, "入学失败！", "提示");
 					}
 				}

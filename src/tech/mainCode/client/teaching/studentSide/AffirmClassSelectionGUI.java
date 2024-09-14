@@ -255,9 +255,10 @@ public class AffirmClassSelectionGUI extends JDialog {
 								new Object[] { courseId }).send())
 				.getReturn(String.class);
 
-		int studentNum = students.split(",").length ; // 获取课程学生数
-		//演示效果 如果已选学生超过0，就不允许再选择
-		if(studentNum>0)return ConflictStatus.ENOUGH; //课程已满
+//		int studentNum = students.split(",").length ; // 获取课程学生数
+//		System.out.println("该课程已经选择的学生数："+studentNum);
+//		//演示效果 如果已选学生超过0，就不允许再选择
+//		if(studentNum>0)return ConflictStatus.ENOUGH; //课程已满
 
 		String[] course = new String[num * 2];
 		for (int i = 0; i < num; i++) { //提取课程的时间

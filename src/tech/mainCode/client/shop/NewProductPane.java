@@ -103,7 +103,7 @@ public class NewProductPane extends JPanel {
 				Product product = new Product();
 				product.setName(txtName.getText());
 				product.setNumber(Integer.parseInt(txtCount.getText()));
-				product.setPicture("<img src=\"" + txtImage.getText() + "\" />");
+				product.setPicture( txtImage.getText() );
 				product.setType((String) cbType.getSelectedItem());
 				product.setPrice(Float.parseFloat(txtPrice.getText()));
 				product.setInformation(txtInformation.getText());

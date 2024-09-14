@@ -164,16 +164,14 @@ public class AppTeachingManager extends JFrame {
 		btnList.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		contentPane.add(btnList);
 
-		LibButton btnResetPW = new LibButton("学生改密",0);
+		LibButton btnResetPW = new LibButton("敬请期待...",0);
 		btnResetPW.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				currentDisplayPane.setVisible(false);
-				resetPasswordPane.setVisible(true);
-				currentDisplayPane = resetPasswordPane;
+				System.out.println("待添加功能");
 			}
 		});
 
-		btnResetPW.setBounds(0, 80 +60*7, 147, 60);
+		btnResetPW.setBounds(0, 80 + 60 * 8, 147, 68);
 		btnResetPW.setFont(new Font("微软雅黑", Font.PLAIN, 20));
 		contentPane.add(btnResetPW);
 
@@ -298,7 +296,8 @@ public class AppTeachingManager extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("微软雅黑", Font.PLAIN, 20));
-		btnNewButton.setBounds(0, 80 + 60 * 8, 147, 68);
+//		btnNewButton.setBounds(0, 80 + 60 * 8, 147, 68);
+		btnNewButton.setBounds(0, 80 +60*7, 147, 60);
 		contentPane.add(btnNewButton);
 		switchManagePane.setVisible(false);
 
@@ -319,7 +318,7 @@ public class AppTeachingManager extends JFrame {
 				btnOut.setBackground(new Color(0, 100, 0));
 				btnSwitch.setBackground(new Color(0, 100, 0));
 				btnList.setBackground(new Color(0, 100, 0));
-				btnResetPW.setBackground(new Color(0, 100, 0));
+//				btnResetPW.setBackground(new Color(0, 100, 0));
 			}
 
 		});
@@ -333,7 +332,7 @@ public class AppTeachingManager extends JFrame {
 				btnOut.setBackground(new Color(0, 100, 0));
 				btnSwitch.setBackground(new Color(0, 100, 0));
 				btnList.setBackground(new Color(0, 100, 0));
-				btnResetPW.setBackground(new Color(0, 100, 0));
+//				btnResetPW.setBackground(new Color(0, 100, 0));
 			}
 
 		});
@@ -347,7 +346,7 @@ public class AppTeachingManager extends JFrame {
 				btnOut.setBackground(new Color(0, 100, 0));
 				btnSwitch.setBackground(new Color(0, 100, 0));
 				btnList.setBackground(new Color(0, 100, 0));
-				btnResetPW.setBackground(new Color(0, 100, 0));
+//				btnResetPW.setBackground(new Color(0, 100, 0));
 			}
 
 		});
@@ -361,7 +360,7 @@ public class AppTeachingManager extends JFrame {
 				btnOut.setBackground(new Color(0, 100, 0));
 				btnSwitch.setBackground(new Color(0, 100, 0));
 				btnList.setBackground(new Color(0, 100, 0));
-				btnResetPW.setBackground(new Color(0, 100, 0));
+//				btnResetPW.setBackground(new Color(0, 100, 0));
 			}
 
 		});
@@ -375,7 +374,7 @@ public class AppTeachingManager extends JFrame {
 				btnOut.setBackground(new Color(0, 100, 0));
 				btnSwitch.setBackground(new Color(0, 100, 0));
 				btnList.setBackground(new Color(0, 100, 0));
-				btnResetPW.setBackground(new Color(0, 100, 0));
+//				btnResetPW.setBackground(new Color(0, 100, 0));
 			}
 
 		});
@@ -389,7 +388,7 @@ public class AppTeachingManager extends JFrame {
 				btnIn.setBackground(new Color(0, 100, 0));
 				btnSwitch.setBackground(new Color(0, 100, 0));
 				btnList.setBackground(new Color(0, 100, 0));
-				btnResetPW.setBackground(new Color(0, 100, 0));
+//				btnResetPW.setBackground(new Color(0, 100, 0));
 			}
 
 		});
@@ -403,7 +402,7 @@ public class AppTeachingManager extends JFrame {
 				btnIn.setBackground(new Color(0, 100, 0));
 				btnOut.setBackground(new Color(0, 100, 0));
 				btnList.setBackground(new Color(0, 100, 0));
-				btnResetPW.setBackground(new Color(0, 100, 0));
+//				btnResetPW.setBackground(new Color(0, 100, 0));
 			}
 
 		});
@@ -417,24 +416,24 @@ public class AppTeachingManager extends JFrame {
 				btnIn.setBackground(new Color(0, 100, 0));
 				btnOut.setBackground(new Color(0, 100, 0));
 				btnSwitch.setBackground(new Color(0, 100, 0));
-				btnResetPW.setBackground(new Color(0, 100, 0));
+//				btnResetPW.setBackground(new Color(0, 100, 0));
 			}
 
 		});
-		btnResetPW.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mousePressed(java.awt.event.MouseEvent evt) {
-				btnResetPW.setBackground(new Color(0, 120, 0));
-				button.setBackground(new Color(0, 100, 0));
-				button_1.setBackground(new Color(0, 100, 0));
-				button_2.setBackground(new Color(0, 100, 0));
-				btnNewButton.setBackground(new Color(0, 100, 0));
-				btnIn.setBackground(new Color(0, 100, 0));
-				btnOut.setBackground(new Color(0, 100, 0));
-				btnSwitch.setBackground(new Color(0, 100, 0));
-				btnList.setBackground(new Color(0, 100, 0));
-			}
-
-		});
+//		btnResetPW.addMouseListener(new java.awt.event.MouseAdapter() {
+//			public void mousePressed(java.awt.event.MouseEvent evt) {
+//				btnResetPW.setBackground(new Color(0, 120, 0));
+//				button.setBackground(new Color(0, 100, 0));
+//				button_1.setBackground(new Color(0, 100, 0));
+//				button_2.setBackground(new Color(0, 100, 0));
+//				btnNewButton.setBackground(new Color(0, 100, 0));
+//				btnIn.setBackground(new Color(0, 100, 0));
+//				btnOut.setBackground(new Color(0, 100, 0));
+//				btnSwitch.setBackground(new Color(0, 100, 0));
+//				btnList.setBackground(new Color(0, 100, 0));
+//			}
+//
+//		});
 
 	}
 }
