@@ -18,9 +18,7 @@ import tech.mainCode.client.rounded.RoundedTextArea;
 
 /**
  * 书籍添加面板
- * 
- * @author 曾铖
- * @modify z0gSh1u
+
  */
 public class NewBookPane extends JPanel {
 

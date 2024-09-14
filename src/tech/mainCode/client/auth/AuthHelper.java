@@ -9,7 +9,7 @@ import tech.mainCode.client.main.App;
 /**
  * 登陆界面前端请求相关代码
  * 
- * @author z0gSh1u
+
  */
 public class AuthHelper {
 

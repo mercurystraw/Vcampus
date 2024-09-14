@@ -31,8 +31,6 @@ import java.util.Date;
 
 /**
  * 我的借阅窗口
- * 
- * @author z0gSh1u
  */
 public class MyBorrowGUI extends JDialog {
 

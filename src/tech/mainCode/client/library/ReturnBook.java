@@ -25,8 +25,7 @@ import java.awt.Toolkit;
 /**
  * 书籍归还窗口
  * 
- * @author 曾铖
- * @modify z0gSh1u
+
  */
 public class ReturnBook extends JDialog {
 

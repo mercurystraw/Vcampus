@@ -12,8 +12,7 @@ import tech.mainCode.server.main.*;
 
 /**
  * 登陆认证后端
- * 
- * @author z0gSh1u
+
  */
 public class Auth {
 

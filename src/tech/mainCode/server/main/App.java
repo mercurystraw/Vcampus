@@ -19,7 +19,7 @@ import tech.mainCode.util.ServerUtils;
 /**
  * 服务器端全局App对象
  *
- * @author z0gSh1u
+
  */
 public class App {
 

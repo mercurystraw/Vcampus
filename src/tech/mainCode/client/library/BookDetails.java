@@ -22,9 +22,6 @@ import javax.swing.ImageIcon;
 import java.net.URL;
 /**
  * 书籍详情窗口
- * 
- * @author 曾铖
- * @modify z0gSh1u
  */
 public class BookDetails extends JDialog {
 

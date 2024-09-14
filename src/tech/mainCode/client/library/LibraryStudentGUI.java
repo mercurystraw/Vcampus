@@ -17,9 +17,7 @@ import javax.swing.ImageIcon;
 
 /**
  * 图书馆学生主页
- * 
- * @author 曾铖
- * @modify z0gSh1u
+
  */
 public class LibraryStudentGUI extends JFrame {
 

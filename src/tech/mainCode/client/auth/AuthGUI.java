@@ -32,7 +32,7 @@ import java.awt.Color;
 /**
  * 登陆界面GUI
  *
- * @author z0gSh1u
+
  */
 
 

@@ -27,8 +27,7 @@ import tech.mainCode.client.rounded.*;
 /**
  * 书籍搜索与借阅窗口
  * 
- * @author 曾铖
- * @modify z0gSh1u
+
  */
 public class QueryBook extends JDialog {
 

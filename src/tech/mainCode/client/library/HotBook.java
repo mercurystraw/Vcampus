@@ -11,8 +11,7 @@ import java.awt.Font;
 /**
  * 热门书籍Block
  * 
- * @author 曾铖
- * @modify z0gSh1u
+
  */
 public class HotBook extends JPanel {
 

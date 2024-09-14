@@ -6,8 +6,6 @@ import tech.mainCode.util.SwingUtils;
 
 /**
  * 服务器端启动类
- *
- * @author z0gSh1u
  */
 
 public class Bootstrap_server {

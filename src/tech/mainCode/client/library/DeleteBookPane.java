@@ -18,9 +18,7 @@ import tech.mainCode.client.rounded.RoundedTextField;
 
 /**
  * 书籍删除面板
- * 
- * @author 曾铖
- * @modify z0gSh1u
+
  */
 public class DeleteBookPane extends JPanel {
 
