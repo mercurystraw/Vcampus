@@ -1,11 +1,12 @@
 # 虚拟校园系统VCampus
 
-![image-20240912232249334](D:\Typora\typora_user_images\image-20240912232249334.png)
+![image-20240912232249334](run_image.png)
 
 ## 技术细节
 
+- Swing前端,创建新按钮、输入框、表格等进行美化
 - 请求-响应机制及消息队列 
 - 利用反射调用后端处理函数
 - JSON序列化与反序列化
-- 利用MyBatis建立DAO层
+- 利用MyBatis建立DAO层连接数据库
 
